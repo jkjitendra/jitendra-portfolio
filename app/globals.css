@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg:11 16 32;
+  --text:230 236 255;
+  --accent:46 132 255;
+  --accentAlt:138 183 255;
+}
+
+html[data-theme=emerald]{
+  --bg:10 18 16;
+  --text:231 255 248;
+  --accent:0 200 150;
+  --accentAlt:46 230 181;
+}
+
+html[data-theme=amethyst]{
+  --bg:17 10 31;
+  --text:241 236 255;
+  --accent:138 92 246;
+  --accentAlt:178 152 255;
+}
+
+html[data-theme=solar]{
+  --bg:14 10 7;
+  --text:255 239 227;
+  --accent:255 138 61;
+  --accentAlt:255 195 138;
+}
+
+html[data-theme=mono]{
+  --bg:14 14 16;
+  --text:237 237 237;
+  --accent:255 255 255;
+  --accentAlt:190 190 191;
+}
+
+html, body{
+  min-height:100%;
+  background:radial-gradient(1200px 800px at 30% -10%,rgba(255,255,255,.06),rgb(var(--bg)));
+  color:rgb(var(--text));
+}
+
+.company-card {
+  @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-sm;
+  transition: background 0.3s ease;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+html[data-theme="sapphire"] .company-card,
+html[data-theme="emerald"] .company-card,
+html[data-theme="amethyst"] .company-card,
+html[data-theme="solar"] .company-card,
+html[data-theme="mono"] .company-card {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes marquee-1of3 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.3333%); }
+}
+
+.animate-marquee-1of3 {
+  animation: marquee-1of3 17s linear infinite;
+}
+
+.theme-panel {
+  background-color: rgb(var(--bg) / 0.9); /* use theme bg with opacity */
+  color: rgb(var(--text));
+}
+
+
+.container-edge{
+  @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+.card{
+  @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg;
+}
+
+.btn{
+  @apply inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--accent))] px-4 py-2 font-medium text-white transition 
+    hover:opacity-90 
+    focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accentAlt))]/50;
+}
+
+.badge{
+  @apply rounded-md border border-white/10 bg-white/10 px-2 py-1 text-xs;
+}
+
+/* ------- Responsive typography ------- */
+@layer base {
+  /* Slightly larger base on tablets/desktops */
+  body {
+    @apply text-[15px] leading-relaxed;
+  }
+  @screen md {
+    body { @apply text-[16px] leading-relaxed; }
+  }
+  @screen lg {
+    body { @apply text-[17px] leading-relaxed; }
+  }
+
+  /* Headings scale up with breakpoints */
+  h1 { @apply text-3xl md:text-4xl lg:text-5xl font-semibold; }
+  h2 { @apply text-2xl md:text-3xl font-semibold; }
+  h3 { @apply text-xl  md:text-2xl font-medium; }
+}
+
+/* Helper for body copy inside sections/cards */
+@layer components {
+  .copy { @apply text-[15px] md:text-[16px] lg:text-[17px] leading-6; }
+}

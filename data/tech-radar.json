@@ -1,0 +1,20 @@
+{
+  "adopt": [
+    "Java 21",
+    "Spring Boot 3",
+    "Tailwind CSS",
+    "Next.js App Router"
+  ],
+  "trial": [
+    "WebFlux",
+    "Resend Email",
+    "Turborepo"
+  ],
+  "assess": [
+    "HTMX",
+    "tRPC"
+  ],
+  "hold": [
+    "Legacy synchronous REST patterns"
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "skill": "Java",
+    "level": "Expert"
+  },
+  {
+    "skill": "Spring Boot",
+    "level": "Expert"
+  },
+  {
+    "skill": "React",
+    "level": "Intermediate"
+  },
+  {
+    "skill": "Cassandra",
+    "level": "Intermediate"
+  },
+  {
+    "skill": "AWS (S3, Lambda)",
+    "level": "Intermediate"
+  },
+  {
+    "skill": "Scala",
+    "level": "Intermediate"
+  }
+]

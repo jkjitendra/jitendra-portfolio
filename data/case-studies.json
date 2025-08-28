@@ -1,0 +1,21 @@
+[
+  {
+    "title": "Cutting API latency from 3s to 100ms",
+    "problem": "Legacy Scala services causing slow endpoints during peak traffic.",
+    "approach": [
+      "Spring Boot rewrite",
+      "Caching & async IO",
+      "Query optimization"
+    ],
+    "impact": "p95 time ~3000ms \u2192 ~100ms."
+  },
+  {
+    "title": "OversGraph API engagement +25%",
+    "problem": "Lower engagement during innings without visuals.",
+    "approach": [
+      "Compact overs graph API",
+      "Optimized payloads"
+    ],
+    "impact": "Session time increased ~18\u201325%."
+  }
+]

@@ -1,0 +1,29 @@
+[
+  {
+    "name": "XPense (Splitwise-like)",
+    "description": "Expense manager with AI category suggestions and file uploads.",
+    "tech": [
+      "Spring Boot",
+      "Angular",
+      "PostgreSQL"
+    ],
+    "github": "https://github.com/jkjitendra",
+    "live": "",
+    "demo": {
+      "username": "demo@xpense.com",
+      "password": "demo1234"
+    }
+  },
+  {
+    "name": "NotebookLM Replica",
+    "description": "Local RAG demo using Ollama; query PDFs and notes.",
+    "tech": [
+      "Python",
+      "RAG",
+      "Ollama"
+    ],
+    "github": "https://github.com/jkjitendra",
+    "live": "",
+    "demo": null
+  }
+]

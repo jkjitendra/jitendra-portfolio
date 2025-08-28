@@ -1,0 +1,7 @@
+[
+  {
+    "metric": "Comm API p95 (ms)",
+    "before": 3000,
+    "after": 100
+  }
+]

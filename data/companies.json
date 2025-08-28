@@ -1,0 +1,24 @@
+[
+  {
+    "name": "Cricbuzz",
+    "logo": "/logos/cricbuzz_logo.png",
+    "url": "https://www.cricbuzz.com/"
+  },
+  {
+    "name": "DBS Bank",
+    "logo": "/logos/dbs_logo.png",
+    "url": "https://www.ncs.co/en-in/",
+    "invertOnDark": false
+  },
+  {
+    "name": "NCSI Technologies",
+    "logo": "/logos/ncsi_logo.svg",
+    "url": "https://www.ncs.co/en-in/",
+    "invertOnDark": false
+  },
+  {
+    "name": "Infosys Ltd.",
+    "logo": "/logos/infosys_logo.png",
+    "url": "https://www.infosys.com/"
+  }
+]

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "title": "SpringBoot NextJs Portfolio",
+    "description": "How I built my portfolio using SpringBoot and NextJs",
+    "createdDate": "2023-10-01",
+    "url": "https://medium.com/@dev_tips/spring-boot-react-next-js-how-to-build-a-full-stack-app-in-2025-49666fc10d59",
+    "tags": ["SpringBoot", "NextJs", "Portfolio"],
+    "image": "/blogs/blog_spring_nextjs.webp",
+    "published": true,
+    "readingTime": "8 min read",
+    "author": "Jitendra Kumar",
+    "authorImage": "/authors/jitendra_kumar.png"
+
+  },
+  {
+    "id": 2,
+    "title": "Create Your own Authentication System",
+    "description": "Authentication is the process of verifying the identity of a user or system. It is a crucial aspect of web application security, as it ensures that only authorized users can access sensitive data and perform certain actions.",
+    "createdDate": "2023-10-02",
+    "url": "https://medium.com/@younes10sillimi/building-a-secure-authentication-system-in-next-js-exploring-jwt-middleware-and-beyond-7e7125670881",
+    "tags": ["Authentication", "Security", "Web Development"],
+    "image": "/blogs/blog_auth.webp",
+    "published": true,
+    "readingTime": "10 min read",
+    "author": "Jitendra Kumar",
+    "authorImage": "/authors/jitendra_kumar.png"
+
+  },
+  {
+    "id": 3,
+    "title": "SpringBoot NextJs Portfolio",
+    "description": "How I built my portfolio using SpringBoot and NextJs",
+    "createdDate": "2023-10-01",
+    "url": "https://medium.com/@dev_tips/spring-boot-react-next-js-how-to-build-a-full-stack-app-in-2025-49666fc10d59",
+    "tags": ["SpringBoot", "NextJs", "Portfolio"],
+    "image": "/blogs/blog_spring_nextjs.webp",
+    "published": true,
+    "readingTime": "8 min read",
+    "author": "Jitendra Kumar",
+    "authorImage": "/authors/jitendra_kumar.png"
+
+  },
+  {
+    "id": 4,
+    "title": "Create Your own Authentication System",
+    "description": "Authentication is the process of verifying the identity of a user or system. It is a crucial aspect of web application security, as it ensures that only authorized users can access sensitive data and perform certain actions.",
+    "createdDate": "2023-10-02",
+    "url": "https://medium.com/@younes10sillimi/building-a-secure-authentication-system-in-next-js-exploring-jwt-middleware-and-beyond-7e7125670881",
+    "tags": ["Authentication", "Security", "Web Development"],
+    "image": "/blogs/blog_auth.webp",
+    "published": true,
+    "readingTime": "10 min read",
+    "author": "Jitendra Kumar",
+    "authorImage": "/authors/jitendra_kumar.png"
+
+  }
+]
