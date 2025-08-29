@@ -6,32 +6,36 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 <hr/>
 
 ## 🚀 Features
-- Responsive Design: Mobile-first UI with adaptive layouts.
--	Sections:
+- **Responsive Design**: Mobile-first UI with adaptive layouts.
+-	**Sections**:
     -	Hero with name, tagline, and company carousel.
     -	Work Experience & Personal Projects.
     -	Case Studies.
     -	Blogs with images, tags, and metadata.
     -	Resume (view inline on desktop, download on mobile).
     -	Testimonials & Performance improvements.
--	Company Carousel: Auto-scrolling slider with partner logos.
--	Theme Switcher:
+-	**Company Carousel**: Auto-scrolling slider with partner logos.
+-	**Theme Switcher**:
     -	Desktop inline dropdown.
     -	Mobile floating action button (FAB).
     -	Live preview on hover + persistent theme with localStorage.
--	Collapsible Navbar:
+-	**Collapsible Navbar**:
     -	Desktop navigation links.
     -	Mobile hamburger menu with slide-over panel.
--	SEO-friendly:
+-	**SEO-friendly**:
     -	Next.js Metadata API used.
     -	Optimized images with next/image.
--	Modern Styling: TailwindCSS with custom themes (emerald, amethyst, sapphire, solar, mono).
+-	**Modern Styling**: TailwindCSS with custom themes (emerald, amethyst, sapphire, solar, mono).
+
+<hr/>
 
 ## 🛠️ Tech Stack
--	Framework: Next.js 15
--	Language: TypeScript
--	Styling: TailwindCSS
--	Icons/Images: Next.js Image Optimization
+-	**Framework**: Next.js 15
+-	**Language**: TypeScript
+-	**Styling**: TailwindCSS
+-	**Icons/Images**: Next.js Image Optimization
+
+<hr/>
 
 ## 📂 Project Structure
 
@@ -73,6 +77,8 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 └── README.md
 ```
 
+<hr/>
+
 ## ⚙️ Setup & Development
 1. Clone the repo:
 ```bash
@@ -92,17 +98,21 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) to view in the browser.
 
+<hr/>
+
 ## 🎨 Theming
 
 Themes are defined in globals.css using CSS variables:
--	emerald
--	amethyst
--	sapphire
--	solar
--	mono
+- emerald 🌿
+- amethyst 💜
+- sapphire 🔷
+- solar ☀️
+- mono ⚫
 
 Switch themes using the ThemeSwitcher (desktop dropdown or mobile FAB).
 The ThemeSwitcher component handles theme selection and persistence using localStorage.
+
+<hr/>
 
 ## 📸 Screenshots
 ![Home Page](public/screenshots/home.png)
@@ -111,9 +121,12 @@ The ThemeSwitcher component handles theme selection and persistence using localS
 ![Tech Radar Page](public/screenshots/tech-radar.png)
 ![Testimonials Page](public/screenshots/testimonials.png)
 
+<hr/>
+
 ## 🌐 Live Demo
 Check out the live portfolio here: [jkjitendra.in](https://www.jkjitendra.in)
 
+<hr/>
 
 ## 📄 License
 MIT License © 2025 Jitendra Kumar Tiwari
