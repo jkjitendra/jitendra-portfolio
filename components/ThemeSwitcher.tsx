@@ -14,7 +14,7 @@ const options = [
 ];
 
 export default function ThemeSwitcher({ variant = "desktop" }: Props) {
-  const [theme, setTheme] = useState("sapphire");
+  const [theme, setTheme] = useState("emerald");
   const [open, setOpen] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
@@ -23,7 +23,7 @@ export default function ThemeSwitcher({ variant = "desktop" }: Props) {
 
   // initialize from localStorage
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "sapphire";
+    const saved = localStorage.getItem("theme") || "emerald";
     setTheme(saved);
     document.documentElement.setAttribute("data-theme", saved);
   }, []);

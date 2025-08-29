@@ -1,9 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import TestimonialMarquee from "@/components/TestimonialMarquee";
 import projects from "@/data/personal-projects.json";
 import caseStudies from "@/data/case-studies.json";
-import testimonials from "@/data/testimonials.json";
 import CompanyCarousel from "@/components/CompanyCarousel";
 
 export default function Home() {
