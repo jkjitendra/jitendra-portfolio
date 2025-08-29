@@ -115,3 +115,155 @@ html[data-theme="mono"] .company-card {
 @layer components {
   .copy { @apply text-[15px] md:text-[16px] lg:text-[17px] leading-6; }
 }
+
+
+/* ---- Vertical Pills Component ---- */
+@layer components {
+  .vertical-pill-container {
+    @apply relative overflow-hidden rounded-[100px] border border-white/20 shadow-2xl;
+    background: linear-gradient(135deg, 
+      rgba(255,255,255,0.1) 0%, 
+      rgba(255,255,255,0.05) 50%, 
+      rgba(0,0,0,0.1) 100%);
+    backdrop-filter: blur(20px);
+  }
+  
+  .pill-content-track {
+    @apply absolute inset-0 overflow-hidden;
+  }
+  
+  .pill-arrow-btn {
+    @apply absolute bottom-4 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full 
+           bg-black/90 border border-white/20 flex items-center justify-center
+           text-white transition-all duration-300 hover:bg-black/95 hover:scale-105;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  
+  .pill-item {
+    @apply rounded-full bg-black/90 border border-white/10 
+           flex items-center justify-center text-white font-medium
+           shadow-lg transition-all duration-200;
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Enhanced clockwise revolving animations */
+@keyframes revolveUpFromBottom {
+  0% { 
+    transform: translateY(120px) scale(0.6) rotate(30deg); 
+    opacity: 0; 
+  }
+  40% { 
+    opacity: 0.7; 
+  }
+  100% { 
+    transform: translateY(0) scale(1) rotate(0deg); 
+    opacity: 1; 
+  }
+}
+
+@keyframes arrowMoveUp {
+  0% { 
+    transform: translateY(0) scale(1); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateY(-420px) scale(0.8); 
+    opacity: 0; 
+  }
+}
+
+@keyframes revolveOut {
+  0% { 
+    transform: translateY(0) scale(1) rotate(0deg); 
+    opacity: 1; 
+  }
+  70% { 
+    opacity: 0.3; 
+  }
+  100% { 
+    transform: translateY(-80px) scale(0.7) rotate(-20deg); 
+    opacity: 0; 
+  }
+}
+
+
+.animate-revolve-up-from-bottom {
+  animation: revolveUpFromBottom 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-arrow-move-up {
+  animation: arrowMoveUp 0.8s ease-in-out forwards;
+}
+/* 
+.animate-revolve-up {
+  animation: revolveUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-revolve-out {
+  animation: revolveOut 0.6s cubic-bezier(0.55, 0.06, 0.55, 0.94) forwards;
+} */
+
+/* Gradient radial utility */
+@layer utilities {
+  .bg-gradient-radial {
+    background-image: radial-gradient(var(--tw-gradient-stops));
+  }
+}
+
+/* Mobile-specific pill adjustments */
+@layer components {
+  @media (max-width: 768px) {
+    .pill-mobile-container {
+      @apply w-20 h-[300px] rounded-[60px];
+    }
+    
+    .pill-mobile-item {
+      @apply w-16 h-16 text-[10px];
+    }
+    
+    .pill-mobile-arrow {
+      @apply w-16 h-16 bottom-2;
+    }
+  }
+}
+
+/* Enhanced mobile animations */
+@keyframes mobileArrowMoveUp {
+  0% { 
+    transform: translateX(-50%) translateY(0) scale(1); 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateX(-50%) translateY(-280px) scale(0.8); 
+    opacity: 0; 
+  }
+}
+
+.animate-mobile-arrow-move-up {
+  animation: mobileArrowMoveUp 0.8s ease-in-out forwards;
+}
+
+/* Fix mobile scroll issues */
+@layer base {
+  html, body {
+    min-height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  /* Ensure proper scroll behavior on mobile */
+  @media (max-width: 768px) {
+    html, body {
+      height: auto;
+      min-height: 100vh;
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+    
+    /* Prevent viewport height issues on mobile browsers */
+    .min-h-screen {
+      min-height: 100vh;
+      min-height: 100dvh; /* Dynamic viewport height for mobile */
+    }
+  }
+}

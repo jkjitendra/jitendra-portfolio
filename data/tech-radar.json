@@ -1,20 +1,51 @@
 {
-  "adopt": [
-    "Java 21",
-    "Spring Boot 3",
-    "Tailwind CSS",
-    "Next.js App Router"
+  "Frameworks": [
+    "Java",
+    "JavaScript",
+    "TypeScript",
+    "Scala",
+    "Spring Boot",
+    "Hibernate",
+    "Node.js",
+    "Express.js",
+    "ReactJS",
+    "NextJS",
+    "Tailwind CSS"
   ],
-  "trial": [
-    "WebFlux",
-    "Resend Email",
-    "Turborepo"
+  "Databases": [
+    "PostgreSQL",
+    "Redis",
+    "MongoDB",
+    "MySQL",
+    "Cassandra"
   ],
-  "assess": [
-    "HTMX",
-    "tRPC"
+  "Tools": [
+    "Git",
+    "Docker",
+    "Kubernetes",
+    "Jenkins",
+    "Grafana",
+    "Prometheus",
+    "ELK Stack",
+    "Nomad",
+    "Consul",
+    "Vault",
+    "CircleCI",
+    "GitHub Actions",
+    "Jira",
+    "Confluence",
+    "Postman",
+    "Swagger UI",
+    "Apache Maven",
+    "Gradle",
+    "NPM/Yarn",
+    "Webpack"
   ],
-  "hold": [
-    "Legacy synchronous REST patterns"
+  "Others": [
+    "RESTful APIs",
+    "GraphQL",
+    "AWS",
+    "Agile",
+    "TDD/BDD"
   ]
 }
