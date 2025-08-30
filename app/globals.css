@@ -365,3 +365,48 @@ html[data-theme="mono"] .company-card {
 .animate-continuous-roll-down {
   animation: continuousRollDown 0.8s ease-in forwards;
 }
+
+
+/* Enhanced SVG and tooltip styles */
+@layer components {
+  .tech-icon-container {
+    @apply relative inline-block transition-all duration-200;
+  }
+  
+  .tech-icon-container:hover {
+    @apply scale-105;
+  }
+
+  .tech-tooltip {
+    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 
+           px-2 py-1 bg-black/90 text-white text-xs rounded 
+           whitespace-nowrap z-50 pointer-events-none;
+  }
+  
+  .tech-tooltip::after {
+    content: '';
+    @apply absolute top-full left-1/2 transform -translate-x-1/2 
+           border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90;
+  }
+
+  /* Pause indicator */
+  .pause-indicator {
+    @apply absolute top-2 right-2 bg-black/60 rounded-full p-1 
+           transition-opacity duration-200;
+  }
+  
+  /* SVG filter for white icons on dark background */
+  .tech-svg {
+    filter: brightness(0) invert(1);
+  }
+  
+  /* Smooth hover transitions for pill items */
+  .pill-rolling-item {
+    transition: all 0.2s ease;
+  }
+  
+  .pill-rolling-item:hover {
+    transform: scale(1.05);
+  }
+}
+

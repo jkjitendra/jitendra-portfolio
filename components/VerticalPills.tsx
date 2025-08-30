@@ -39,6 +39,147 @@ const PILL_CATEGORIES: PillCategory[] = [
   }
 ];
 
+
+const getImageSrc = (techName: string): string => {
+  // Convert tech name to filename format
+  const fileName = techName.toLowerCase()
+    .replace(/[^a-z0-9]/g, '') // Remove special characters
+    .replace(/\./g, '') // Remove dots
+    .replace(/\s+/g, ''); // Remove spaces
+  
+  return `/tech/${fileName}-original.svg`;
+};
+
+const getTechDisplayName = (techName: string): string => {
+  // Special cases for better display names
+  const displayNames: Record<string, string> = {
+    'apachekafka': 'Apache Kafka',
+    'awscodeartifact': 'AWS CodeArtifact',
+    'awslambda': 'AWS Lambda',
+    'awss3': 'AWS S3',
+    'bitbucket': 'Bitbucket',
+    'cassandra': 'Apache Cassandra',
+    'circleci': 'CircleCI',
+    'confluence': 'Confluence',
+    'consul': 'HashiCorp Consul',
+    'docker': 'Docker',
+    'elasticsearch': 'Elastic Search',
+    'express': 'Express.js',
+    'git': 'Git',
+    'github': 'GitHub',
+    'gitlab': 'GitLab',
+    'go': 'Go',
+    'gradle': 'Gradle',
+    'grafana': 'Grafana',
+    'hibernate': 'Hibernate',
+    'intellij': 'IntelliJ IDEA',
+    'java': 'Java',
+    'javascript': 'JavaScript',
+    'jenkins': 'Jenkins',
+    'jfrog': 'JFrog Artifactory',
+    'jira': 'Jira',
+    'json': 'JSON',
+    'junit': 'JUnit',
+    'jwt': 'JWT',
+    'kalilinux': 'Kali Linux',
+    'kibana': 'Kibana',
+    'kubernetes': 'Kubernetes',
+    'linux': 'Linux',
+    'mariadb': 'MariaDB',
+    'maven': 'Maven',
+    'mongodb': 'MongoDB',
+    'mysql': 'MySQL',
+    'nextjs': 'Next.js',
+    'nexus': 'Nexus',
+    'nodejs': 'Node.js',
+    'nomad': 'HashiCorp Nomad',
+    'notion': 'Notion',
+    'npm': 'npm',
+    'oauth': 'OAuth',
+    'openapi': 'OpenAPI',
+    'opencv': 'OpenCV',
+    'oracle': 'Oracle DB',
+    'pcf': 'Pivotal Cloud Foundry',
+    'postgresql': 'PostgreSQL',
+    'postman': 'Postman',
+    'protobuf': 'Protobuf',
+    'python': 'Python',
+    'raspberrypi': 'Raspberry Pi',
+    'react': 'React',
+    'redis': 'Redis',
+    'redux': 'Redux',
+    'restapi': 'REST API',
+    'scala': 'Scala',
+    'sonarqube': 'SonarQube',
+    'spring': 'Spring',
+    'springboot': 'Spring Boot',
+    'ssh': 'SSH',
+    'swagger': 'Swagger',
+    'tailwindcss': 'Tailwind CSS',
+    'typescript': 'TypeScript',
+    'ubuntu': 'Ubuntu',
+    'vite': 'Vite',
+    'visualstudiocode': 'VS Code'  
+  };
+
+  const key = techName.toLowerCase().replace(/[^a-z0-9]/g, '');
+  return displayNames[key] || techName;
+};
+
+const getCircleBackgroundColor = (categoryName: string): string => {
+  const colorMap: Record<string, string> = {
+    'Frameworks': 'rgba(127, 255, 212, 0.8)', // aquamarine with transparency
+    'Databases': 'rgba(240, 230, 140, 0.8)',  // khaki with transparency
+    'Tools': 'rgba(147, 112, 219, 0.8)',      // mediumpurple with transparency
+    'Others': 'rgba(221, 160, 221, 0.8)'      // plum with transparency
+  };
+  
+  return colorMap[categoryName] || 'burlywood';
+};
+
+function useResponsiveTiming() {
+  const [timing, setTiming] = useState({
+    rollingDelay: 0.3,
+    carouselStartDelay: 100,
+    arrowDuration: 0.8
+  });
+
+  useEffect(() => {
+    const updateTiming = () => {
+      const width = window.innerWidth;
+      
+      if (width >= 1024) {
+        // Large screens - slower rolling, faster arrow
+        setTiming({
+          rollingDelay: 0.5, // Increased delay for rolling animation
+          carouselStartDelay: 300, // More delay before carousel starts
+          arrowDuration: 0.6 // Faster arrow animation
+        });
+      } else if (width >= 768) {
+        // Medium screens
+        setTiming({
+          rollingDelay: 0.4,
+          carouselStartDelay: 200,
+          arrowDuration: 0.7
+        });
+      } else {
+        // Small screens - current timing works fine
+        setTiming({
+          rollingDelay: 0.3,
+          carouselStartDelay: 100,
+          arrowDuration: 0.8
+        });
+      }
+    };
+
+    updateTiming();
+    window.addEventListener('resize', updateTiming);
+    return () => window.removeEventListener('resize', updateTiming);
+  }, []);
+
+  return timing;
+}
+
 // Custom hook for responsive detection
 function useIsMobile() {
   const [isMobile, setIsMobile] = useState(false);
@@ -178,6 +319,190 @@ const mobileArrowMoveVariants: Variants = {
   }
 };
 
+
+interface TechIconProps {
+  techName: string;
+  size: string;
+  className?: string;
+}
+
+function TechIcon({ techName, size, className = "" }: TechIconProps) {
+  const [imageError, setImageError] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  // const imageSrc = getImageSrc(techName);
+  const [currentSrc, setCurrentSrc] = useState('');
+  const displayName = getTechDisplayName(techName);
+
+  const fileName = techName.toLowerCase()
+    .replace(/[^a-z0-9]/g, '')
+    .replace(/\./g, '')
+    .replace(/\s+/g, '');
+  
+  // Technology URL mapping for all your technologies
+  const techUrlMap: Record<string, string> = {
+    'java': 'https://www.java.com/',
+    'javascript': 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
+    'typescript': 'https://www.typescriptlang.org/',
+    'python': 'https://www.python.org/',
+    'go': 'https://golang.org/',
+    'scala': 'https://www.scala-lang.org/',
+    'r': 'https://www.r-project.org/',
+    'spring': 'https://spring.io/',
+    'springboot': 'https://spring.io/projects/spring-boot',
+    'hibernate': 'https://hibernate.org/',
+    'junit': 'https://junit.org/',
+    'maven': 'https://maven.apache.org/',
+    'gradle': 'https://gradle.org/',
+    'nodejs': 'https://nodejs.org/',
+    'express': 'https://expressjs.com/',
+    'react': 'https://reactjs.org/',
+    'redux': 'https://redux.js.org/',
+    'nextjs': 'https://nextjs.org/',
+    'tailwindcss': 'https://tailwindcss.com/',
+    'vite': 'https://vitejs.dev/',
+    'npm': 'https://www.npmjs.com/',
+    'raspberrypi': 'https://www.raspberrypi.org/',
+    'mysql': 'https://www.mysql.com/',
+    'mariadb': 'https://mariadb.org/',
+    'postgresql': 'https://www.postgresql.org/',
+    'oracle': 'https://www.oracle.com/database/',
+    'mongodb': 'https://www.mongodb.com/',
+    'cassandra': 'https://cassandra.apache.org/',
+    'redis': 'https://redis.io/',
+    'elasticsearch': 'https://www.elastic.co/',
+    'apachekafka': 'https://kafka.apache.org/',
+    'kibana': 'https://www.elastic.co/kibana',
+    'git': 'https://git-scm.com/',
+    'github': 'https://github.com/',
+    'gitlab': 'https://gitlab.com/',
+    'bitbucket': 'https://bitbucket.org/',
+    'jira': 'https://www.atlassian.com/software/jira',
+    'confluence': 'https://www.atlassian.com/software/confluence',
+    'jenkins': 'https://www.jenkins.io/',
+    'docker': 'https://www.docker.com/',
+    'kubernetes': 'https://kubernetes.io/',
+    'circleci': 'https://circleci.com/',
+    'consul': 'https://www.consul.io/',
+    'nomad': 'https://www.nomadproject.io/',
+    'postman': 'https://www.postman.com/',
+    'swagger': 'https://swagger.io/',
+    'pcf': 'https://pivotal.io/',
+    'nexus': 'https://www.sonatype.com/nexus-repository-sonatype',
+    'jfrog': 'https://jfrog.com/',
+    'sonarqube': 'https://www.sonarqube.org/',
+    'grafana': 'https://grafana.com/',
+    'intellij': 'https://www.jetbrains.com/idea/',
+    'visualstudiocode': 'https://code.visualstudio.com/',
+    'awss3': 'https://aws.amazon.com/s3/',
+    'awslambda': 'https://aws.amazon.com/lambda/',
+    'awscodeartifact': 'https://aws.amazon.com/codeartifact/',
+    'oauth': 'https://oauth.net/',
+    'openapi': 'https://www.openapis.org/',
+    'opencv': 'https://opencv.org/',
+    'graphql': 'https://graphql.org/',
+    'restapi': 'https://restfulapi.net/',
+    'jwt': 'https://jwt.io/',
+    'json': 'https://www.json.org/',
+    'protobuf': 'https://developers.google.com/protocol-buffers',
+    'ssh': 'https://www.ssh.com/',
+    'kalilinux': 'https://www.kali.org/',
+    'linux': 'https://www.linux.org/',
+    'ubuntu': 'https://ubuntu.com/',
+    'notion': 'https://www.notion.so/'
+  };
+
+  const websiteUrl = techUrlMap[fileName];
+
+  // Image sources to try in order (SVG first, then PNG)
+  const imageSources = [
+    `/tech/${fileName}-original.svg`,
+    `/tech/${fileName}.svg`,
+    `/tech/${fileName}.png`,
+    `/tech/${fileName}-original.png`
+  ];
+  
+  useEffect(() => {
+    setCurrentSrc(imageSources[0]); // Start with first option
+  }, [techName]);
+
+  const handleImageError = () => {
+    const currentIndex = imageSources.indexOf(currentSrc);
+    if (currentIndex < imageSources.length - 1) {
+      setCurrentSrc(imageSources[currentIndex + 1]);
+    } else {
+      setImageError(true);
+    }
+  };
+
+  const handleClick = () => {
+    if (websiteUrl) {
+      window.open(websiteUrl, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  if (imageError) {
+    // Fallback to text if image fails to load
+    return (
+      <div 
+        className={`relative ${className} cursor-pointer`}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setShowTooltip(false)}
+        onClick={handleClick}
+      >
+        <span className="text-center leading-tight text-[10px] md:text-[12px] px-1 text-white">
+          {techName.length > 12 ? techName.slice(0, 10) + '..' : techName}
+        </span>
+        
+        {/* Enhanced Tooltip with click instruction */}
+        {showTooltip && (
+          <div className=" hidden md:block fixed left-1/2 transform -translate-x-1/2 mb-2 
+                         px-4 py-3 bg-black/90 text-white text-sm font-medium rounded-lg
+                         whitespace-nowrap z-[9999] pointer-events-none shadow-lg border border-white/20">
+            {displayName}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Don't render img if currentSrc is empty
+  if (!currentSrc) {
+    return (
+      <div className={`${size} ${className} bg-gray-300 rounded animate-pulse`}>
+        {/* Loading placeholder */}
+      </div>
+    );
+  }
+
+  return (
+    <div 
+      className={`relative ${className} ${websiteUrl ? 'cursor-pointer' : 'cursor-default'}`}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+      onClick={handleClick}
+    >
+      <img
+        src={currentSrc}
+        alt={displayName}
+        className={`${size}  transition-all duration-200 
+                   ${showTooltip ? 'opacity-80 scale-105' : 'opacity-100'}`}
+        onError={handleImageError}
+        loading="lazy"
+        draggable={false}
+      />
+      
+      {/* Enhanced Tooltip with click instruction */}
+      {showTooltip && (
+        <div className=" hidden md:block fixed top-[5%] left-1/2 transform -translate-x-1/2 mb-2 
+                       px-2 py-2 bg-black/90 text-white text-wrap text-xs font-small rounded-lg
+                       whitespace-nowrap z-[9999] pointer-events-none shadow-2xl border border-white/20">
+          {displayName}
+        </div>
+      )}
+    </div>
+  );
+}
+
 interface SinglePillProps {
   category: PillCategory;
   index: number;
@@ -189,6 +514,8 @@ function SinglePill({ category, index }: SinglePillProps) {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showArrow, setShowArrow] = useState(true);
   const [animationMode, setAnimationMode] = useState<'rolling' | 'carousel'>('rolling');
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   
   const [isCarouselPlaying, setIsCarouselPlaying] = useState(false);
   const [translateY, setTranslateY] = useState(0);
@@ -196,6 +523,7 @@ function SinglePill({ category, index }: SinglePillProps) {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const { isMobile, mounted } = useIsMobile();
+  const timing = useResponsiveTiming();
 
   // Create extended items array for seamless looping (like company carousel):-
   //  Triple the items for seamless loop
@@ -207,7 +535,7 @@ function SinglePill({ category, index }: SinglePillProps) {
 
   // Smooth sliding carousel (like company carousel)
   useEffect(() => {
-    if (isCarouselPlaying && isExpanded && animationMode === 'carousel') {
+    if (isCarouselPlaying && isExpanded && animationMode === 'carousel' && !isPaused) {
       intervalRef.current = setInterval(() => {
         setTranslateY(prev => {
           const itemHeight = isMobile && mounted ? 72 : 92; // Height of each item + gap
@@ -231,7 +559,18 @@ function SinglePill({ category, index }: SinglePillProps) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isCarouselPlaying, isExpanded, animationMode, category.items.length, isMobile, mounted]);
+  }, [isCarouselPlaying, isExpanded, animationMode, isPaused, category.items.length, isMobile, mounted]);
+
+  // Handle pill hover
+  const handlePillMouseEnter = () => {
+    setIsHovered(true);
+    setIsPaused(true);
+  };
+
+  const handlePillMouseLeave = () => {
+    setIsHovered(false);
+    setIsPaused(false);
+  };
 
   const handleArrowClick = () => {
     if (isAnimating) return;
@@ -265,6 +604,49 @@ function SinglePill({ category, index }: SinglePillProps) {
       });
     }
   }
+
+    // Updated container variants with responsive timing
+  const responsiveContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.06,
+        delayChildren: timing.rollingDelay // Use responsive delay
+      }
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+        duration: 0.3
+      }
+    }
+  };
+
+  // Updated arrow variants with responsive timing
+  const responsiveArrowMoveVariants: Variants = {
+    initial: { 
+      y: 0, 
+      opacity: 1,
+      scale: 1,
+      x: '-50%',
+    },
+    moveUp: { 
+      y: isMobile ? -280 : -420,
+      opacity: 0,
+      scale: 0.8,
+      x: '-50%',
+      transition: {
+        duration: timing.arrowDuration, // Use responsive duration
+        ease: [0.25, 0.1, 0.25, 1],
+        opacity: { delay: timing.arrowDuration * 0.7, duration: 0.4 },
+        scale: { delay: timing.arrowDuration * 0.6, duration: 0.4 }
+      }
+    }
+  };
+
 
   // Prevent hydration mismatch by returning consistent markup until mounted
   if (!mounted) {
@@ -351,9 +733,9 @@ function SinglePill({ category, index }: SinglePillProps) {
           outline: 'dotted',
           boxShadow: 'inset 2px 4px 8px #00000080'
         }}
+        onMouseEnter={handlePillMouseEnter}
+        onMouseLeave={handlePillMouseLeave}
       >
-        {/* Content Track */}
-        {/* Content Track - Sliding Container */}
         {/* Content Track - Sliding Container with Rolling Entrance */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute inset-3 md:inset-6 flex items-start justify-center">
@@ -367,7 +749,7 @@ function SinglePill({ category, index }: SinglePillProps) {
                   <AnimatePresence mode="popLayout" key={animationKey}>
                     <motion.div
                       className="flex flex-col gap-4 md:gap-3 items-center absolute top-0 left-0 right-0"
-                      variants={containerVariants}
+                      variants={responsiveContainerVariants}
                       initial="hidden"
                       animate="visible"
                       exit="exit"
@@ -376,35 +758,30 @@ function SinglePill({ category, index }: SinglePillProps) {
                         setTimeout(() => {
                           setAnimationMode('carousel');
                           setIsCarouselPlaying(true);
-                        }, 100);
+                        }, timing.carouselStartDelay); // Responsive delay
                       }}
                     >
                       {visibleItems.map(({ item, key, index: itemIndex }) => (
                         <motion.div
                           key={key}
                           className="w-[3.5rem] h-[3.5rem] md:w-20 md:h-20
-                                    rounded-full bg-black/90 border border-white/10 
-                                    flex items-center justify-center text-white font-medium
+                                    rounded-full border border-white/10 
+                                    flex items-center justify-center text-black font-medium
                                     shadow-lg backdrop-blur-sm pill-rolling-item flex-shrink-0"
                           variants={pillVariants}
                           custom={itemIndex}
                           layout
                           style={{ 
                             transformStyle: 'preserve-3d',
-                            transformOrigin: 'center center'
+                            transformOrigin: 'center center',
+                            backgroundColor: getCircleBackgroundColor(category.name) // Dynamic background color
                           }}
                         >
-                          <span 
-                            className="text-center leading-tight text-[10px] md:text-[12px] px-1"
-                            style={{ 
-                              transform: mounted && isMobile ? 'rotateZ(0deg)' : 'rotateZ(0deg)',
-                              whiteSpace: 'nowrap',
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis'
-                            }}
-                          >
-                            {item.length > 12 ? item.slice(0, 10) + '..' : item}
-                          </span>
+                          <TechIcon 
+                            techName={item}
+                            size="w-6 h-6 md:w-8 md:h-8"
+                            className="flex items-center justify-center"
+                          />
                         </motion.div>
                       ))}
                     </motion.div>
@@ -420,29 +797,26 @@ function SinglePill({ category, index }: SinglePillProps) {
                     transition={{ duration: 0.5 }}
                     style={{
                       transform: `translateY(${translateY}px)`,
-                      transition: 'transform 0.8s linear',
-                      gap: isMobile && mounted ? '16px' : '12px' // Consistent gap
+                      transition: isPaused ? 'none' : 'transform 0.8s linear', // Disable transition when paused
+                      gap: isMobile && mounted ? '16px' : '12px'
                     }}
                   >
                     {extendedItems.map((item, idx) => (
                       <div
                         key={`${item}-${idx}`}
                         className="w-[3.5rem] h-[3.5rem] md:w-20 md:h-20
-                                  rounded-full bg-black/90 border border-white/10 
-                                  flex items-center justify-center text-white font-medium
+                                  rounded-full border border-white/10 
+                                  flex items-center justify-center text-black font-medium
                                   shadow-lg pill-rolling-item flex-shrink-0"
+                        style={{
+                          backgroundColor: getCircleBackgroundColor(category.name) // Dynamic background color
+                        }}
                       >
-                        <span 
-                          className="text-center leading-tight text-[10px] md:text-[12px] px-1"
-                          style={{ 
-                            transform: mounted && isMobile ? 'rotateZ(0deg)' : 'rotateZ(0deg)',
-                            whiteSpace: 'nowrap',
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis'
-                          }}
-                        >
-                          {item.length > 12 ? item.slice(0, 10) + '..' : item}
-                        </span>
+                        <TechIcon 
+                          techName={item}
+                          size="w-6 h-6 md:w-8 md:h-8"
+                          className="flex items-center justify-center"
+                        />
                       </div>
                     ))}
                   </motion.div>
@@ -465,7 +839,7 @@ function SinglePill({ category, index }: SinglePillProps) {
               disabled={isAnimating}
               whileHover={{ scale: 1.05, x: '-50%' }}
               whileTap={{ scale: 0.95, x: '-50%' }}
-              variants={isMobile ? mobileArrowMoveVariants : arrowMoveVariants}
+              variants={responsiveArrowMoveVariants}
               initial="initial"
               animate={!showArrow ? "moveUp" : "initial"}
               exit="moveUp"
