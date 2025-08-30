@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, Variants } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import techRadarData from "@/data/tech-radar.json";
 
@@ -15,25 +15,25 @@ interface PillCategory {
 const PILL_CATEGORIES: PillCategory[] = [
   {
     name: "Frameworks",
-    color: "linear-gradient(to bottom, #4ade80, #16a34a)", // Green gradient
+    color: "#8ddd8d",
     borderColor: "border-green-400/50",
     items: techRadarData["Frameworks"]
   },
   {
     name: "Databases", 
-    color: "linear-gradient(to bottom, #facc15, #ca8a04)", // Yellow gradient
+    color: "#e0e055", // Yellow gradient
     borderColor: "border-yellow-400/50",
     items: techRadarData["Databases"]
   },
   {
     name: "Tools",
-    color: "linear-gradient(to bottom, #3b82f6, #1d4ed8)", // Blue gradient
+    color: "#6066ee", // Blue gradient
     borderColor: "border-blue-500/50",
     items: techRadarData["Tools"]
   },
   {
     name: "Others",
-    color: "linear-gradient(to bottom, #f472b6, #db2777)", // Pink gradient
+    color: "#faaafa", // Pink gradient
     borderColor: "border-pink-400/50", 
     items: techRadarData["Others"]
   }
@@ -59,33 +59,59 @@ function useIsMobile() {
   return { isMobile, mounted };
 }
 
-
+// Enhanced rolling animations - continuous rolling while moving up
 const pillVariants: Variants = {
   hidden: { 
-    y: 120, 
+    y: 150, 
     opacity: 0, 
-    scale: 0.7,
-    rotate: 20,
+    scale: 0.6,
+    rotate: 540, // Multiple rotations for continuous rolling effect
+    transformOrigin: "center center"
   },
   visible: (i: number) => ({
     y: 0,
     opacity: 1,
     scale: 1,
-    rotate: 0,
+    rotate: 0, 
+    transformOrigin: "center center",
     transition: {
-      delay: i * 0.1,
-      duration: 0.6,
-      type: "spring",
-      stiffness: 100,
-      damping: 15
+      delay: i * 0.06,
+      duration: 0.7, // Longer duration for smooth rolling
+      ease: [0.25, 0.1, 0.25, 1],
+      // Different easing for rotation to create rolling effect
+      rotate: {
+        duration: 0.7,
+        ease: "linear", // Linear rotation for consistent rolling
+      },
+      // Y movement with easing
+      y: {
+        duration: 0.7,
+        ease: [0.25, 0.1, 0.25, 1],
+      },
+      // Scale and opacity with different timing
+      scale: {
+        duration: 0.5,
+        ease: "easeOut"
+      },
+      opacity: {
+        duration: 0.4,
+        ease: "easeIn"
+      }
     }
   }),
   exit: {
-    y: -60,
+    y: -150,
     opacity: 0,
-    scale: 0.8,
+    scale: 0.6,
+    rotate: -540, // Counter-clockwise exit rolling
+    transformOrigin: "center center",
     transition: {
-      duration: 0.3
+      duration: 0.7,
+      ease: [0.55, 0.06, 0.55, 0.94],
+      rotate: {
+        duration: 0.7,
+        ease: "linear"
+      }
     }
   }
 };
@@ -95,8 +121,16 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 1.3 // Content starts appearing after arrow animation completes
+      staggerChildren: 0.06,
+      delayChildren: 0.3
+    }
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      staggerChildren: 0.05,
+      staggerDirection: -1,
+      duration: 0.3
     }
   }
 };
@@ -154,7 +188,50 @@ function SinglePill({ category, index }: SinglePillProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showArrow, setShowArrow] = useState(true);
+  const [animationMode, setAnimationMode] = useState<'rolling' | 'carousel'>('rolling');
+  
+  const [isCarouselPlaying, setIsCarouselPlaying] = useState(false);
+  const [translateY, setTranslateY] = useState(0);
+  const [animationKey, setAnimationKey] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   const { isMobile, mounted } = useIsMobile();
+
+  // Create extended items array for seamless looping (like company carousel):-
+  //  Triple the items for seamless loop
+  const extendedItems = [
+    ...category.items,
+    ...category.items,
+    ...category.items,
+  ];
+
+  // Smooth sliding carousel (like company carousel)
+  useEffect(() => {
+    if (isCarouselPlaying && isExpanded && animationMode === 'carousel') {
+      intervalRef.current = setInterval(() => {
+        setTranslateY(prev => {
+          const itemHeight = isMobile && mounted ? 72 : 92; // Height of each item + gap
+          const newY = prev - itemHeight;
+          
+          // Reset position when we've scrolled through original items
+          if (Math.abs(newY) >= itemHeight * category.items.length) {
+            return 0;
+          }
+          
+          return newY;
+        });
+      }, 1500); // Slower, more readable speed like company carousel
+    } else if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isCarouselPlaying, isExpanded, animationMode, category.items.length, isMobile, mounted]);
 
   const handleArrowClick = () => {
     if (isAnimating) return;
@@ -162,27 +239,20 @@ function SinglePill({ category, index }: SinglePillProps) {
     setIsAnimating(true);
     
     if (!isExpanded) {
-      // First click - animate arrow up slowly, then show content
-      setShowArrow(false);
-
-      // Wait for arrow animation to complete before showing content
-      setTimeout(() => {
-        setIsExpanded(true);
-      }, 800); // Match arrow animation duration
+      // First click - start carousel
+      setShowArrow(false); // Hide arrow immediately
+      setIsExpanded(true);
+      // setIsCarouselPlaying(true); // Start carousel
+      setAnimationMode('rolling'); // Start with rolling mode
       
-      // Reset animation state after everything completes
       setTimeout(() => {
         setIsAnimating(false);
-      }, 1200); // After content animation completes
-    } else {
-      // Subsequent clicks - cycle through content
-      setCurrentIndex((prev) => (prev + 1) % category.items.length);
-      setTimeout(() => setIsAnimating(false), 400);
+      }, 1200);
     }
   };
 
   // Use mounted check to prevent hydration mismatch
-  const maxVisibleItems = mounted && isMobile ? 3 : 6;
+  const maxVisibleItems = mounted && isMobile ? 3 : 5;
   const visibleItems = [];
   
   if (isExpanded) {
@@ -190,7 +260,7 @@ function SinglePill({ category, index }: SinglePillProps) {
       const itemIndex = (currentIndex + i) % category.items.length;
       visibleItems.push({
         item: category.items[itemIndex],
-        key: `${itemIndex}-${currentIndex}`,
+        key: `${itemIndex}-${currentIndex}-${animationKey}`, // Include animation key for unique keys
         index: i
       });
     }
@@ -211,11 +281,12 @@ function SinglePill({ category, index }: SinglePillProps) {
         {/* Default pill container */}
         <div
           className={clsx(
-            "relative w-28 h-[500px] transform rotate-12", 
-            "rounded-[100px] border border-white/20 shadow-2xl overflow-hidden",
+            "relative w-28 h-[500px]", 
+            "rounded-[100px] shadow-2xl overflow-hidden",
             category.borderColor
           )}
           style={{
+            transform: 'rotate(18deg)',
             background: category.color,
             backdropFilter: 'blur(20px)'
           }}
@@ -229,8 +300,8 @@ function SinglePill({ category, index }: SinglePillProps) {
           {/* Default arrow button */}
           <button
             className="absolute bottom-4 left-1/2 w-20 h-20 rounded-full 
-                       bg-black/90 border border-white/20 flex items-center justify-center
-                       text-white shadow-lg z-10"
+                      bg-black/90 border border-white/20 flex items-center justify-center
+                      text-white shadow-lg z-10"
             style={{ transform: 'translateX(-50%)' }}
             onClick={handleArrowClick}
           >
@@ -256,7 +327,7 @@ function SinglePill({ category, index }: SinglePillProps) {
   return (
     <div className="relative flex flex-col items-center">
       {/* Label */}
-      <div className="mt-3 mb-2 md:mt-6 md:mb-4 text-center max-w-32 md:pl-20">
+      <div className="hidden md:block mt-3 mb-2 md:mt-6 md:mb-4 text-center max-w-32 md:pl-20">
         <p className="text-xs md:text-sm font-medium text-white/90 leading-tight">
           {category.name}
         </p>
@@ -266,52 +337,124 @@ function SinglePill({ category, index }: SinglePillProps) {
       {/* Pill Container - Right tilted */}
       <div
         className={clsx(
-          "relative transform rotate-12",
-          "w-20 h-[300px] md:w-28 md:h-[500px]",
-          "rounded-[60px] md:rounded-[100px] border border-white/20 shadow-2xl overflow-hidden",
+          "relative",
+          "w-20 h-[220px] md:w-32 md:h-[500px]",
+          "rounded-[60px] md:rounded-[3.47rem] overflow-hidden",
           category.borderColor
         )}
         style={{
+          transform: mounted && isMobile ? 'rotate(10deg)' : 'rotate(18deg)',
           background: category.color,
-          backdropFilter: 'blur(20px)'
+          backdropFilter: 'blur(20px)',
+          outlineWidth: '3px',
+          outlineStyle: 'solid',
+          outline: 'dotted',
+          boxShadow: 'inset 2px 4px 8px #00000080'
         }}
       >
         {/* Content Track */}
+        {/* Content Track - Sliding Container */}
+        {/* Content Track - Sliding Container with Rolling Entrance */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-3 md:inset-6 flex flex-col items-center justify-start pt-2 gap-2 md:pt-4 md:gap-3">
-            <AnimatePresence mode="wait">
-              {isExpanded && (
-                <motion.div
-                  className="flex flex-col gap-2 md:gap-3 items-center"
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                >
-                  {visibleItems.map(({ item, key, index: itemIndex }) => (
+          <div className="absolute inset-3 md:inset-6 flex items-start justify-center">
+            {isExpanded && (
+              <div 
+                className="w-full overflow-hidden relative"
+                style={{ height: mounted && isMobile ? '210px' : '450px' }}
+              >
+                {/* Initial rolling animation phase */}
+                {!isCarouselPlaying && (
+                  <AnimatePresence mode="popLayout" key={animationKey}>
                     <motion.div
-                      key={key}
-                      className="rounded-full bg-black/90 border border-white/10 
-                                 flex items-center justify-center text-white font-medium
-                                 shadow-lg
-                                 w-16 h-16 md:w-20 md:h-20"
-                      variants={pillVariants}
-                      custom={itemIndex}
-                      layout
+                      className="flex flex-col gap-4 md:gap-3 items-center absolute top-0 left-0 right-0"
+                      variants={containerVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      onAnimationComplete={() => {
+                        // Start carousel after rolling animation completes
+                        setTimeout(() => {
+                          setAnimationMode('carousel');
+                          setIsCarouselPlaying(true);
+                        }, 100);
+                      }}
                     >
-                      <span className="text-center leading-tight text-[10px] md:text-[12px] px-1">
-                        {item.length > 12 ? item.slice(0, 10) + '..' : item}
-                      </span>
+                      {visibleItems.map(({ item, key, index: itemIndex }) => (
+                        <motion.div
+                          key={key}
+                          className="w-[3.5rem] h-[3.5rem] md:w-20 md:h-20
+                                    rounded-full bg-black/90 border border-white/10 
+                                    flex items-center justify-center text-white font-medium
+                                    shadow-lg backdrop-blur-sm pill-rolling-item flex-shrink-0"
+                          variants={pillVariants}
+                          custom={itemIndex}
+                          layout
+                          style={{ 
+                            transformStyle: 'preserve-3d',
+                            transformOrigin: 'center center'
+                          }}
+                        >
+                          <span 
+                            className="text-center leading-tight text-[10px] md:text-[12px] px-1"
+                            style={{ 
+                              transform: mounted && isMobile ? 'rotateZ(0deg)' : 'rotateZ(0deg)',
+                              whiteSpace: 'nowrap',
+                              overflow: 'hidden',
+                              textOverflow: 'ellipsis'
+                            }}
+                          >
+                            {item.length > 12 ? item.slice(0, 10) + '..' : item}
+                          </span>
+                        </motion.div>
+                      ))}
                     </motion.div>
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  </AnimatePresence>
+                )}
+
+                {/* Sliding carousel phase */}
+                {isCarouselPlaying && (
+                  <motion.div
+                    className="flex flex-col items-center absolute top-0 left-0 right-0"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.5 }}
+                    style={{
+                      transform: `translateY(${translateY}px)`,
+                      transition: 'transform 0.8s linear',
+                      gap: isMobile && mounted ? '16px' : '12px' // Consistent gap
+                    }}
+                  >
+                    {extendedItems.map((item, idx) => (
+                      <div
+                        key={`${item}-${idx}`}
+                        className="w-[3.5rem] h-[3.5rem] md:w-20 md:h-20
+                                  rounded-full bg-black/90 border border-white/10 
+                                  flex items-center justify-center text-white font-medium
+                                  shadow-lg pill-rolling-item flex-shrink-0"
+                      >
+                        <span 
+                          className="text-center leading-tight text-[10px] md:text-[12px] px-1"
+                          style={{ 
+                            transform: mounted && isMobile ? 'rotateZ(0deg)' : 'rotateZ(0deg)',
+                            whiteSpace: 'nowrap',
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis'
+                          }}
+                        >
+                          {item.length > 12 ? item.slice(0, 10) + '..' : item}
+                        </span>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            )}
           </div>
         </div>
 
-        {/* Arrow Button - Bottom center with animation */}
+        {/* Arrow Button - Only show when carousel is not playing */}
         <AnimatePresence>
-          {showArrow && (
+          {showArrow && !isCarouselPlaying && (
             <motion.button
               className="absolute bottom-2 md:bottom-4 left-1/2 
                         w-16 h-16 md:w-20 md:h-20 rounded-full 
@@ -354,13 +497,13 @@ export default function VerticalPills() {
   const { mounted } = useIsMobile();
 
   return (
-    <div className="relative w-full py-8 md:py-16">
+    <div className="relative w-full py-4 md:py-16">
       {/* Pills container - Responsive grid layout */}
-      <div className="w-full max-w-7xl mx-auto px-4">
+      <div className="w-full md:w-[46%] max-w-7xl mx-auto px-4">
         {/* Mobile: 2x2 grid, Tablet+: single row */}
         <div className={clsx(
           "place-items-center",
-          mounted ? "grid grid-cols-2 gap-6 md:flex md:gap-8 lg:gap-20 md:items-center md:justify-center" 
+          mounted ? "grid grid-cols-4 gap-1 md:flex md:gap-8 lg:gap-20 md:items-center md:justify-center" 
                   : "flex gap-8 lg:gap-20 items-center justify-center"
         )}>
           {PILL_CATEGORIES.map((category, index) => (

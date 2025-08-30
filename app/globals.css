@@ -267,3 +267,101 @@ html[data-theme="mono"] .company-card {
     }
   }
 }
+
+.will-change-transform { will-change: transform; }
+
+
+
+/* Enhanced rolling motion with 3D transforms */
+@layer components {
+  .pill-rolling-container {
+    transform-style: preserve-3d;
+    perspective: 1200px;
+    perspective-origin: center center;
+  }
+  
+  .pill-rolling-item {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+}
+
+/* Custom rolling keyframes for even smoother motion */
+@keyframes continuousRollUp {
+  0% { 
+    transform: translateY(180px) rotate(720deg) scale(0.5); 
+    opacity: 0; 
+  }
+  15% { 
+    transform: translateY(150px) rotate(630deg) scale(0.55); 
+    opacity: 0.1; 
+  }
+  30% { 
+    transform: translateY(120px) rotate(540deg) scale(0.65); 
+    opacity: 0.3; 
+  }
+  45% { 
+    transform: translateY(90px) rotate(450deg) scale(0.75); 
+    opacity: 0.5; 
+  }
+  60% { 
+    transform: translateY(60px) rotate(360deg) scale(0.85); 
+    opacity: 0.7; 
+  }
+  75% { 
+    transform: translateY(30px) rotate(270deg) scale(0.92); 
+    opacity: 0.85; 
+  }
+  90% { 
+    transform: translateY(10px) rotate(90deg) scale(0.98); 
+    opacity: 0.95; 
+  }
+  100% { 
+    transform: translateY(0) rotate(0deg) scale(1); 
+    opacity: 1; 
+  }
+}
+
+@keyframes continuousRollDown {
+  0% { 
+    transform: translateY(0) rotate(0deg) scale(1); 
+    opacity: 1; 
+  }
+  15% { 
+    transform: translateY(-30px) rotate(-90deg) scale(0.98); 
+    opacity: 0.95; 
+  }
+  30% { 
+    transform: translateY(-60px) rotate(-180deg) scale(0.92); 
+    opacity: 0.85; 
+  }
+  45% { 
+    transform: translateY(-90px) rotate(-270deg) scale(0.85); 
+    opacity: 0.7; 
+  }
+  60% { 
+    transform: translateY(-120px) rotate(-360deg) scale(0.75); 
+    opacity: 0.5; 
+  }
+  75% { 
+    transform: translateY(-150px) rotate(-450deg) scale(0.65); 
+    opacity: 0.3; 
+  }
+  90% { 
+    transform: translateY(-170px) rotate(-630deg) scale(0.55); 
+    opacity: 0.1; 
+  }
+  100% { 
+    transform: translateY(-180px) rotate(-720deg) scale(0.5); 
+    opacity: 0; 
+  }
+}
+
+.animate-continuous-roll-up {
+  animation: continuousRollUp 1s ease-out forwards;
+}
+
+.animate-continuous-roll-down {
+  animation: continuousRollDown 0.8s ease-in forwards;
+}
