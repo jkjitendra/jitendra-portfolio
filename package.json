@@ -4,10 +4,9 @@
   "version": "1.0.1",
   "scripts": {
     "dev": "next dev",
-    "bump:sw": "node scripts/bump-sw-version.js",
-    "build:sw": "tsc -p tsconfig.sw.json",
+    "bump:sw": "node scripts/bump-sw-version.mjs",
     "prebuild": "npm run bump:sw",
-    "build": "npm run build:sw && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
