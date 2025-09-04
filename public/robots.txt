@@ -1,2 +1,10 @@
 User-agent: *
 Allow: /
+
+# Disallow sensitive files/folders (not needed in indexing)
+Disallow: /api/
+Disallow: /_next/
+Disallow: /private/
+
+# Point to sitemap
+Sitemap: https://www.jkjitendra.in/sitemap.xml

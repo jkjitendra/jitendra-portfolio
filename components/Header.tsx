@@ -42,7 +42,7 @@ export default function Header() {
     <header className={`sticky top-0 z-50 transition ${scrolled ? "backdrop-blur bg-black/40" : ""}`}>
       <div className="mx-auto max-w-6xl flex items-center gap-3 py-3">
         {/* LEFT: Logo */}
-        <Link href="/" aria-label="Home" className="relative z-10 shrink-0 ml-[-1rem] sm:ml-[-1.5rem] lg:ml-[-2rem]">
+        <Link href="/" aria-label="Home" className="relative z-10 shrink-0 360-380:ml-[-2rem] 360-380:mr-[-1rem] 400-420:ml-[-2rem] 400-420:mr-[2rem] ml-[-1rem] sm:ml-[-1.5rem] lg:ml-[-2rem]">
           <div className="relative h-8 sm:h-9 md:h-10 w-[120px] sm:w-[140px] md:w-[160px]">
             <Image
               src="/logos/jk_logo.png"

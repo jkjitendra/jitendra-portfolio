@@ -43,6 +43,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* This sets data-theme from localStorage BEFORE React hydrates */}
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+
+        {/* Register the service worker for image caching */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                  navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.error('SW registration failed:', err));
+                });
+              }
+            `,
+          }}
+        />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         {children}

@@ -44,9 +44,13 @@ export default function BlogPage() {
                     priority={false}
                     loading="lazy"
                     decoding="async"
+                    placeholder={blog.blur ? "blur" : undefined}
+                    blurDataURL={blog.blur}
                     sizes="(max-width: 640px) 100vw,
-                           (max-width: 1024px) 50vw,
-                           33vw"
+                          (max-width: 1024px) 50vw,
+                          33vw"
+                    // Optional: hint lower network priority for scrolled lists
+                    fetchPriority="low"
                   />
                 </div>
 

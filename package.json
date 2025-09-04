@@ -1,10 +1,13 @@
 {
   "name": "jitendra-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "bump:sw": "node scripts/bump-sw-version.js",
+    "build:sw": "tsc -p tsconfig.sw.json",
+    "prebuild": "npm run bump:sw",
+    "build": "npm run build:sw && next build",
     "start": "next start",
     "lint": "next lint"
   },

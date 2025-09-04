@@ -49,12 +49,14 @@ function CompanyCard({ c }: { c: Company }) {
         width={400}
         height={120}
         className={`relative z-10 object-contain 
-          h-12 sm:h-14 md:h-16 lg:h-20
-          w-auto
-          ${c.invertOnDark ? "dark:invert" : ""}
-        `}
+          h-12 sm:h-14 md:h-16 lg:h-20 w-auto 
+          ${c.invertOnDark ? "dark:invert" : ""}`}
         loading="lazy"
         decoding="async"
+        sizes="(max-width: 640px) 160px,
+         (max-width: 768px) 200px,
+         (max-width: 1024px) 240px,
+         320px"
       />
     </a>
   );

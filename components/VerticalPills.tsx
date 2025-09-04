@@ -40,16 +40,6 @@ const PILL_CATEGORIES: PillCategory[] = [
 ];
 
 
-const getImageSrc = (techName: string): string => {
-  // Convert tech name to filename format
-  const fileName = techName.toLowerCase()
-    .replace(/[^a-z0-9]/g, '') // Remove special characters
-    .replace(/\./g, '') // Remove dots
-    .replace(/\s+/g, ''); // Remove spaces
-  
-  return `/tech/${fileName}-original.svg`;
-};
-
 const getTechDisplayName = (techName: string): string => {
   // Special cases for better display names
   const displayNames: Record<string, string> = {
@@ -489,6 +479,8 @@ function TechIcon({ techName, size, className = "" }: TechIconProps) {
         onError={handleImageError}
         loading="lazy"
         draggable={false}
+        // Hint browsers that these are low-priority visuals
+        fetchPriority="low"
       />
       
       {/* Enhanced Tooltip with click instruction */}
