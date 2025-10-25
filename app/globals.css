@@ -37,6 +37,65 @@ html[data-theme=mono]{
   --accentAlt:190 190 191;
 }
 
+
+html[data-theme=light] {
+  --bg: 255 255 255;
+  --text: 20 20 20;
+  --accent: 0 122 255;
+  --accentAlt: 100 180 255;
+}
+
+html[data-theme=light] .card {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme=light] .badge {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgb(30 30 30);
+}
+
+html[data-theme=light] .btn {
+  color: white;
+  background: rgb(var(--accent));
+}
+
+html[data-theme="light"] .tech-radar-bg {
+  background: radial-gradient(
+      circle at 50% 20%,
+      rgba(0, 122, 255, 0.08),
+      rgba(0, 0, 0, 0.02) 80%
+    ),
+    linear-gradient(to bottom right, #ffffff, #f6f8fa);
+}
+
+html[data-theme="light"] .text-white\/90 {
+  color: rgba(0, 0, 0, 0.8) !important;
+}
+
+html[data-theme="light"] .bg-white\/20 {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+html[data-theme="emerald"] .tech-radar-bg,
+html[data-theme="amethyst"] .tech-radar-bg,
+html[data-theme="sapphire"] .tech-radar-bg,
+html[data-theme="solar"] .tech-radar-bg,
+html[data-theme="mono"] .tech-radar-bg {
+  background: radial-gradient(
+      circle at 50% 10%,
+      rgba(255, 255, 255, 0.08),
+      rgba(0, 0, 0, 0.2) 85%
+    ),
+    linear-gradient(to bottom right, rgb(var(--bg)), rgb(var(--bg)));
+}
+
+.tech-radar-bg {
+  transition: background 0.5s ease;
+}
+
 html, body{
   min-height:100%;
   background:radial-gradient(1200px 800px at 30% -10%,rgba(255,255,255,.06),rgb(var(--bg)));

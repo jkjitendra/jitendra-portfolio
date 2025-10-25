@@ -7,6 +7,7 @@ type Props = { variant?: "desktop" | "mobile-fab" };
 
 const options = [
   { id: "emerald", label: "Emerald Noir" },
+  { id: "light", label: "Light Mode" },
   { id: "amethyst", label: "Royal Amethyst" },
   { id: "sapphire", label: "Sapphire & Slate" },
   { id: "solar", label: "Solar Dawn" },

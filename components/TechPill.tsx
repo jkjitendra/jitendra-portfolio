@@ -16,8 +16,9 @@ export default function TechPill() {
         >
           <h1 className="text-4xl lg:text-6xl font-bold mb-4">Tech Radar</h1>
           <p className="copy opacity-80 max-w-2xl">
-            Explore our technology stack through these interactive pill interfaces. 
-            Click the arrows to reveal and cycle through different technologies in each category.
+            Explore my technology stack through these interactive 3D pill
+            interfaces. Click the arrows to reveal and cycle through different
+            technologies in each category.
           </p>
         </motion.div>
       </section>
