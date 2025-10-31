@@ -137,6 +137,22 @@ Check out the live portfolio here: [jkjitendra.in](https://www.jkjitendra.in)
 
 <hr/>
 
+## 🛠 export-project.js — Project Export Utility
+
+This Node.js script automates the process of exporting the entire project source code into a single, shareable Markdown file (project-portfolio.md).
+
+### Purpose
+- To generate a text-based portfolio snapshot of the project for documentation, archiving, or sharing with recruiters.
+- It consolidates important source files (code, configs, data, components) into one readable Markdown file, excluding build artifacts and binary assets.
+
+### Usage
+Run the script from your project root:
+```bash
+  node scripts/export-project.js
+```
+
+<hr/>
+
 ## 📄 License
 
 MIT License © 2025 Jitendra Kumar Tiwari
