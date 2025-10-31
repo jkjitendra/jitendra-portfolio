@@ -6,34 +6,36 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 <hr/>
 
 ## 🚀 Features
+
 - **Responsive Design**: Mobile-first UI with adaptive layouts.
--	**Sections**:
-    -	Hero with name, tagline, and company carousel.
-    -	Work Experience & Personal Projects.
-    -	Case Studies.
-    -	Blogs with images, tags, and metadata.
-    -	Resume (view inline on desktop, download on mobile).
-    -	Testimonials & Performance improvements.
--	**Company Carousel**: Auto-scrolling slider with partner logos.
--	**Theme Switcher**:
-    -	Desktop inline dropdown.
-    -	Mobile floating action button (FAB).
-    -	Live preview on hover + persistent theme with localStorage.
--	**Collapsible Navbar**:
-    -	Desktop navigation links.
-    -	Mobile hamburger menu with slide-over panel.
--	**SEO-friendly**:
-    -	Next.js Metadata API used.
-    -	Optimized images with next/image.
--	**Modern Styling**: TailwindCSS with custom themes (emerald, amethyst, sapphire, solar, mono).
+- **Sections**:
+  - Hero with name, tagline, and company carousel.
+  - Work Experience & Personal Projects.
+  - Case Studies.
+  - Blogs with images, tags, and metadata.
+  - Resume (view inline on desktop, download on mobile).
+  - Testimonials & Performance improvements.
+- **Company Carousel**: Auto-scrolling slider with partner logos.
+- **Theme Switcher**:
+  - Desktop inline dropdown.
+  - Mobile floating action button (FAB).
+  - Live preview on hover + persistent theme with localStorage.
+- **Collapsible Navbar**:
+  - Desktop navigation links.
+  - Mobile hamburger menu with slide-over panel.
+- **SEO-friendly**:
+  - Next.js Metadata API used.
+  - Optimized images with next/image.
+- **Modern Styling**: TailwindCSS with custom themes (emerald, amethyst, sapphire, solar, mono).
 
 <hr/>
 
 ## 🛠️ Tech Stack
--	**Framework**: Next.js 15
--	**Language**: TypeScript
--	**Styling**: TailwindCSS
--	**Icons/Images**: Next.js Image Optimization
+
+- **Framework**: Next.js 15
+- **Language**: TypeScript
+- **Styling**: TailwindCSS
+- **Icons/Images**: Next.js Image Optimization
 
 <hr/>
 
@@ -80,18 +82,22 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 <hr/>
 
 ## ⚙️ Setup & Development
+
 1. Clone the repo:
+
 ```bash
 git clone https://github.com/jkjitendra/jitendra-portfolio.git
 cd jitendra-portfolio
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -103,11 +109,12 @@ npm run dev
 ## 🎨 Theming
 
 Themes are defined in globals.css using CSS variables:
-- emerald 🌿
+
+- emerald  🌿
+- light    ⚪
 - amethyst 💜
 - sapphire 🔷
-- solar ☀️
-- mono ⚫
+- solar    ☀️
 
 Switch themes using the ThemeSwitcher (desktop dropdown or mobile FAB).
 The ThemeSwitcher component handles theme selection and persistence using localStorage.
@@ -115,6 +122,7 @@ The ThemeSwitcher component handles theme selection and persistence using localS
 <hr/>
 
 ## 📸 Screenshots
+
 ![Home Page](public/screenshots/home.png)
 ![Projects Page](public/screenshots/projects.png)
 ![Blogs Page](public/screenshots/blogs.png)
@@ -124,10 +132,11 @@ The ThemeSwitcher component handles theme selection and persistence using localS
 <hr/>
 
 ## 🌐 Live Demo
+
 Check out the live portfolio here: [jkjitendra.in](https://www.jkjitendra.in)
 
 <hr/>
 
 ## 📄 License
-MIT License © 2025 Jitendra Kumar Tiwari
 
+MIT License © 2025 Jitendra Kumar Tiwari

@@ -11,7 +11,6 @@ const options = [
   { id: "amethyst", label: "Royal Amethyst" },
   { id: "sapphire", label: "Sapphire & Slate" },
   { id: "solar", label: "Solar Dawn" },
-  { id: "mono", label: "Mono Pro" },
 ];
 
 export default function ThemeSwitcher({ variant = "desktop" }: Props) {

@@ -1,0 +1,47 @@
+{
+  "workExpTitle": "Work Experience",
+  "experience":
+  [
+    {
+      "logo": "/logos/cricbuzz_logo.png",
+      "name": "Cricbuzz Platforms Limited",
+      "role": "Software Engineer · Aug 2024 – Present",
+      "color": "#1EA47C",
+      "points": [
+        "Performance Optimization: Reduced average API latency from ~3s → ~100ms by migrating legacy Scala services to Spring Boot microservices, minimizing redundant database calls, and caching critical data objects for faster response times.",
+        "Asynchronous Processing: Implemented non-blocking I/O and background task scheduling to improve throughput and prevent user-facing latency.",
+        "Multi-layer Caching Strategy: Integrated in-memory and distributed caching layers to handle high traffic efficiently during live matches.",
+        "Response Time Optimization: Minimized redundant database calls and cached critical data objects to enhance overall API performance.",
+        "Feature Flag Rollout System: Introduced a dynamic feature-flag mechanism for safe, on-demand API and module rollouts without downtime.",
+        "Video & Commentary Snippets: Implemented video and commentary snippet APIs fetching data from MongoDB, with geo-based filtering and premium/free content segregation.",
+        "Partner Strip Feature: Developed and deployed sponsor strip functionality enabling dynamic logo placements for premium sponsors within the Cricbuzz app interface.",
+        "OversGraph API: Created real-time graph visuals, improving user engagement by 25%+."
+      ]
+    },
+    {
+      "logo": "/logos/ncsi_logo.svg",
+      "name": "NCSI Technologies Pvt Ltd",
+      "role": "Software Engineer · Pune · Mar 2022–Aug 2024",
+      "color": "#00A9E5",
+      "points": [
+        "API Development: Built scalable RESTful APIs for banking (Spring Boot, React, TypeScript).",
+        "Data Engineering: Engineered hierarchical tables using advanced DSA for nested structures.",
+        "Security: Implemented MFA, RBAC, and maker-checker approval flows.",
+        "Cloud Modernization: Migrated to DB-backed Spring Cloud Config.",
+        "Customer Experience: Optimized real-time notifications and engagement."
+      ]
+    },
+    {
+      "logo": "/logos/infosys_logo.png",
+      "name": "Infosys Ltd",
+      "role": "Systems Engineer · Hyderabad · Nov 2020–Mar 2022",
+      "color": "#3781C2",
+      "points": [
+        "Telecom APIs: Developed REST APIs, improving reliability.",
+        "Reliability: Fixed 50+ production issues across modules.",
+        "Optimization: Reduced app load time by 30%.",
+        "UI Enhancement: Improved dashboards by 20% (ReactJS)."
+      ]
+    }
+  ]
+}

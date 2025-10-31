@@ -30,14 +30,6 @@ html[data-theme=solar]{
   --accentAlt:255 195 138;
 }
 
-html[data-theme=mono]{
-  --bg:14 14 16;
-  --text:237 237 237;
-  --accent:255 255 255;
-  --accentAlt:190 190 191;
-}
-
-
 html[data-theme=light] {
   --bg: 255 255 255;
   --text: 20 20 20;
@@ -82,8 +74,7 @@ html[data-theme="light"] .bg-white\/20 {
 html[data-theme="emerald"] .tech-radar-bg,
 html[data-theme="amethyst"] .tech-radar-bg,
 html[data-theme="sapphire"] .tech-radar-bg,
-html[data-theme="solar"] .tech-radar-bg,
-html[data-theme="mono"] .tech-radar-bg {
+html[data-theme="solar"] .tech-radar-bg {
   background: radial-gradient(
       circle at 50% 10%,
       rgba(255, 255, 255, 0.08),
@@ -113,10 +104,31 @@ html, body{
 html[data-theme="sapphire"] .company-card,
 html[data-theme="emerald"] .company-card,
 html[data-theme="amethyst"] .company-card,
-html[data-theme="solar"] .company-card,
-html[data-theme="mono"] .company-card {
+html[data-theme="solar"] .company-card {
   background: rgba(255, 255, 255, 0.05);
 }
+
+.experience-card {
+  @apply border border-white/10 backdrop-blur-md shadow-lg;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgb(var(--text));
+}
+html[data-theme="emerald"] .experience-card,
+html[data-theme="amethyst"] .experience-card,
+html[data-theme="sapphire"] .experience-card,
+html[data-theme="solar"] .experience-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgb(var(--text));
+}
+html[data-theme="light"] .experience-card {
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),
+              0 2px 4px rgba(0, 0, 0, 0.06);
+  color: rgb(20, 20, 20);
+}
+
 
 @keyframes marquee-1of3 {
   from { transform: translateX(0); }
