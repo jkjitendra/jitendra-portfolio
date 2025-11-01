@@ -30,8 +30,17 @@ export const viewport: Viewport = {
 const themeInit = `
   (function() {
     try {
-      var t = localStorage.getItem('theme') || 'emerald';
-      document.documentElement.setAttribute('data-theme', t);
+      var savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        // If user has a saved preference, use it
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } else {
+        // No saved theme, apply default based on screen size
+        // (767px is just under the 'md' breakpoint of 768px)
+        var isMobile = window.matchMedia("(max-width: 767px)").matches;
+        var defaultTheme = isMobile ? 'sapphire' : 'emerald';
+        document.documentElement.setAttribute('data-theme', defaultTheme);
+      }
     } catch (e) {}
   })();
 `;

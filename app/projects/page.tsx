@@ -4,7 +4,7 @@ import projects from "@/data/personal-projects.json";
 
 export default function ProjectsPage() {
   return (
-    <main>
+    <main className="page-glow">
       <Header />
 
       <section className="container-edge mt-10 copy">

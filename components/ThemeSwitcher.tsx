@@ -21,11 +21,12 @@ export default function ThemeSwitcher({ variant = "desktop" }: Props) {
 
   useEffect(() => setMounted(true), []);
 
-  // initialize from localStorage
+  // Sync state with the <html> tag on mount
   useEffect(() => {
-    const saved = localStorage.getItem("theme") || "emerald";
-    setTheme(saved);
-    document.documentElement.setAttribute("data-theme", saved);
+    // The themeInit script in layout.tsx already set the 'data-theme' attribute
+    // We just need to read that value to sync React's internal state.
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "emerald";
+    setTheme(currentTheme);
   }, []);
 
   // close menus on outside click

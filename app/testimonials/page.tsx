@@ -5,7 +5,7 @@ import testimonials from "@/data/testimonials.json";
 
 export default function TestimonialsPage() {
   return (
-    <main>
+    <main className="page-glow">
       <Header />
 
       <section className="container-edge mt-10 copy">

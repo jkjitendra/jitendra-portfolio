@@ -7,6 +7,9 @@
   --text:230 236 255;
   --accent:46 132 255;
   --accentAlt:138 183 255;
+
+  --glow: 0 122 255;
+  --glowAlt: 120 200 255;
 }
 
 html[data-theme=emerald]{
@@ -14,6 +17,10 @@ html[data-theme=emerald]{
   --text:231 255 248;
   --accent:0 200 150;
   --accentAlt:46 230 181;
+
+  /* Complementary electric teal glow */
+  --glow: 0 255 200;
+  --glowAlt: 150 255 230;
 }
 
 html[data-theme=amethyst]{
@@ -21,13 +28,32 @@ html[data-theme=amethyst]{
   --text:241 236 255;
   --accent:138 92 246;
   --accentAlt:178 152 255;
+
+  /* Refined Light Purple Glow (cool lavender with soft electric edge) */
+  --glow: 180 120 255;      /* core glow – soft violet */
+  --glowAlt: 220 180 255;   /* lighter lavender edge */
 }
 
-html[data-theme=solar]{
-  --bg:14 10 7;
-  --text:255 239 227;
-  --accent:255 138 61;
-  --accentAlt:255 195 138;
+html[data-theme=sapphire] {
+  --bg: 10 14 30;
+  --text: 230 240 255;
+  --accent: 60 130 255;
+  --accentAlt: 140 190 255;
+
+  /* Electric cyan glow */
+  --glow: 0 255 255;
+  --glowAlt: 140 255 255;
+}
+
+html[data-theme=solar] {
+  --bg: 14 10 7;
+  --text: 255 239 227;
+  --accent: 255 138 61;
+  --accentAlt: 255 195 138;
+
+  /* Warm golden-yellow glow */
+  --glow: 255 220 120;
+  --glowAlt: 255 160 80;
 }
 
 html[data-theme=light] {
@@ -35,6 +61,10 @@ html[data-theme=light] {
   --text: 20 20 20;
   --accent: 0 122 255;
   --accentAlt: 100 180 255;
+
+  /* 💡 Soft sky-blue glow (already perfect) */
+  --glow: 0 122 255;
+  --glowAlt: 150 200 255;
 }
 
 html[data-theme=light] .card {
@@ -140,8 +170,11 @@ html[data-theme="light"] .experience-card {
 }
 
 .theme-panel {
-  background-color: rgb(var(--bg) / 0.9); /* use theme bg with opacity */
-  color: rgb(var(--text));
+  background-color: rgba(17, 24, 39, 0.95); /* Dark slate gray with high opacity */
+  backdrop-filter: blur(8px); /* Adds a nice frosted glass effect */
+  
+  /* Ensure the text is always light and readable on the dark background */
+  color: rgb(240 240 240);
 }
 
 
@@ -481,3 +514,196 @@ html[data-theme="light"] .experience-card {
   }
 }
 
+
+/* === Theme-reactive Neon Border === */
+.page-glow {
+  position: relative;
+  min-height: 100vh;
+  z-index: 0;
+  overflow: visible !important;
+  padding-top: 72px;
+}
+
+.page-glow::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 24px;
+
+  /* Use rgb(var(--glow) / opacity) syntax for live variable blending */
+  border: 1px solid rgb(var(--glow) / 0.75);
+  box-shadow:
+    0 0 25px 4px rgb(var(--glow) / 0.55),
+    0 0 60px 12px rgb(var(--glowAlt) / 0.35),
+    0 0 120px 30px rgb(var(--glowAlt) / 0.2),
+    inset 0 0 25px 6px rgb(var(--glow) / 0.25),
+    inset 0 0 50px 15px rgb(var(--accentAlt) / 0.15);
+
+  background:
+    radial-gradient(circle at 10% 20%, rgb(var(--glowAlt) / 0.1) 0%, transparent 40%) no-repeat,
+    radial-gradient(circle at 80% 30%, rgb(var(--glow) / 0.08) 0%, transparent 45%) no-repeat,
+    radial-gradient(circle at 20% 90%, rgb(var(--glowAlt) / 0.06) 0%, transparent 40%) no-repeat;
+
+  background-blend-mode: screen;
+  filter: blur(2px);
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+  animation: borderDustPulseVar 8s ease-in-out infinite alternate;
+}
+
+/* === Floating Particle Glow Layer === */
+.page-glow::after {
+  content: "";
+  position: fixed;
+  inset: -2px; /* slightly beyond the page edges */
+  border-radius: 28px;
+  pointer-events: none;
+  z-index: 0; /* below ::before but above content */
+  background:
+    radial-gradient(circle, rgb(var(--glow) / 0.9) 0%, transparent 60%) 10% 20% / 3px 3px,
+    radial-gradient(circle, rgb(var(--glowAlt) / 0.8) 0%, transparent 60%) 30% 80% / 2px 2px,
+    radial-gradient(circle, rgb(var(--glow) / 0.7) 0%, transparent 60%) 70% 40% / 2px 2px,
+    radial-gradient(circle, rgb(var(--glowAlt) / 0.6) 0%, transparent 60%) 90% 70% / 4px 4px,
+    radial-gradient(circle, rgb(var(--glow) / 0.8) 0%, transparent 60%) 50% 10% / 3px 3px,
+    radial-gradient(circle, rgb(var(--glowAlt) / 0.5) 0%, transparent 60%) 80% 90% / 2px 2px;
+  background-repeat: no-repeat;
+  filter: blur(1px) brightness(1.4);
+  animation: particleDrift 14s linear infinite;
+  mix-blend-mode: screen;
+}
+
+/* ✨ Animation: particles drift around slowly */
+@keyframes particleDrift {
+  0% {
+    background-position:
+      10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
+  }
+  50% {
+    background-position:
+      15% 25%, 25% 75%, 65% 35%, 85% 65%, 55% 15%, 75% 85%;
+  }
+  100% {
+    background-position:
+      10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
+  }
+}
+
+/* Subtle pulsing glow animation */
+@keyframes borderDustPulseVar {
+  0%, 100% {
+    box-shadow:
+      0 0 25px 4px rgb(var(--glow) / 0.55),
+      0 0 60px 12px rgb(var(--glowAlt) / 0.35),
+      0 0 120px 30px rgb(var(--glowAlt) / 0.2),
+      inset 0 0 25px 6px rgb(var(--glow) / 0.25),
+      inset 0 0 50px 15px rgb(var(--glowAlt) / 0.15);
+  }
+  50% {
+    box-shadow:
+      0 0 40px 6px rgb(var(--glow) / 0.75),
+      0 0 80px 20px rgb(var(--glow) / 0.45),
+      0 0 150px 40px rgb(var(--glowAlt) / 0.3),
+      inset 0 0 35px 10px rgb(var(--glow) / 0.35),
+      inset 0 0 60px 20px rgb(var(--glowAlt) / 0.2);
+  }
+}
+
+
+
+/* Mobile menu dark theme using theme variables */
+.mobile-menu-panel {
+  background: linear-gradient(
+    135deg, 
+    rgba(var(--bg), 0.98) 0%, 
+    rgba(var(--bg), 0.95) 50%,
+    rgba(var(--bg), 0.98) 100%
+  ) !important;
+  backdrop-filter: blur(20px);
+  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.mobile-menu-header {
+  background: linear-gradient(
+    135deg, 
+    rgba(var(--bg), 0.95) 0%, 
+    rgba(var(--bg), 0.85) 100%
+  ) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+.mobile-menu-nav {
+  background: linear-gradient(
+    135deg, 
+    rgba(var(--bg), 0.95) 0%, 
+    rgba(var(--bg), 0.98) 100%
+  ) !important;
+}
+
+.mobile-menu-item {
+  color: rgb(var(--text)) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.05) !important;
+  margin-bottom: 4px;
+}
+
+.mobile-menu-item:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateX(4px);
+}
+
+/* Force dark theme for mobile menu in all themes */
+html[data-theme="light"] .mobile-menu-panel,
+html[data-theme="emerald"] .mobile-menu-panel,
+html[data-theme="amethyst"] .mobile-menu-panel,
+html[data-theme="sapphire"] .mobile-menu-panel,
+html[data-theme="solar"] .mobile-menu-panel {
+  background: linear-gradient(
+    135deg, 
+    rgba(11, 16, 32, 0.98) 0%, 
+    rgba(11, 16, 32, 0.95) 50%,
+    rgba(11, 16, 32, 0.98) 100%
+  ) !important;
+}
+
+html[data-theme="emerald"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
+}
+html[data-theme="light"] .mobile-menu-header,
+html[data-theme="amethyst"] .mobile-menu-header,
+html[data-theme="sapphire"] .mobile-menu-header,
+html[data-theme="solar"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgba(64, 167, 165, 95%) 0%, rgb(27, 37, 70, 85%) 100%) !important;
+}
+
+html[data-theme="light"] .mobile-menu-nav,
+html[data-theme="emerald"] .mobile-menu-nav,
+html[data-theme="amethyst"] .mobile-menu-nav,
+html[data-theme="sapphire"] .mobile-menu-nav,
+html[data-theme="solar"] .mobile-menu-nav {
+  /* background: linear-gradient(
+    135deg, 
+    rgba(11, 16, 32, 0.95) 0%, 
+    rgba(11, 16, 32, 0.98) 100%
+  ) !important; */
+   background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
+}
+
+html[data-theme="light"] .mobile-menu-item,
+html[data-theme="emerald"] .mobile-menu-item,
+html[data-theme="amethyst"] .mobile-menu-item,
+html[data-theme="sapphire"] .mobile-menu-item,
+html[data-theme="solar"] .mobile-menu-item {
+  color: rgb(8 175 183) !important;
+  background: rgb(99 64 64 / 10%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html[data-theme="light"] .mobile-menu-item:hover,
+html[data-theme="emerald"] .mobile-menu-item:hover,
+html[data-theme="amethyst"] .mobile-menu-item:hover,
+html[data-theme="sapphire"] .mobile-menu-item:hover,
+html[data-theme="solar"] .mobile-menu-item:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}

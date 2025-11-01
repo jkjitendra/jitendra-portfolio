@@ -51,7 +51,7 @@ export default function Home() {
 
   
   return (
-    <main>
+    <main className="page-glow">
       <Header />
 
       {/* Hero Section */}
@@ -68,7 +68,7 @@ export default function Home() {
           Jitendra Kumar Tiwari
         </motion.h1>
         {showSkills && (
-          <p className="mt-3 text-white/80 text-lg" style={{fontFamily: "monospace"}}>
+          <p className="mt-3" style={{fontFamily: "monospace"}}>
             {/* Render typed skills, separated */}
             {typedSkills.map((skill, idx) => (
               <span key={skill}>
@@ -106,12 +106,9 @@ export default function Home() {
         <div className="space-y-10">
           {/* Experience Card */}
           {experience.map((exp, idx) => (
-            <motion.div
+            <div
               key={idx}
               className="experience-card bg-white/[0.05] border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-[0_0_30px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(0,0,0,0.6)] hover:scale-[1.02] transition-transform duration-300"
-              whileInView={{ opacity: 1, y: 0 }}
-              initial={{ opacity: 0, y: 40 }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
               <div className="flex items-center gap-4">
                 <img src={exp.logo} alt={exp.name} className="w-15 h-10 object-contain" />
@@ -133,7 +130,7 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </motion.div>
+            </div>
           ))}
         </div>
       </section>
@@ -143,13 +140,9 @@ export default function Home() {
         <h2>{caseStudyTitle}</h2>
         <ol className="mt-6 space-y-6">
           {caseStudies.map((c, j) => (
-            <motion.li
+            <li
               key={c.title}
               className="card p-5"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 * j }}
-              viewport={{ once: true }}
             >
               <h3>{c.title}</h3>
               <p className="mt-2 opacity-90">
@@ -164,7 +157,7 @@ export default function Home() {
               <p className="mt-2 opacity-90">
                 <b>Impact:</b> {c.impact}
               </p>
-            </motion.li>
+            </li>
           ))}
         </ol>
       </section>

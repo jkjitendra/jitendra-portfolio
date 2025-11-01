@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function BlogPage() {
   return (
-    <main>
+    <main className="page-glow">
       <Header />
 
       <section className="container-edge mt-10 copy mb-10">

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <main>
+    <main className="page-glow">
       <Header />
       <ResumeClient />
       {/* Optional <noscript> fallback */}

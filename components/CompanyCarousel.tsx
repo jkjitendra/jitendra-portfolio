@@ -82,7 +82,8 @@ export default function CompanyCarousel() {
             lg:max-w-[980px] xl:max-w-[1120px]
             overflow-hidden rounded-3xl 
           border-white/10 
-          bg-white/[0.03] backdrop-blur-sm
+          bg-white/[0.03] [html[data-theme=light]_&]:bg-[rgb(197_221_255/0.12)]
+            backdrop-blur-sm
             px-2 py-5 sm:px-3 sm:py-5
             [mask-image:linear-gradient(90deg,transparent,black_10%,black_90%,transparent)]
           "
