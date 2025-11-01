@@ -654,51 +654,70 @@ html[data-theme="light"] .experience-card {
 }
 
 /* Force dark theme for mobile menu in all themes */
-html[data-theme="light"] .mobile-menu-panel,
-html[data-theme="emerald"] .mobile-menu-panel,
-html[data-theme="amethyst"] .mobile-menu-panel,
-html[data-theme="sapphire"] .mobile-menu-panel,
-html[data-theme="solar"] .mobile-menu-panel {
-  background: linear-gradient(
-    135deg, 
-    rgba(11, 16, 32, 0.98) 0%, 
-    rgba(11, 16, 32, 0.95) 50%,
-    rgba(11, 16, 32, 0.98) 100%
-  ) !important;
+html[data-theme="emerald"] .mobile-menu-panel {
+  background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
 }
-
 html[data-theme="emerald"] .mobile-menu-header {
   background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
 }
-html[data-theme="light"] .mobile-menu-header,
-html[data-theme="amethyst"] .mobile-menu-header,
-html[data-theme="sapphire"] .mobile-menu-header,
-html[data-theme="solar"] .mobile-menu-header {
-  background: linear-gradient(135deg, rgba(64, 167, 165, 95%) 0%, rgb(27, 37, 70, 85%) 100%) !important;
-}
-
-html[data-theme="light"] .mobile-menu-nav,
-html[data-theme="emerald"] .mobile-menu-nav,
-html[data-theme="amethyst"] .mobile-menu-nav,
-html[data-theme="sapphire"] .mobile-menu-nav,
-html[data-theme="solar"] .mobile-menu-nav {
-  /* background: linear-gradient(
-    135deg, 
-    rgba(11, 16, 32, 0.95) 0%, 
-    rgba(11, 16, 32, 0.98) 100%
-  ) !important; */
-   background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
-}
-
-html[data-theme="light"] .mobile-menu-item,
-html[data-theme="emerald"] .mobile-menu-item,
-html[data-theme="amethyst"] .mobile-menu-item,
-html[data-theme="sapphire"] .mobile-menu-item,
-html[data-theme="solar"] .mobile-menu-item {
-  color: rgb(8 175 183) !important;
-  background: rgb(99 64 64 / 10%) !important;
+html[data-theme="emerald"] .mobile-menu-item {
+  color: rgb(255 255 255) !important;
+  background: rgb(7 66 93 / 79%) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
+
+html[data-theme="light"] .mobile-menu-panel {
+  background: linear-gradient(135deg, rgb(127 127 127) 0%, rgb(206 188 188 / 85%) 100%) !important
+}
+html[data-theme="light"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgb(103 101 86 / 95%) 0%, rgb(38 51 90 / 85%) 100%) !important
+}
+html[data-theme="light"] .mobile-menu-item {
+  color: rgb(255 255 255) !important;
+  background: rgb(59 68 96) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html[data-theme="amethyst"] .mobile-menu-panel {
+  background: linear-gradient(135deg, rgb(57 7 98 / 95%) 0%, rgb(56 47 8 / 85%) 100%) !important
+}
+html[data-theme="amethyst"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgb(41 35 57 / 95%) 0%, rgb(6 23 72 / 85%) 100%) !important
+}
+html[data-theme="amethyst"] .mobile-menu-item {
+  color: rgb(255 255 255) !important;
+  background: rgb(57 14 94 / 79%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html[data-theme="sapphire"] .mobile-menu-panel {
+  background: linear-gradient(135deg, rgb(11 79 114 / 95%) 0%, rgb(19 36 89 / 85%) 100%) !important
+}
+html[data-theme="sapphire"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgb(18 42 63 / 95%) 0%, rgb(24 41 94 / 85%) 100%) !important
+}
+html[data-theme="sapphire"] .mobile-menu-item {
+  color: rgb(255 255 255) !important;
+  background: rgb(7 66 93 / 79%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+html[data-theme="solar"] .mobile-menu-panel {
+   background: linear-gradient(135deg, rgb(79 56 6 / 95%) 0%, rgb(10 28 62 / 85%) 100%) !important
+}
+html[data-theme="solar"] .mobile-menu-header {
+  background: linear-gradient(135deg, rgb(80 70 21 / 95%) 0%, rgb(29 42 78 / 85%) 100%) !important
+}
+html[data-theme="solar"] .mobile-menu-item {
+  color: rgb(255 255 255) !important;
+  background: rgb(55 48 11 / 79%) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+
+
+
+
 
 html[data-theme="light"] .mobile-menu-item:hover,
 html[data-theme="emerald"] .mobile-menu-item:hover,
