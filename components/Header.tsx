@@ -117,10 +117,10 @@ export default function Header() {
         />
         <div
           ref={panelRef}
-          className={`absolute right-0 top-0 h-full w-72 max-w-[85%] border-l border-white/10 shadow-xl transition-transform duration-300 mobile-menu-panel ${open ? "translate-x-0" : "translate-x-full"}`}
+          className={`absolute right-0 top-0 w-72 h-[57rem] max-w-[85%] border-l border-white/10 shadow-xl transition-transform duration-300 mobile-menu-panel ${open ? "translate-x-0" : "translate-x-full"}`}
           role="dialog" aria-modal="true"
         >
-          <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between mobile-menu-header">
+          <div className="px-5 pt-[0.5rem] pb-[1rem] border-b border-white/10 flex items-center justify-between mobile-menu-header">
             <Link onClick={closeMenu} href="/" className="rounded-md px-3 py-2 hover:bg-white/10 text-white font-medium">Home</Link>
             <button aria-label="Close menu" onClick={closeMenu} className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/10">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.3 5.7 12 12l6.3 6.3-1.4 1.4L10.6 13.4 4.3 19.7 2.9 18.3 9.2 12 2.9 5.7 4.3 4.3l6.3 6.3 6.3-6.3z" /></svg>
