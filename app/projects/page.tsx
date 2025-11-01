@@ -22,11 +22,34 @@ export default function ProjectsPage() {
                 ))}
               </div>
 
-              {p.demo && (
+              {p.demo.username && (
                 <div className="mt-3 text-xs opacity-80">
-                  Demo: <b>{p.demo.username}</b> / <b>{p.demo.password}</b>
+                  Demo: <b>{p.demo?.username}</b> / <b>{p.demo?.password}</b>
                 </div>
               )}
+
+              <div className="mt-4 flex gap-3 text-sm">
+                {p.github && (
+                  <a
+                    className="btn btn-sm btn-ghost hover:bg-blue-600 hover:text-white"
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                )}
+                {p.live && (
+                  <a
+                    className="btn"
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
