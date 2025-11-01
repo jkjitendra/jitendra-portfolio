@@ -1,29 +1,73 @@
 [
   {
     "name": "XPense (Splitwise-like)",
-    "description": "Expense manager with AI category suggestions and file uploads.",
+    "description": "Smart expense manager for personal and group expenses tracking with AI-based categorization, file uploads, analytics and integrated UPI payments.",
     "tech": [
       "Spring Boot",
       "Angular",
       "PostgreSQL"
     ],
-    "github": "https://github.com/jkjitendra",
+    "github": "https://github.com/ExpensePro",
     "live": "",
     "demo": {
-      "username": "demo@xpense.com",
-      "password": "demo1234"
+      "username": null,
+      "password": null
     }
   },
   {
-    "name": "NotebookLM Replica",
-    "description": "Local RAG demo using Ollama; query PDFs and notes.",
-    "tech": [
-      "Python",
-      "RAG",
-      "Ollama"
-    ],
-    "github": "https://github.com/jkjitendra",
+    "name": "Aristobox",
+    "description": "Offline-first educational kit order collection for field teams; tablet-optimized PWA with local storage, customer management, and CSV export.",
+    "tech": ["TypeScript", "React", "PWA"],
+    "github": "https://github.com/jkjitendra/Aristobox",
     "live": "",
-    "demo": null
+    "demo": {
+      "username": null,
+      "password": null
+    }
+  },
+  {
+    "name": "Blog App",
+    "description": "Full-stack blog with RBAC, comments, reactions, social login/SSO and payments.",
+    "tech": ["Java", "Spring Boot"],
+    "github": "https://github.com/jkjitendra/Blog_App",
+    "live": "",
+    "demo": {
+      "username": null,
+      "password": null
+    }
+  },
+  {
+    "name": "Identity Reconciliation",
+    "description": "Identity stitching by email/phone to unify customer records across systems.",
+    "tech": ["Java", "Spring Boot"],
+    "github": "https://github.com/jkjitendra/identity-reconciliation",
+    "live": "",
+    "demo": {
+      "username": null,
+      "password": null
+    }
+  },
+  {
+    "name": "MazeSolver (Desktop)",
+    "description": "Java 17 + Swing desktop app for solving MathMaze puzzles; native installers via Gradle/jpackage.",
+    "tech": ["Java", "Swing", "Gradle"],
+    "github": "https://github.com/jkjitendra/MazeSolver",
+    "live": "",
+    "demo": {
+      "username": null,
+      "password": null
+    }
+  },
+  {
+    "name": "price_lookup (Chrome Extension)",
+    "description": "Extension that tracks and notifies lowest product prices.",
+    "tech": ["JavaScript", "Chrome Extension"],
+    "github": "https://github.com/jkjitendra/price_lookup",
+    "live": "",
+    "demo": {
+      "username": null,
+      "password": null
+    }
   }
+
 ]
