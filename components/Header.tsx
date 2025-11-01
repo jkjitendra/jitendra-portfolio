@@ -74,6 +74,7 @@ export default function Header() {
 
         {/* MIDDLE: Nav pushed to the right */}
         <nav className="hidden md:flex ml-auto items-center gap-6 lg:gap-8 text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] leading-6">
+          <Link href="/" className="hover:text-[rgb(var(--accentAlt))]">Home</Link>
           <Link href="/projects" className="hover:text-[rgb(var(--accentAlt))]">Projects</Link>
           <Link href="/tech-radar" className="hover:text-[rgb(var(--accentAlt))]">Tech Radar</Link>
           <Link href="/resume" className="hover:text-[rgb(var(--accentAlt))]">Resume</Link>
@@ -82,7 +83,7 @@ export default function Header() {
         </nav>
 
         {/* RIGHT: Theme switcher on desktop */}
-        <div className="hidden md:block md:ml-4 md:mr-2 lg:mr-4 ml-auto">
+        <div className="hidden md:block md:ml-4 md:mr-2 lg:mr-4 ml-auto bg-[rgb(197 221 255 / 0.12)] rounded-md">
           <ThemeSwitcher variant="desktop" />
         </div>
 

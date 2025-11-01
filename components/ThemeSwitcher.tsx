@@ -6,11 +6,11 @@ import { createPortal } from "react-dom";
 type Props = { variant?: "desktop" | "mobile-fab" };
 
 const options = [
-  { id: "emerald", label: "Emerald Noir" },
-  { id: "light", label: "Light Mode" },
-  { id: "amethyst", label: "Royal Amethyst" },
-  { id: "sapphire", label: "Sapphire & Slate" },
-  { id: "solar", label: "Solar Dawn" },
+  { id: "emerald", label: "Emerald" },
+  { id: "light", label: "Light" },
+  { id: "amethyst", label: "Royal" },
+  { id: "sapphire", label: "Sapphire" },
+  { id: "solar", label: "Solar" },
 ];
 
 export default function ThemeSwitcher({ variant = "desktop" }: Props) {
@@ -85,7 +85,10 @@ export default function ThemeSwitcher({ variant = "desktop" }: Props) {
         <button
           type="button"
           onClick={() => setOpen((o) => !o)}
-          className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-white/10 px-3 py-2 text-[14px] lg:text-[18px] xl:text-[20px] leading-none"
+          className="inline-flex items-center justify-between gap-2 
+            rounded-md border border-white/10 bg-white/10 px-3 py-2 
+            text-[14px] lg:text-[18px] xl:text-[20px] leading-none
+            w-[8rem] shrink-0 [html[data-theme=light]_&]:bg-[rgb(100_154_231/0.12)]"
         >
           <span className="whitespace-nowrap">{current}</span>
           <svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true">
@@ -93,7 +96,10 @@ export default function ThemeSwitcher({ variant = "desktop" }: Props) {
           </svg>
         </button>
         {open && (
-          <div className="absolute right-0 z-[200] mt-2 w-56 rounded-lg border border-white/10 bg-black/70 backdrop-blur-md shadow-xl p-1">
+          <div className="absolute right-0 z-[200] mt-2 w-56 rounded-lg border border-white/10 
+            bg-[rgb(var(--bg)/0.90)] text-[rgb(var(--text))] hover:bg-[rgba(83,136,211,0.12)]
+            backdrop-blur-md shadow-xl p-1"
+          >
             {MenuList}
           </div>
         )}
