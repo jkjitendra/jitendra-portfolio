@@ -67,8 +67,10 @@ export default function Home() {
         >
           Jitendra Kumar Tiwari
         </motion.h1>
-        {showSkills && (
-          <p className="mt-3" style={{fontFamily: "monospace"}}>
+          <p 
+            className="mt-3"
+            style={{ fontFamily: "monospace", minHeight: "1.6em", visibility: showSkills ? "visible" : "hidden" }}
+          >
             {/* Render typed skills, separated */}
             {typedSkills.map((skill, idx) => (
               <span key={skill}>
@@ -85,7 +87,6 @@ export default function Home() {
               </span>
             )}
           </p>
-        )}
         <style>
           {`
             .blinking-cursor {
