@@ -4,7 +4,7 @@ import TechPill from "@/components/TechPill";
 
 export default function TechRadar() {
   return (
-    <main className="min-h-screen page-glow">
+    <main className="page-glow min-h-screen flex flex-col">
       <Header />
       <TechPill />
       <Footer />

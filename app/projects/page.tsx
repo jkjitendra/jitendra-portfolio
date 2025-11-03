@@ -4,7 +4,7 @@ import projects from "@/data/personal-projects.json";
 
 export default function ProjectsPage() {
   return (
-    <main className="page-glow">
+    <main className="page-glow min-h-screen flex flex-col">
       <Header />
 
       <section className="container-edge mt-10 copy">
@@ -54,7 +54,7 @@ export default function ProjectsPage() {
           ))}
         </div>
       </section>
-
+      <br/>
       <Footer />
     </main>
   );

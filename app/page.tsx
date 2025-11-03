@@ -51,7 +51,7 @@ export default function Home() {
 
   
   return (
-    <main className="page-glow">
+    <main className="page-glow min-h-screen">
       <Header />
 
       {/* Hero Section */}
@@ -163,6 +163,7 @@ export default function Home() {
         </ol>
       </section>
 
+      <br/>
       <Footer />
     </main>
   );
