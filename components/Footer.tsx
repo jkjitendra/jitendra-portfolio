@@ -1,8 +1,8 @@
 export default function Footer() {
   return (
-    <footer className="mt-24 border-t border-white/10 py-10">
+    <footer className="mt-auto border-t border-white/10 py-10 [html[data-theme=light]_&]:border-black/10">
       <div className="container-edge flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm/6 text-white/70">
+        <p className="text-sm/6 text-white/70 [html[data-theme=light]_&]:text-black/70">
           © {new Date().getFullYear()} Jitendra Kumar Tiwari.
         </p>
 
