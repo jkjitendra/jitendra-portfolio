@@ -714,11 +714,6 @@ html[data-theme="solar"] .mobile-menu-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-
-
-
-
-
 html[data-theme="light"] .mobile-menu-item:hover,
 html[data-theme="emerald"] .mobile-menu-item:hover,
 html[data-theme="amethyst"] .mobile-menu-item:hover,
