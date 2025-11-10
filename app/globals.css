@@ -7,53 +7,17 @@
   --text:230 236 255;
   --accent:46 132 255;
   --accentAlt:138 183 255;
-
+/* 
   --glow: 0 122 255;
-  --glowAlt: 120 200 255;
+  --glowAlt: 120 200 255; */
 }
 
-html[data-theme=emerald]{
-  --bg:10 18 16;
-  --text:231 255 248;
-  --accent:0 200 150;
-  --accentAlt:46 230 181;
 
-  /* Complementary electric teal glow */
-  --glow: 0 255 200;
-  --glowAlt: 150 255 230;
-}
-
-html[data-theme=amethyst]{
-  --bg:17 10 31;
-  --text:241 236 255;
-  --accent:138 92 246;
-  --accentAlt:178 152 255;
-
-  /* Refined Light Purple Glow (cool lavender with soft electric edge) */
-  --glow: 180 120 255;      /* core glow – soft violet */
-  --glowAlt: 220 180 255;   /* lighter lavender edge */
-}
-
-html[data-theme=sapphire] {
+html[data-theme=dark] {
   --bg: 10 14 30;
   --text: 230 240 255;
   --accent: 60 130 255;
   --accentAlt: 140 190 255;
-
-  /* Electric cyan glow */
-  --glow: 0 255 255;
-  --glowAlt: 140 255 255;
-}
-
-html[data-theme=solar] {
-  --bg: 14 10 7;
-  --text: 255 239 227;
-  --accent: 255 138 61;
-  --accentAlt: 255 195 138;
-
-  /* Warm golden-yellow glow */
-  --glow: 255 220 120;
-  --glowAlt: 255 160 80;
 }
 
 html[data-theme=light] {
@@ -101,10 +65,7 @@ html[data-theme="light"] .bg-white\/20 {
   border-color: rgba(0, 0, 0, 0.15) !important;
 }
 
-html[data-theme="emerald"] .tech-radar-bg,
-html[data-theme="amethyst"] .tech-radar-bg,
-html[data-theme="sapphire"] .tech-radar-bg,
-html[data-theme="solar"] .tech-radar-bg {
+html[data-theme="dark"] .tech-radar-bg {
   background: radial-gradient(
       circle at 50% 10%,
       rgba(255, 255, 255, 0.08),
@@ -131,10 +92,7 @@ html, body{
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-html[data-theme="sapphire"] .company-card,
-html[data-theme="emerald"] .company-card,
-html[data-theme="amethyst"] .company-card,
-html[data-theme="solar"] .company-card {
+html[data-theme="dark"] .company-card {
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -143,10 +101,7 @@ html[data-theme="solar"] .company-card {
   background: rgba(255, 255, 255, 0.05);
   color: rgb(var(--text));
 }
-html[data-theme="emerald"] .experience-card,
-html[data-theme="amethyst"] .experience-card,
-html[data-theme="sapphire"] .experience-card,
-html[data-theme="solar"] .experience-card {
+html[data-theme="dark"] .experience-card {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
   color: rgb(var(--text));
@@ -654,18 +609,6 @@ html[data-theme="light"] .experience-card {
 }
 
 /* Force dark theme for mobile menu in all themes */
-html[data-theme="emerald"] .mobile-menu-panel {
-  background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
-}
-html[data-theme="emerald"] .mobile-menu-header {
-  background: linear-gradient(135deg, rgb(21 80 79 / 95%) 0%, rgb(21 31 61 / 85%) 100%) !important
-}
-html[data-theme="emerald"] .mobile-menu-item {
-  color: rgb(255 255 255) !important;
-  background: rgb(7 66 93 / 79%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-
 html[data-theme="light"] .mobile-menu-panel {
   background: linear-gradient(135deg, rgb(127 127 127) 0%, rgb(206 188 188 / 85%) 100%) !important
 }
@@ -678,46 +621,82 @@ html[data-theme="light"] .mobile-menu-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-html[data-theme="amethyst"] .mobile-menu-panel {
-  background: linear-gradient(135deg, rgb(57 7 98 / 95%) 0%, rgb(56 47 8 / 85%) 100%) !important
-}
-html[data-theme="amethyst"] .mobile-menu-header {
-  background: linear-gradient(135deg, rgb(41 35 57 / 95%) 0%, rgb(6 23 72 / 85%) 100%) !important
-}
-html[data-theme="amethyst"] .mobile-menu-item {
-  color: rgb(255 255 255) !important;
-  background: rgb(57 14 94 / 79%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
 
-html[data-theme="sapphire"] .mobile-menu-panel {
+html[data-theme="dark"] .mobile-menu-panel {
   background: linear-gradient(135deg, rgb(11 79 114 / 95%) 0%, rgb(19 36 89 / 85%) 100%) !important
 }
-html[data-theme="sapphire"] .mobile-menu-header {
+html[data-theme="dark"] .mobile-menu-header {
   background: linear-gradient(135deg, rgb(18 42 63 / 95%) 0%, rgb(24 41 94 / 85%) 100%) !important
 }
-html[data-theme="sapphire"] .mobile-menu-item {
+html[data-theme="dark"] .mobile-menu-item {
   color: rgb(255 255 255) !important;
   background: rgb(7 66 93 / 79%) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-html[data-theme="solar"] .mobile-menu-panel {
-   background: linear-gradient(135deg, rgb(79 56 6 / 95%) 0%, rgb(10 28 62 / 85%) 100%) !important
-}
-html[data-theme="solar"] .mobile-menu-header {
-  background: linear-gradient(135deg, rgb(80 70 21 / 95%) 0%, rgb(29 42 78 / 85%) 100%) !important
-}
-html[data-theme="solar"] .mobile-menu-item {
-  color: rgb(255 255 255) !important;
-  background: rgb(55 48 11 / 79%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
 
 html[data-theme="light"] .mobile-menu-item:hover,
-html[data-theme="emerald"] .mobile-menu-item:hover,
-html[data-theme="amethyst"] .mobile-menu-item:hover,
-html[data-theme="sapphire"] .mobile-menu-item:hover,
-html[data-theme="solar"] .mobile-menu-item:hover {
+html[data-theme="dark"] .mobile-menu-item:hover {
   background: rgba(255, 255, 255, 0.2) !important;
+}
+
+@font-face {
+  font-family: 'Gabriola';
+  src: url('../public/Gabriola.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+ /* Profile Card Social Icons */
+.landing-bg {
+  background:linear-gradient(to right,#44A08D,#093637)
+}
+.profile-card-social {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.profile-card-social__item {
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: #405de6;
+  box-shadow: 0px 7px 30px rgba(43, 98, 169, 0.5);
+  position: relative;
+  font-size: 25px;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-card-social__item {
+    width: 45px;
+    height: 45px;
+    margin: 5px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .profile-card-social__item:hover {
+    transform: scale(1.2);
+  }
+}
+
+.profile-card-social__item {
+  background: linear-gradient(45deg, #333, #626b73);
+  box-shadow: 0px 4px 10px rgba(63, 65, 67, 0.7);
+}
+
+.profile-card-social .icon-font {
+  display: inline-flex;
 }

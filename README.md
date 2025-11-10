@@ -26,7 +26,7 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 - **SEO-friendly**:
   - Next.js Metadata API used.
   - Optimized images with next/image.
-- **Modern Styling**: TailwindCSS with custom themes (emerald, amethyst, sapphire, solar, mono).
+- **Modern Styling**: TailwindCSS with custom themes (light, dark).
 
 <hr/>
 
@@ -110,11 +110,8 @@ npm run dev
 
 Themes are defined in globals.css using CSS variables:
 
-- emerald  🌿
-- light    ⚪
-- amethyst 💜
-- sapphire 🔷
-- solar    ☀️
+- light
+- dark
 
 Switch themes using the ThemeSwitcher (desktop dropdown or mobile FAB).
 The ThemeSwitcher component handles theme selection and persistence using localStorage.
@@ -142,11 +139,14 @@ Check out the live portfolio here: [jkjitendra.in](https://www.jkjitendra.in)
 This Node.js script automates the process of exporting the entire project source code into a single, shareable Markdown file (project-portfolio.md).
 
 ### Purpose
+
 - To generate a text-based portfolio snapshot of the project for documentation, archiving, or sharing with recruiters.
 - It consolidates important source files (code, configs, data, components) into one readable Markdown file, excluding build artifacts and binary assets.
 
 ### Usage
+
 Run the script from your project root:
+
 ```bash
   node scripts/export-project.js
 ```
