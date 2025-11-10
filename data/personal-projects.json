@@ -1,6 +1,6 @@
 [
   {
-    "name": "XPense (Splitwise-like)",
+    "name": "XPense",
     "description": "Smart expense manager for personal and group expenses tracking with AI-based categorization, file uploads, analytics and integrated UPI payments.",
     "tech": [
       "Spring Boot",
@@ -19,7 +19,7 @@
     "description": "Offline-first educational kit order collection for field teams; tablet-optimized PWA with local storage, customer management, and CSV export.",
     "tech": ["TypeScript", "React", "PWA"],
     "github": "https://github.com/jkjitendra/Aristobox",
-    "live": "",
+    "live": "https://aristobox.netlify.app/",
     "demo": {
       "username": null,
       "password": null
@@ -63,7 +63,7 @@
     "description": "Extension that tracks and notifies lowest product prices.",
     "tech": ["JavaScript", "Chrome Extension"],
     "github": "https://github.com/jkjitendra/price_lookup",
-    "live": "",
+    "live": "https://chromewebstore.google.com/detail/hpkjionlijpkmbjdpbpefdbgdejjpjje?utm_source=item-share-cb",
     "demo": {
       "username": null,
       "password": null
