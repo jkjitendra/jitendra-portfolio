@@ -38,7 +38,7 @@ const themeInit = `
         // No saved theme, apply default based on screen size
         // (767px is just under the 'md' breakpoint of 768px)
         var isMobile = window.matchMedia("(max-width: 767px)").matches;
-        var defaultTheme = isMobile ? 'sapphire' : 'emerald';
+        var defaultTheme = isMobile ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', defaultTheme);
       }
     } catch (e) {}
@@ -48,7 +48,7 @@ const themeInit = `
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // Provide a stable default and suppress hydration warnings for this element.
-    <html lang="en" data-theme="emerald" suppressHydrationWarning>
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
         {/* This sets data-theme from localStorage BEFORE React hydrates */}
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />

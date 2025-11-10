@@ -62,32 +62,12 @@ export default function ResumeClient() {
         gap: 16,
       }}
     >
-      <div style={{ display: "flex", gap: 8 }}>
-        <a
-          href={RESUME_PATH}
-          target="_blank"
-          rel="noreferrer"
-          style={{
-            padding: "8px 12px",
-            background: "#0b5fff",
-            color: "white",
-            borderRadius: 6,
-            textDecoration: "none",
-            fontWeight: 600,
-            display: "inline-block",
-          }}
-          aria-label="Open resume in new tab"
-        >
-          View in new tab
-        </a>
-      </div>
-
       <div
         style={{
           border: "1px solid #e6e6e6",
           borderRadius: 8,
           overflow: "hidden",
-          height: "80vh",
+          height: "90vh",
           minHeight: 500,
         }}
       >
