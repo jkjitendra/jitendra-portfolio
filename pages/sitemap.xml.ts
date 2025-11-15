@@ -23,7 +23,7 @@ function generateSiteMap(pages: string[]) {
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   // Add routes you want in sitemap
-  const staticPages = ["/", "/blogs", "/jitendra_resume.pdf", "/tech"];
+  const staticPages = ["/", "/blogs", "/jitendra_resume.pdf", "/tech-radar"];
 
   const sitemap = generateSiteMap(staticPages);
 
