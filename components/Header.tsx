@@ -81,7 +81,7 @@ export default function Header() {
       <header className="fixed top-0 left-0 right-0 z-[1000] border-b border-white/10 shadow-sm backdrop-blur-md 
               bg-[rgb(var(--bg)/0.70)] m:bg-[rgb(var(--bg)/0.70)]"
       >
-        <div className="mx-auto max-w-[70rem] flex items-center gap-[0.5rem] py-3">
+        <div className="mx-auto max-w-[70rem] flex items-center justify-between gap-[0.5rem] px-3 py-3">
           {/* LEFT: Logo */}
           <Link href="/" aria-label="Landing Page" className="relative z-10 shrink-0 360-380:ml-[-2rem] 360-380:mr-[-1rem] 400-420:ml-[-1.5rem] 400-420:mr-[2rem] ml-[-1rem] sm:ml-[-1.5rem] lg:ml-[-2rem]">
             <div className="relative h-8 sm:h-9 md:h-10 w-[120px] sm:w-[140px] md:w-[160px]">
@@ -130,7 +130,7 @@ export default function Header() {
               }
               setOpen(v => !v);
             }}
-            className="md:hidden ml-[220px] inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/10"
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/10"
           >
             {open ? (
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
