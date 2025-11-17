@@ -48,7 +48,7 @@ const themeInit = `
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // Provide a stable default and suppress hydration warnings for this element.
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* This sets data-theme from localStorage BEFORE React hydrates */}
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
