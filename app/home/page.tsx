@@ -16,12 +16,14 @@ const skills = [
 const { caseStudyTitle, caseStudies } = caseStudyData;
 const { workExpTitle, experience } = experienceData;
 
+let hasAnimated = false;
+
 export default function Home() {
 
-  const [typedSkills, setTypedSkills] = useState<string[]>([]);
-  const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
+  const [typedSkills, setTypedSkills] = useState<string[]>(hasAnimated ? skills : []);
+  const [currentSkillIndex, setCurrentSkillIndex] = useState(hasAnimated ? skills.length : 0);
   const [currentTypedText, setCurrentTypedText] = useState("");
-  const [showSkills, setShowSkills] = useState(false);
+  const [showSkills, setShowSkills] = useState(true);
 
   useEffect(() => {
     if (!showSkills) return; // only start typing after name animation
@@ -33,7 +35,7 @@ export default function Home() {
     if (currentTypedText.length < currentSkill.length) {
       const timeout = setTimeout(() => {
         setCurrentTypedText(currentSkill.slice(0, currentTypedText.length + 1));
-      }, 100);
+      }, 60);
       return () => clearTimeout(timeout);
     }
 
@@ -42,9 +44,15 @@ export default function Home() {
       setTypedSkills((prev) => [...prev, currentSkill]);
       setCurrentSkillIndex((prev) => prev + 1);
       setCurrentTypedText("");
-    }, 800); // a bit longer pause feels smoother
+    }, 700); // a bit longer pause feels smoother
     return () => clearTimeout(timeout);
   }, [currentTypedText, currentSkillIndex, showSkills]);
+
+  useEffect(() => {
+    if (!hasAnimated) {
+      hasAnimated = true;
+    }
+  }, []);
 
   return (
 
@@ -58,37 +66,29 @@ export default function Home() {
       </div>
       {/* Hero Section */}
       <section className="container-edge mt-10 text-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 45 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.1 }}
-          onAnimationComplete={() => {
-            // Add a short cinematic delay before typing starts
-            setTimeout(() => setShowSkills(true), 600);
-          }}
-        >
+        <h1>
           Jitendra Kumar Tiwari
-        </motion.h1>
-          <p 
-            className="mt-3"
-            style={{ fontFamily: "monospace", minHeight: "1.6em", visibility: showSkills ? "visible" : "hidden" }}
-          >
-            {/* Render typed skills, separated */}
-            {typedSkills.map((skill, idx) => (
-              <span key={skill}>
-                {skill}
-                {/* Add separator only if this is NOT the last completed skill or if not currently typing last skill */}
-                {(idx < typedSkills.length - 1 || currentSkillIndex < skills.length) && ' | '}
-              </span>
-            ))}
-            {/* Render current typing word, only if we have more to type */}
-            {currentSkillIndex < skills.length && (
-              <span>
-                {currentTypedText}
-                <span className="blinking-cursor">|</span>
-              </span>
-            )}
-          </p>
+        </h1>
+        <p
+          className="mt-3"
+          style={{ fontFamily: "monospace", minHeight: "1.6em", visibility: showSkills ? "visible" : "hidden" }}
+        >
+          {/* Render typed skills, separated */}
+          {typedSkills.map((skill, idx) => (
+            <span key={skill}>
+              {skill}
+              {/* Add separator only if this is NOT the last completed skill or if not currently typing last skill */}
+              {(idx < typedSkills.length - 1 || currentSkillIndex < skills.length) && ' | '}
+            </span>
+          ))}
+          {/* Render current typing word, only if we have more to type */}
+          {currentSkillIndex < skills.length && (
+            <span>
+              {currentTypedText}
+              <span className="blinking-cursor">|</span>
+            </span>
+          )}
+        </p>
         <style>
           {`
             .blinking-cursor {
@@ -116,7 +116,7 @@ export default function Home() {
               <div className="flex items-center gap-4">
                 <img src={exp.logo} alt={exp.name} className="w-15 h-10 object-contain" />
                 <div>
-                  <h3 
+                  <h3
                     className="font-semibold text-xl"
                     style={{
                       color: exp.color,
@@ -165,7 +165,7 @@ export default function Home() {
         </ol>
       </section> */}
 
-      <br/>
+      <br />
       <Footer />
     </main>
   );
