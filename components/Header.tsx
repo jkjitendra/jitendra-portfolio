@@ -26,7 +26,7 @@ export default function Header() {
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
   const pathname = usePathname();
-  
+
   /** Active-state Helper*/
   const isActive = (href: NavItem["href"]): boolean => {
     if (href === "/") return pathname === "/";
@@ -84,14 +84,14 @@ export default function Header() {
         <div className="mx-auto max-w-[70rem] flex items-center justify-between gap-[0.5rem] px-3 py-3">
           {/* LEFT: Logo */}
           <Link href="/" aria-label="Landing Page" className="relative z-10 shrink-0 360-380:ml-[-2rem] 360-380:mr-[-1rem] 400-420:ml-[-1.5rem] 400-420:mr-[2rem] ml-[-1rem] sm:ml-[-1.5rem] lg:ml-[-2rem]">
-            <div className="relative h-8 sm:h-9 md:h-10 w-[120px] sm:w-[140px] md:w-[160px]">
+            <div className="relative h-12 sm:h-14 md:h-16 w-[150px] sm:w-[180px] md:w-[200px]">
               <Image
-                src="/logos/jk_logo.png"
+                src="/logos/jk_logo_main.png"
                 alt="Jitendra Logo"
                 fill
                 priority
                 fetchPriority="high"
-                sizes="(max-width: 640px) 120px, (max-width: 768px) 140px, 160px"
+                sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
                 className="object-contain [filter:drop-shadow(0_0_10px_rgba(0,0,0,0.35))]"
               />
             </div>
@@ -103,11 +103,10 @@ export default function Header() {
               <Link
                 key={href}
                 href={href}
-                className={`transition-colors ${
-                  isActive(href)
-                    ? "text-[rgb(var(--accentAlt))] font-semibold"
-                    : "hover:text-[rgb(var(--accentAlt))]"
-                }`}
+                className={`transition-colors ${isActive(href)
+                  ? "text-[rgb(var(--accentAlt))] font-semibold"
+                  : "hover:text-[rgb(var(--accentAlt))]"
+                  }`}
                 aria-current={isActive(href) ? "page" : undefined}
               >
                 {label}
@@ -146,9 +145,9 @@ export default function Header() {
 
         {/* Mobile slide-over */}
         <div className={`md:hidden fixed inset-0 z-[999] transition ${open ? "pointer-events-auto" : "pointer-events-none"}`} aria-hidden={!open}>
-          <div className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity ${open ? "opacity-100" :    "opacity-0"}`} 
-          onClick={closeMenu}
-            // style={{ backgroundColor: "rgba(var(--bg),0.5)" }} 
+          <div className={`absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity ${open ? "opacity-100" : "opacity-0"}`}
+            onClick={closeMenu}
+          // style={{ backgroundColor: "rgba(var(--bg),0.5)" }} 
           />
           <div
             ref={panelRef}
@@ -159,9 +158,8 @@ export default function Header() {
               <Link
                 onClick={closeMenu}
                 href="/home"
-                className={`rounded-md px-3 py-2 hover:bg-white/10 text-white font-medium ${
-                  isActive("/home") ? "bg-white/20 text-[rgb(var(--accentAlt))]" : ""
-                }`}
+                className={`rounded-md px-3 py-2 hover:bg-white/10 text-white font-medium ${isActive("/home") ? "bg-white/20 text-[rgb(var(--accentAlt))]" : ""
+                  }`}
                 aria-current={isActive("/home") ? "page" : undefined}
               >
                 Home
@@ -176,11 +174,10 @@ export default function Header() {
                   key={href}
                   onClick={closeMenu}
                   href={href}
-                  className={`mobile-menu-item rounded-md px-3 py-2 transition-colors ${
-                    isActive(href)
-                      ? "bg-white/20 font-semibold text-[rgb(var(--accentAlt))]"
-                      : "hover:bg-white/10"
-                  }`}
+                  className={`mobile-menu-item rounded-md px-3 py-2 transition-colors ${isActive(href)
+                    ? "bg-white/20 font-semibold text-[rgb(var(--accentAlt))]"
+                    : "hover:bg-white/10"
+                    }`}
                   aria-current={isActive(href) ? "page" : undefined}
                 >
                   {label}
