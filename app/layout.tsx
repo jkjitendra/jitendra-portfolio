@@ -61,7 +61,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 window.addEventListener('load', () => {
                   navigator.serviceWorker.register('/sw.js')
                     .then(reg => console.log('SW registered:', reg.scope))
-                    .catch(err => console.error('SW registration failed:', err));
+                    .catch(err => {
+                      if (err.toString().includes('wrsParams')) {
+                        console.warn('Service Worker registration blocked by Webroot/Security extension. This is local to your machine and safe to ignore.');
+                      } else {
+                        console.error('SW registration failed:', err);
+                      }
+                    });
                 });
               }
             `,
