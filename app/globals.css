@@ -2,12 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --bg:11 16 32;
-  --text:230 236 255;
-  --accent:46 132 255;
-  --accentAlt:138 183 255;
-/* 
+:root {
+  --bg: 11 16 32;
+  --text: 230 236 255;
+  --accent: 46 132 255;
+  --accentAlt: 138 183 255;
+  --logo-filter: none;
+  /* 
   --glow: 0 122 255;
   --glowAlt: 120 200 255; */
 }
@@ -18,6 +19,7 @@ html[data-theme=dark] {
   --text: 230 240 255;
   --accent: 60 130 255;
   --accentAlt: 140 190 255;
+  --logo-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) brightness(1.2);
 }
 
 html[data-theme=light] {
@@ -48,11 +50,9 @@ html[data-theme=light] .btn {
 }
 
 html[data-theme="light"] .tech-radar-bg {
-  background: radial-gradient(
-      circle at 50% 20%,
+  background: radial-gradient(circle at 50% 20%,
       rgba(0, 122, 255, 0.08),
-      rgba(0, 0, 0, 0.02) 80%
-    ),
+      rgba(0, 0, 0, 0.02) 80%),
     linear-gradient(to bottom right, #ffffff, #f6f8fa);
 }
 
@@ -66,11 +66,9 @@ html[data-theme="light"] .bg-white\/20 {
 }
 
 html[data-theme="dark"] .tech-radar-bg {
-  background: radial-gradient(
-      circle at 50% 10%,
+  background: radial-gradient(circle at 50% 10%,
       rgba(255, 255, 255, 0.08),
-      rgba(0, 0, 0, 0.2) 85%
-    ),
+      rgba(0, 0, 0, 0.2) 85%),
     linear-gradient(to bottom right, rgb(var(--bg)), rgb(var(--bg)));
 }
 
@@ -78,10 +76,11 @@ html[data-theme="dark"] .tech-radar-bg {
   transition: background 0.5s ease;
 }
 
-html, body{
-  min-height:100%;
-  background:radial-gradient(1200px 800px at 30% -10%,rgba(255,255,255,.06),rgb(var(--bg)));
-  color:rgb(var(--text));
+html,
+body {
+  min-height: 100%;
+  background: radial-gradient(1200px 800px at 30% -10%, rgba(255, 255, 255, .06), rgb(var(--bg)));
+  color: rgb(var(--text));
   overflow-y: scroll;
 }
 
@@ -90,8 +89,14 @@ html, body{
   transition: background 0.3s ease;
 }
 
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
 html[data-theme="dark"] .company-card {
   background: rgba(255, 255, 255, 0.05);
@@ -102,23 +107,30 @@ html[data-theme="dark"] .company-card {
   background: rgba(255, 255, 255, 0.05);
   color: rgb(var(--text));
 }
+
 html[data-theme="dark"] .experience-card {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
   color: rgb(var(--text));
 }
+
 html[data-theme="light"] .experience-card {
   background: rgba(0, 0, 0, 0.03);
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08),
-              0 2px 4px rgba(0, 0, 0, 0.06);
+    0 2px 4px rgba(0, 0, 0, 0.06);
   color: rgb(20, 20, 20);
 }
 
 
 @keyframes marquee-1of3 {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-33.3333%); }
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-33.3333%);
+  }
 }
 
 .animate-marquee-1of3 {
@@ -126,54 +138,71 @@ html[data-theme="light"] .experience-card {
 }
 
 .theme-panel {
-  background-color: rgba(17, 24, 39, 0.95); /* Dark slate gray with high opacity */
-  backdrop-filter: blur(8px); /* Adds a nice frosted glass effect */
-  
+  background-color: rgba(17, 24, 39, 0.95);
+  /* Dark slate gray with high opacity */
+  backdrop-filter: blur(8px);
+  /* Adds a nice frosted glass effect */
+
   /* Ensure the text is always light and readable on the dark background */
   color: rgb(240 240 240);
 }
 
 
-.container-edge{
+.container-edge {
   @apply mx-auto max-w-6xl px-4 sm:px-6 lg:px-8;
 }
 
-.card{
+.card {
   @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-md shadow-lg;
 }
 
-.btn{
-  @apply inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--accent))] px-4 py-2 font-medium text-white transition 
-    hover:opacity-90 
-    focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accentAlt))]/50;
+.btn {
+  @apply inline-flex items-center gap-2 rounded-lg bg-[rgb(var(--accent))] px-4 py-2 font-medium text-white transition hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accentAlt))]/50;
 }
 
-.badge{
+.badge {
   @apply rounded-md border border-white/10 bg-white/10 px-2 py-1 text-xs;
 }
 
 /* ------- Responsive typography ------- */
 @layer base {
+
   /* Slightly larger base on tablets/desktops */
   body {
     @apply text-[15px] leading-relaxed;
   }
+
   @screen md {
-    body { @apply text-[16px] leading-relaxed; }
+    body {
+      @apply text-[16px] leading-relaxed;
+    }
   }
+
   @screen lg {
-    body { @apply text-[17px] leading-relaxed; }
+    body {
+      @apply text-[17px] leading-relaxed;
+    }
   }
 
   /* Headings scale up with breakpoints */
-  h1 { @apply text-3xl md:text-4xl lg:text-5xl font-semibold; }
-  h2 { @apply text-2xl md:text-3xl font-semibold; }
-  h3 { @apply text-xl  md:text-2xl font-medium; }
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold;
+  }
+
+  h2 {
+    @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  h3 {
+    @apply text-xl md:text-2xl font-medium;
+  }
 }
 
 /* Helper for body copy inside sections/cards */
 @layer components {
-  .copy { @apply text-[15px] md:text-[16px] lg:text-[17px] leading-6; }
+  .copy {
+    @apply text-[15px] md:text-[16px] lg:text-[17px] leading-6;
+  }
 }
 
 
@@ -181,70 +210,71 @@ html[data-theme="light"] .experience-card {
 @layer components {
   .vertical-pill-container {
     @apply relative overflow-hidden rounded-[100px] border border-white/20 shadow-2xl;
-    background: linear-gradient(135deg, 
-      rgba(255,255,255,0.1) 0%, 
-      rgba(255,255,255,0.05) 50%, 
-      rgba(0,0,0,0.1) 100%);
+    background: linear-gradient(135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(0, 0, 0, 0.1) 100%);
     backdrop-filter: blur(20px);
   }
-  
+
   .pill-content-track {
     @apply absolute inset-0 overflow-hidden;
   }
-  
+
   .pill-arrow-btn {
-    @apply absolute bottom-4 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full 
-           bg-black/90 border border-white/20 flex items-center justify-center
-           text-white transition-all duration-300 hover:bg-black/95 hover:scale-105;
+    @apply absolute bottom-4 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-black/90 border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:bg-black/95 hover:scale-105;
     backdrop-filter: blur(10px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-  
+
   .pill-item {
-    @apply rounded-full bg-black/90 border border-white/10 
-           flex items-center justify-center text-white font-medium
-           shadow-lg transition-all duration-200;
+    @apply rounded-full bg-black/90 border border-white/10 flex items-center justify-center text-white font-medium shadow-lg transition-all duration-200;
     backdrop-filter: blur(10px);
   }
 }
 
 /* Enhanced clockwise revolving animations */
 @keyframes revolveUpFromBottom {
-  0% { 
-    transform: translateY(120px) scale(0.6) rotate(30deg); 
-    opacity: 0; 
+  0% {
+    transform: translateY(120px) scale(0.6) rotate(30deg);
+    opacity: 0;
   }
-  40% { 
-    opacity: 0.7; 
+
+  40% {
+    opacity: 0.7;
   }
-  100% { 
-    transform: translateY(0) scale(1) rotate(0deg); 
-    opacity: 1; 
+
+  100% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
   }
 }
 
 @keyframes arrowMoveUp {
-  0% { 
-    transform: translateY(0) scale(1); 
-    opacity: 1; 
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
   }
-  100% { 
-    transform: translateY(-420px) scale(0.8); 
-    opacity: 0; 
+
+  100% {
+    transform: translateY(-420px) scale(0.8);
+    opacity: 0;
   }
 }
 
 @keyframes revolveOut {
-  0% { 
-    transform: translateY(0) scale(1) rotate(0deg); 
-    opacity: 1; 
+  0% {
+    transform: translateY(0) scale(1) rotate(0deg);
+    opacity: 1;
   }
-  70% { 
-    opacity: 0.3; 
+
+  70% {
+    opacity: 0.3;
   }
-  100% { 
-    transform: translateY(-80px) scale(0.7) rotate(-20deg); 
-    opacity: 0; 
+
+  100% {
+    transform: translateY(-80px) scale(0.7) rotate(-20deg);
+    opacity: 0;
   }
 }
 
@@ -256,6 +286,7 @@ html[data-theme="light"] .experience-card {
 .animate-arrow-move-up {
   animation: arrowMoveUp 0.8s ease-in-out forwards;
 }
+
 /* 
 .animate-revolve-up {
   animation: revolveUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
@@ -278,11 +309,11 @@ html[data-theme="light"] .experience-card {
     .pill-mobile-container {
       @apply w-20 h-[300px] rounded-[60px];
     }
-    
+
     .pill-mobile-item {
       @apply w-16 h-16 text-[10px];
     }
-    
+
     .pill-mobile-arrow {
       @apply w-16 h-16 bottom-2;
     }
@@ -291,13 +322,14 @@ html[data-theme="light"] .experience-card {
 
 /* Enhanced mobile animations */
 @keyframes mobileArrowMoveUp {
-  0% { 
-    transform: translateX(-50%) translateY(0) scale(1); 
-    opacity: 1; 
+  0% {
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
   }
-  100% { 
-    transform: translateX(-50%) translateY(-280px) scale(0.8); 
-    opacity: 0; 
+
+  100% {
+    transform: translateX(-50%) translateY(-280px) scale(0.8);
+    opacity: 0;
   }
 }
 
@@ -307,28 +339,37 @@ html[data-theme="light"] .experience-card {
 
 /* Fix mobile scroll issues */
 @layer base {
-  html, body {
+
+  html,
+  body {
     min-height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll */
+    overflow-x: hidden;
+    /* Prevent horizontal scroll */
   }
-  
+
   /* Ensure proper scroll behavior on mobile */
   @media (max-width: 768px) {
-    html, body {
+
+    html,
+    body {
       height: auto;
       min-height: 100vh;
-      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+      -webkit-overflow-scrolling: touch;
+      /* Smooth scrolling on iOS */
     }
-    
+
     /* Prevent viewport height issues on mobile browsers */
     .min-h-screen {
       min-height: 100vh;
-      min-height: 100dvh; /* Dynamic viewport height for mobile */
+      min-height: 100dvh;
+      /* Dynamic viewport height for mobile */
     }
   }
 }
 
-.will-change-transform { will-change: transform; }
+.will-change-transform {
+  will-change: transform;
+}
 
 
 
@@ -339,7 +380,7 @@ html[data-theme="light"] .experience-card {
     perspective: 1200px;
     perspective-origin: center center;
   }
-  
+
   .pill-rolling-item {
     transform-style: preserve-3d;
     backface-visibility: hidden;
@@ -349,72 +390,86 @@ html[data-theme="light"] .experience-card {
 
 /* Custom rolling keyframes for even smoother motion */
 @keyframes continuousRollUp {
-  0% { 
-    transform: translateY(180px) rotate(720deg) scale(0.5); 
-    opacity: 0; 
+  0% {
+    transform: translateY(180px) rotate(720deg) scale(0.5);
+    opacity: 0;
   }
-  15% { 
-    transform: translateY(150px) rotate(630deg) scale(0.55); 
-    opacity: 0.1; 
+
+  15% {
+    transform: translateY(150px) rotate(630deg) scale(0.55);
+    opacity: 0.1;
   }
-  30% { 
-    transform: translateY(120px) rotate(540deg) scale(0.65); 
-    opacity: 0.3; 
+
+  30% {
+    transform: translateY(120px) rotate(540deg) scale(0.65);
+    opacity: 0.3;
   }
-  45% { 
-    transform: translateY(90px) rotate(450deg) scale(0.75); 
-    opacity: 0.5; 
+
+  45% {
+    transform: translateY(90px) rotate(450deg) scale(0.75);
+    opacity: 0.5;
   }
-  60% { 
-    transform: translateY(60px) rotate(360deg) scale(0.85); 
-    opacity: 0.7; 
+
+  60% {
+    transform: translateY(60px) rotate(360deg) scale(0.85);
+    opacity: 0.7;
   }
-  75% { 
-    transform: translateY(30px) rotate(270deg) scale(0.92); 
-    opacity: 0.85; 
+
+  75% {
+    transform: translateY(30px) rotate(270deg) scale(0.92);
+    opacity: 0.85;
   }
-  90% { 
-    transform: translateY(10px) rotate(90deg) scale(0.98); 
-    opacity: 0.95; 
+
+  90% {
+    transform: translateY(10px) rotate(90deg) scale(0.98);
+    opacity: 0.95;
   }
-  100% { 
-    transform: translateY(0) rotate(0deg) scale(1); 
-    opacity: 1; 
+
+  100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
   }
 }
 
 @keyframes continuousRollDown {
-  0% { 
-    transform: translateY(0) rotate(0deg) scale(1); 
-    opacity: 1; 
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 1;
   }
-  15% { 
-    transform: translateY(-30px) rotate(-90deg) scale(0.98); 
-    opacity: 0.95; 
+
+  15% {
+    transform: translateY(-30px) rotate(-90deg) scale(0.98);
+    opacity: 0.95;
   }
-  30% { 
-    transform: translateY(-60px) rotate(-180deg) scale(0.92); 
-    opacity: 0.85; 
+
+  30% {
+    transform: translateY(-60px) rotate(-180deg) scale(0.92);
+    opacity: 0.85;
   }
-  45% { 
-    transform: translateY(-90px) rotate(-270deg) scale(0.85); 
-    opacity: 0.7; 
+
+  45% {
+    transform: translateY(-90px) rotate(-270deg) scale(0.85);
+    opacity: 0.7;
   }
-  60% { 
-    transform: translateY(-120px) rotate(-360deg) scale(0.75); 
-    opacity: 0.5; 
+
+  60% {
+    transform: translateY(-120px) rotate(-360deg) scale(0.75);
+    opacity: 0.5;
   }
-  75% { 
-    transform: translateY(-150px) rotate(-450deg) scale(0.65); 
-    opacity: 0.3; 
+
+  75% {
+    transform: translateY(-150px) rotate(-450deg) scale(0.65);
+    opacity: 0.3;
   }
-  90% { 
-    transform: translateY(-170px) rotate(-630deg) scale(0.55); 
-    opacity: 0.1; 
+
+  90% {
+    transform: translateY(-170px) rotate(-630deg) scale(0.55);
+    opacity: 0.1;
   }
-  100% { 
-    transform: translateY(-180px) rotate(-720deg) scale(0.5); 
-    opacity: 0; 
+
+  100% {
+    transform: translateY(-180px) rotate(-720deg) scale(0.5);
+    opacity: 0;
   }
 }
 
@@ -432,39 +487,35 @@ html[data-theme="light"] .experience-card {
   .tech-icon-container {
     @apply relative inline-block transition-all duration-200;
   }
-  
+
   .tech-icon-container:hover {
     @apply scale-105;
   }
 
   .tech-tooltip {
-    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 
-           px-2 py-1 bg-black/90 text-white text-xs rounded 
-           whitespace-nowrap z-50 pointer-events-none;
+    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded whitespace-nowrap z-50 pointer-events-none;
   }
-  
+
   .tech-tooltip::after {
     content: '';
-    @apply absolute top-full left-1/2 transform -translate-x-1/2 
-           border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90;
+    @apply absolute top-full left-1/2 transform -translate-x-1/2 border-l-4 border-r-4 border-t-4 border-transparent border-t-black/90;
   }
 
   /* Pause indicator */
   .pause-indicator {
-    @apply absolute top-2 right-2 bg-black/60 rounded-full p-1 
-           transition-opacity duration-200;
+    @apply absolute top-2 right-2 bg-black/60 rounded-full p-1 transition-opacity duration-200;
   }
-  
+
   /* SVG filter for white icons on dark background */
   .tech-svg {
     filter: brightness(0) invert(1);
   }
-  
+
   /* Smooth hover transitions for pill items */
   .pill-rolling-item {
     transition: all 0.2s ease;
   }
-  
+
   .pill-rolling-item:hover {
     transform: scale(1.05);
   }
@@ -512,10 +563,12 @@ html[data-theme="light"] .experience-card {
 .page-glow::after {
   content: "";
   position: fixed;
-  inset: -2px; /* slightly beyond the page edges */
+  inset: -2px;
+  /* slightly beyond the page edges */
   border-radius: 28px;
   pointer-events: none;
-  z-index: 0; /* below ::before but above content */
+  z-index: 0;
+  /* below ::before but above content */
   background:
     radial-gradient(circle, rgb(var(--glow) / 0.9) 0%, transparent 60%) 10% 20% / 3px 3px,
     radial-gradient(circle, rgb(var(--glowAlt) / 0.8) 0%, transparent 60%) 30% 80% / 2px 2px,
@@ -535,10 +588,12 @@ html[data-theme="light"] .experience-card {
     background-position:
       10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
   }
+
   50% {
     background-position:
       15% 25%, 25% 75%, 65% 35%, 85% 65%, 55% 15%, 75% 85%;
   }
+
   100% {
     background-position:
       10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
@@ -547,7 +602,9 @@ html[data-theme="light"] .experience-card {
 
 /* Subtle pulsing glow animation */
 @keyframes borderDustPulseVar {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow:
       0 0 25px 4px rgb(var(--glow) / 0.55),
       0 0 60px 12px rgb(var(--glowAlt) / 0.35),
@@ -555,6 +612,7 @@ html[data-theme="light"] .experience-card {
       inset 0 0 25px 6px rgb(var(--glow) / 0.25),
       inset 0 0 50px 15px rgb(var(--glowAlt) / 0.15);
   }
+
   50% {
     box-shadow:
       0 0 40px 6px rgb(var(--glow) / 0.75),
@@ -569,31 +627,25 @@ html[data-theme="light"] .experience-card {
 
 /* Mobile menu dark theme using theme variables */
 .mobile-menu-panel {
-  background: linear-gradient(
-    135deg, 
-    rgba(var(--bg), 0.98) 0%, 
-    rgba(var(--bg), 0.95) 50%,
-    rgba(var(--bg), 0.98) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(var(--bg), 0.98) 0%,
+      rgba(var(--bg), 0.95) 50%,
+      rgba(var(--bg), 0.98) 100%) !important;
   backdrop-filter: blur(20px);
   border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .mobile-menu-header {
-  background: linear-gradient(
-    135deg, 
-    rgba(var(--bg), 0.95) 0%, 
-    rgba(var(--bg), 0.85) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(var(--bg), 0.95) 0%,
+      rgba(var(--bg), 0.85) 100%) !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .mobile-menu-nav {
-  background: linear-gradient(
-    135deg, 
-    rgba(var(--bg), 0.95) 0%, 
-    rgba(var(--bg), 0.98) 100%
-  ) !important;
+  background: linear-gradient(135deg,
+      rgba(var(--bg), 0.95) 0%,
+      rgba(var(--bg), 0.98) 100%) !important;
 }
 
 .mobile-menu-item {
@@ -613,9 +665,11 @@ html[data-theme="light"] .experience-card {
 html[data-theme="light"] .mobile-menu-panel {
   background: linear-gradient(135deg, rgb(127 127 127) 0%, rgb(206 188 188 / 85%) 100%) !important
 }
+
 html[data-theme="light"] .mobile-menu-header {
   background: linear-gradient(135deg, rgb(103 101 86 / 95%) 0%, rgb(38 51 90 / 85%) 100%) !important
 }
+
 html[data-theme="light"] .mobile-menu-item {
   color: rgb(255 255 255) !important;
   background: rgb(59 68 96) !important;
@@ -626,9 +680,11 @@ html[data-theme="light"] .mobile-menu-item {
 html[data-theme="dark"] .mobile-menu-panel {
   background: linear-gradient(135deg, rgb(11 79 114 / 95%) 0%, rgb(19 36 89 / 85%) 100%) !important
 }
+
 html[data-theme="dark"] .mobile-menu-header {
   background: linear-gradient(135deg, rgb(18 42 63 / 95%) 0%, rgb(24 41 94 / 85%) 100%) !important
 }
+
 html[data-theme="dark"] .mobile-menu-item {
   color: rgb(255 255 255) !important;
   background: rgb(7 66 93 / 79%) !important;
@@ -650,10 +706,11 @@ html[data-theme="dark"] .mobile-menu-item:hover {
 }
 
 
- /* Profile Card Social Icons */
+/* Profile Card Social Icons */
 .landing-bg {
-  background:linear-gradient(to right,#44A08D,#093637)
+  background: linear-gradient(to right, #44A08D, #093637)
 }
+
 .profile-card-social {
   margin-top: 15px;
   display: flex;

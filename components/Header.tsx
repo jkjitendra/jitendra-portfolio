@@ -92,7 +92,7 @@ export default function Header() {
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
-                className="object-contain [filter:drop-shadow(0_0_10px_rgba(0,0,0,0.35))]"
+                className="object-contain [filter:var(--logo-filter)]"
               />
             </div>
           </Link>
