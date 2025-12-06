@@ -5,6 +5,32 @@ export const metadata: Metadata = {
   title: "Jitendra · Portfolio",
   description:
     "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
+  metadataBase: new URL("https://www.jkjitendra.in"),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "Jitendra · Portfolio",
+    description: "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
+    url: "https://www.jkjitendra.in",
+    siteName: "Jitendra Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jitendra · Portfolio",
+    description: "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
+    creator: "@jkjitendra", // Assuming this handle, can be updated later
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },

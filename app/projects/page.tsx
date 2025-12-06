@@ -2,6 +2,13 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import projects from "@/data/personal-projects.json";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Projects | Jitendra",
+  description: "A showcase of my personal projects, case studies, and open source contributions.",
+};
+
 export default function ProjectsPage() {
   return (
     <main className="page-glow min-h-screen flex flex-col">
@@ -54,7 +61,7 @@ export default function ProjectsPage() {
           ))}
         </div>
       </section>
-      <br/>
+      <br />
       <Footer />
     </main>
   );

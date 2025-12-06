@@ -1,5 +1,5 @@
 // public/service-worker.js
-const VERSION = 'swr-3336f80';                         // ← bump this when you want to bust SW cache
+const VERSION = 'swr-8d45f4d';                         // ← bump this when you want to bust SW cache
 const CACHE_NAME = `imgs-${VERSION}`;
 const IMG_RE = /\.(?:png|webp|jpg|jpeg|svg|gif|avif)$/i;
 
