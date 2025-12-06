@@ -83,7 +83,7 @@ export default function Header() {
       >
         <div className="mx-auto max-w-[70rem] flex items-center justify-between gap-[0.5rem] px-3 py-3">
           {/* LEFT: Logo */}
-          <Link href="/" aria-label="Landing Page" className="relative z-10 shrink-0 360-380:ml-[-2rem] 360-380:mr-[-1rem] 400-420:ml-[-1.5rem] 400-420:mr-[2rem] ml-[-1rem] sm:ml-[-1.5rem] lg:ml-[-2rem]">
+          <Link href="/" aria-label="Landing Page" className="relative z-10 shrink-0">
             <div className="relative h-12 sm:h-14 md:h-16 w-[150px] sm:w-[180px] md:w-[200px]">
               <Image
                 src="/logos/jk_logo_main.png"
@@ -92,7 +92,7 @@ export default function Header() {
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
-                className="object-contain [filter:var(--logo-filter)]"
+                className="object-contain object-left [filter:var(--logo-filter)]"
               />
             </div>
           </Link>
