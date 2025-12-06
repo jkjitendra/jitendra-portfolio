@@ -85,6 +85,7 @@ export default function Header() {
           {/* LEFT: Logo */}
           <Link href="/" aria-label="Landing Page" className="relative z-10 shrink-0">
             <div className="relative h-12 sm:h-14 md:h-16 w-[150px] sm:w-[180px] md:w-[200px]">
+              {/* Light Mode Logo */}
               <Image
                 src="/logos/jk_logo_main.png"
                 alt="Jitendra Logo"
@@ -92,7 +93,17 @@ export default function Header() {
                 priority
                 fetchPriority="high"
                 sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
-                className="object-contain object-left [filter:var(--logo-filter)]"
+                className="object-contain object-left block dark:hidden"
+              />
+              {/* Dark Mode Logo */}
+              <Image
+                src="/logos/jk_logo_white.png"
+                alt="Jitendra Logo"
+                fill
+                priority
+                fetchPriority="high"
+                sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 200px"
+                className="object-contain object-left hidden dark:block"
               />
             </div>
           </Link>

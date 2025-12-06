@@ -20,6 +20,7 @@ html[data-theme=dark] {
   --accent: 60 130 255;
   --accentAlt: 140 190 255;
   --logo-filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1)) brightness(1.2);
+  color-scheme: dark;
 }
 
 html[data-theme=light] {
@@ -31,6 +32,7 @@ html[data-theme=light] {
   /* 💡 Soft sky-blue glow (already perfect) */
   --glow: 0 122 255;
   --glowAlt: 150 200 255;
+  color-scheme: light;
 }
 
 html[data-theme=light] .card {
@@ -81,7 +83,7 @@ body {
   min-height: 100%;
   background: radial-gradient(1200px 800px at 30% -10%, rgba(255, 255, 255, .06), rgb(var(--bg)));
   color: rgb(var(--text));
-  overflow-y: scroll;
+  /* overflow-y: scroll; -- Removed per user request to fix whitespace */
 }
 
 .company-card {
