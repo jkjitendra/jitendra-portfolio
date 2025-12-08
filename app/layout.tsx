@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from "next";
 export const metadata: Metadata = {
   title: "Jitendra · Portfolio",
   description:
-    "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
+    "Projects, Tech Radar, Resume",
   metadataBase: new URL("https://www.jkjitendra.in"),
   robots: {
     index: true,
@@ -19,17 +19,11 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Jitendra · Portfolio",
-    description: "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
+    description: "Projects, Tech Radar, Resume",
     url: "https://www.jkjitendra.in",
     siteName: "Jitendra Portfolio",
     locale: "en_US",
     type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Jitendra · Portfolio",
-    description: "Themes, Case Studies, Tech Radar, Resume, Testimonials, Blogs",
-    creator: "@jkjitendra", // Assuming this handle, can be updated later
   },
   icons: {
     icon: [
