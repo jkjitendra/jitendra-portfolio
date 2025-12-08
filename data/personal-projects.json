@@ -15,11 +15,15 @@
     }
   },
   {
-    "name": "Aristobox",
+    "name": "EduKitBox",
     "description": "Offline-first educational kit order collection for field teams; tablet-optimized PWA with local storage, customer management, and CSV export.",
-    "tech": ["TypeScript", "React", "PWA"],
-    "github": "https://github.com/jkjitendra/Aristobox",
-    "live": "https://aristobox.netlify.app/",
+    "tech": [
+      "TypeScript",
+      "React",
+      "PWA"
+    ],
+    "github": "https://github.com/jkjitendra/EduKitBox",
+    "live": "https://edukitbox.netlify.app/",
     "demo": {
       "username": null,
       "password": null
@@ -28,7 +32,10 @@
   {
     "name": "Blog App",
     "description": "Full-stack blog with RBAC, comments, reactions, social login/SSO and payments.",
-    "tech": ["Java", "Spring Boot"],
+    "tech": [
+      "Java",
+      "Spring Boot"
+    ],
     "github": "https://github.com/jkjitendra/Blog_App",
     "live": "",
     "demo": {
@@ -39,7 +46,10 @@
   {
     "name": "Identity Reconciliation",
     "description": "Identity stitching by email/phone to unify customer records across systems.",
-    "tech": ["Java", "Spring Boot"],
+    "tech": [
+      "Java",
+      "Spring Boot"
+    ],
     "github": "https://github.com/jkjitendra/identity-reconciliation",
     "live": "",
     "demo": {
@@ -50,7 +60,11 @@
   {
     "name": "MazeSolver (Desktop)",
     "description": "Java 17 + Swing desktop app for solving MathMaze puzzles; native installers via Gradle/jpackage.",
-    "tech": ["Java", "Swing", "Gradle"],
+    "tech": [
+      "Java",
+      "Swing",
+      "Gradle"
+    ],
     "github": "https://github.com/jkjitendra/MazeSolver",
     "live": "",
     "demo": {
@@ -61,7 +75,10 @@
   {
     "name": "price_lookup (Chrome Extension)",
     "description": "Extension that tracks and notifies lowest product prices.",
-    "tech": ["JavaScript", "Chrome Extension"],
+    "tech": [
+      "JavaScript",
+      "Chrome Extension"
+    ],
     "github": "https://github.com/jkjitendra/price_lookup",
     "live": "https://chromewebstore.google.com/detail/hpkjionlijpkmbjdpbpefdbgdejjpjje?utm_source=item-share-cb",
     "demo": {
@@ -69,5 +86,4 @@
       "password": null
     }
   }
-
 ]
