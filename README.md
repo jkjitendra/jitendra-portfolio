@@ -1,6 +1,6 @@
 # Jitendra Portfolio
 
-A modern, responsive developer portfolio built with Next.js 15, TypeScript, and TailwindCSS.
+A modern, responsive developer portfolio built with Next.js 16, TypeScript, and TailwindCSS.
 It showcases projects, work experience, case studies, testimonials, blogs, and supports theme switching with a polished UI.
 
 <hr/>
@@ -32,7 +32,7 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15
+- **Framework**: Next.js 16
 - **Language**: TypeScript
 - **Styling**: TailwindCSS
 - **Icons/Images**: Next.js Image Optimization
