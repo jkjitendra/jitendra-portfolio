@@ -162,7 +162,7 @@ export default function Header() {
           />
           <div
             ref={panelRef}
-            className={`absolute right-0 top-0 w-72 h-[57rem] max-w-[85%] border-l border-white/10 shadow-xl transition-transform duration-300 mobile-menu-panel ${open ? "translate-x-0" : "translate-x-full"}`}
+            className={`absolute right-0 top-0 w-72 h-screen max-w-[85%] bg-[#0B1020] border-l border-white/10 shadow-xl transition-transform duration-300 mobile-menu-panel ${open ? "translate-x-0" : "translate-x-full"}`}
             role="dialog" aria-modal="true"
           >
             <div className="px-5 pt-[0.5rem] pb-[1rem] border-b border-white/10 flex items-center justify-between mobile-menu-header">

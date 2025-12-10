@@ -612,10 +612,13 @@ body {
 
 
 /* Mobile menu dark theme using theme variables */
+/* Mobile menu dark theme using theme variables */
 .mobile-menu-panel {
-  background: var(--mobile-menu-panel-bg) !important;
-  backdrop-filter: blur(20px);
-  border-left: 1px solid rgba(255, 255, 255, 0.2) !important;
+  background-color: rgb(11, 16, 32) !important;
+  /* Solid dark background */
+  backdrop-filter: none !important;
+  /* Remove blur to ensure solid look if needed, or keep it but with solid bg it matters less */
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
 .mobile-menu-header {

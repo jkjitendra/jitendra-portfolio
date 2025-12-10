@@ -62,7 +62,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
   };
 
   return (
-    <div className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center perspective-1000">
+    <div className="relative w-full min-h-[500px] py-12 md:py-0 md:h-[600px] md:min-h-0 flex items-center justify-center perspective-1000">
       <AnimatePresence mode="wait">
         {animationStage !== 'success' && animationStage !== 'mailbox' && (
           <motion.div
@@ -70,7 +70,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
             initial="hidden"
             animate={animationStage === 'hidden' ? 'hidden' : 'idle'}
             variants={containerVariants}
-            className="relative shadow-2xl origin-center bg-[#d4c5a9]"
+            className="relative shadow-2xl origin-center bg-[#d4c5a9] rounded-2xl overflow-hidden"
             style={{
               aspectRatio: '3/4',
               width: '100%',
