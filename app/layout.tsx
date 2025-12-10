@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
+import { Dancing_Script } from "next/font/google";
 
 export const metadata: Metadata = {
   title: "Jitendra · Portfolio",
@@ -63,6 +64,12 @@ const themeInit = `
   })();
 `;
 
+const dancingScript = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-handwriting",
+  display: "swap",
+});
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // Provide a stable default and suppress hydration warnings for this element.
@@ -93,7 +100,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className="antialiased" suppressHydrationWarning>
+      <body className={`antialiased ${dancingScript.variable}`} suppressHydrationWarning>
         {children}
       </body>
     </html>

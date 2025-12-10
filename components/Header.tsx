@@ -13,6 +13,7 @@ const NAV_LINKS = [
   { href: "/home", label: "Home" },
   { href: "/tech-radar", label: "Tech Radar" },
   { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
   // { href: "/testimonials", label: "Testimonials" },
   // { href: "/blogs", label: "Blogs" },
 ] as const satisfies readonly NavItem[];
@@ -77,8 +78,8 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-[1000] border-b border-white/10 shadow-sm backdrop-blur-md 
-              bg-[rgb(var(--bg)/0.70)] m:bg-[rgb(var(--bg)/0.70)]"
+      <header className="fixed top-0 left-0 right-0 z-[1000] border-b border-black/5 dark:border-white/10 shadow-sm backdrop-blur-md 
+              bg-[rgb(var(--bg)/0.70)]"
       >
         <div className="mx-auto max-w-[70rem] flex items-center justify-between gap-[0.5rem] px-3 py-3">
           {/* LEFT: Logo */}
@@ -139,7 +140,7 @@ export default function Header() {
               }
               setOpen(v => !v);
             }}
-            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/10 bg-white/10"
+            className="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-black/5 dark:border-white/10 bg-black/5 dark:bg-white/10"
           >
             {open ? (
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
