@@ -540,7 +540,7 @@ body {
 }
 
 
-/* === Theme-reactive Neon Border === */
+/* === Theme-reactive Neon Border (Optimized) === */
 .page-glow {
   position: relative;
   min-height: 100vh;
@@ -557,24 +557,18 @@ body {
   z-index: 1;
   border-radius: 24px;
 
-  /* Use rgb(var(--glow) / opacity) syntax for live variable blending */
-  border: 1px solid rgb(var(--glow) / 0.75);
+  /* Simplified border and shadow for performance */
+  border: 1px solid rgb(var(--glow) / 0.5);
   box-shadow:
-    0 0 25px 4px rgb(var(--glow) / 0.55),
-    0 0 60px 12px rgb(var(--glowAlt) / 0.35),
-    0 0 120px 30px rgb(var(--glowAlt) / 0.2),
-    inset 0 0 25px 6px rgb(var(--glow) / 0.25),
-    inset 0 0 50px 15px rgb(var(--accentAlt) / 0.15);
+    0 0 40px 5px rgb(var(--glow) / 0.3),
+    inset 0 0 40px 5px rgb(var(--glow) / 0.2);
 
   background:
-    radial-gradient(circle at 10% 20%, rgb(var(--glowAlt) / 0.1) 0%, transparent 40%) no-repeat,
-    radial-gradient(circle at 80% 30%, rgb(var(--glow) / 0.08) 0%, transparent 45%) no-repeat,
-    radial-gradient(circle at 20% 90%, rgb(var(--glowAlt) / 0.06) 0%, transparent 40%) no-repeat;
+    radial-gradient(circle at 50% 50%, rgb(var(--glowAlt) / 0.05) 0%, transparent 60%) no-repeat;
 
   background-blend-mode: screen;
-  filter: blur(2px);
+  /* Removed expensive box-shadow animation */
   transition: box-shadow 0.6s ease, border-color 0.6s ease;
-  animation: borderDustPulseVar 8s ease-in-out infinite alternate;
 }
 
 /* === Floating Particle Glow Layer === */
@@ -582,64 +576,38 @@ body {
   content: "";
   position: fixed;
   inset: -2px;
-  /* slightly beyond the page edges */
   border-radius: 28px;
   pointer-events: none;
   z-index: 0;
-  /* below ::before but above content */
+
+  /* Reduced number of gradients */
   background:
-    radial-gradient(circle, rgb(var(--glow) / 0.9) 0%, transparent 60%) 10% 20% / 3px 3px,
-    radial-gradient(circle, rgb(var(--glowAlt) / 0.8) 0%, transparent 60%) 30% 80% / 2px 2px,
-    radial-gradient(circle, rgb(var(--glow) / 0.7) 0%, transparent 60%) 70% 40% / 2px 2px,
-    radial-gradient(circle, rgb(var(--glowAlt) / 0.6) 0%, transparent 60%) 90% 70% / 4px 4px,
-    radial-gradient(circle, rgb(var(--glow) / 0.8) 0%, transparent 60%) 50% 10% / 3px 3px,
-    radial-gradient(circle, rgb(var(--glowAlt) / 0.5) 0%, transparent 60%) 80% 90% / 2px 2px;
+    radial-gradient(circle, rgb(var(--glow) / 0.8) 0%, transparent 60%) 10% 20% / 3px 3px,
+    radial-gradient(circle, rgb(var(--glowAlt) / 0.6) 0%, transparent 60%) 90% 70% / 4px 4px;
+
   background-repeat: no-repeat;
-  filter: blur(1px) brightness(1.4);
-  animation: particleDrift 14s linear infinite;
+  filter: blur(1px) brightness(1.2);
+  /* Simplified animation */
+  animation: particleDrift 20s linear infinite;
   mix-blend-mode: screen;
 }
 
 /* ✨ Animation: particles drift around slowly */
 @keyframes particleDrift {
   0% {
-    background-position:
-      10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
+    background-position: 10% 20%, 90% 70%;
   }
 
   50% {
-    background-position:
-      15% 25%, 25% 75%, 65% 35%, 85% 65%, 55% 15%, 75% 85%;
+    background-position: 15% 25%, 85% 65%;
   }
 
   100% {
-    background-position:
-      10% 20%, 30% 80%, 70% 40%, 90% 70%, 50% 10%, 80% 90%;
+    background-position: 10% 20%, 90% 70%;
   }
 }
 
-/* Subtle pulsing glow animation */
-@keyframes borderDustPulseVar {
-
-  0%,
-  100% {
-    box-shadow:
-      0 0 25px 4px rgb(var(--glow) / 0.55),
-      0 0 60px 12px rgb(var(--glowAlt) / 0.35),
-      0 0 120px 30px rgb(var(--glowAlt) / 0.2),
-      inset 0 0 25px 6px rgb(var(--glow) / 0.25),
-      inset 0 0 50px 15px rgb(var(--glowAlt) / 0.15);
-  }
-
-  50% {
-    box-shadow:
-      0 0 40px 6px rgb(var(--glow) / 0.75),
-      0 0 80px 20px rgb(var(--glow) / 0.45),
-      0 0 150px 40px rgb(var(--glowAlt) / 0.3),
-      inset 0 0 35px 10px rgb(var(--glow) / 0.35),
-      inset 0 0 60px 20px rgb(var(--glowAlt) / 0.2);
-  }
-}
+/* Removed borderDustPulseVar keyframes to prevent performance issues */
 
 
 
