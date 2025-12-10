@@ -30,16 +30,32 @@ export default function ContactPage() {
     e.preventDefault();
     setStatus('submitting');
 
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Log data to console as requested
-    console.log('Form Submitted:', formData);
+      if (!response.ok) {
+        throw new Error('Failed to send message');
+      }
 
-    setStatus('success');
-    setFormData({ name: '', email: '', mobile: '', message: '' });
+      // Success
+      console.log('Form Submitted via API:', formData);
+      setStatus('success');
+      setFormData({ name: '', email: '', mobile: '', message: '' });
 
-    // Status stays 'success' until user types again, triggering 'idle' via handleChange
+      // Status stays 'success' until user types again, triggering 'idle' via handleChange
+
+    } catch (error) {
+      console.error('Submission error:', error);
+      setStatus('error');
+      // Reset error after a delay so user can try again
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   const inputClasses = "w-full bg-[rgba(var(--bg),0.8)] dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-lg px-4 text-[rgb(var(--text))] placeholder-black/40 dark:placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-[rgb(var(--accent))] focus:border-transparent transition-all duration-300 backdrop-blur-sm shadow-inner";
