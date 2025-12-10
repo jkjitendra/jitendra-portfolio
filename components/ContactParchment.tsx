@@ -39,14 +39,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
     }
     // 2. Success -> Success Message
     else if (status === 'success') {
-      // Small delay to let mailbox animation play if it was just triggered
-      // But if we are already in mailbox, we can transition to success
-      // Or just jump straight if 'success' comes fast.
-      // Let's add a small delay so user sees "Sending..." if it was too fast.
-      const timer = setTimeout(() => {
-        setAnimationStage('success');
-      }, 1500);
-      return () => clearTimeout(timer);
+      setAnimationStage('success');
     }
     // 3. Error -> Reset to Idle
     else if (status === 'error') {
