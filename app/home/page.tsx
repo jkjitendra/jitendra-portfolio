@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import caseStudyData from "@/data/case-studies.json";
-import experienceData from "@/data/experience.json";
+import projects from "@/data/personal-projects.json";
 import CompanyCarousel from "@/components/CompanyCarousel";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
@@ -13,8 +13,6 @@ const skills = [
   "Full Stack", "Java", "Spring Boot", "React", "NextJs"
 ];
 
-const { caseStudyTitle, caseStudies } = caseStudyData;
-const { workExpTitle, experience } = experienceData;
 
 let hasAnimated = false;
 
@@ -101,38 +99,51 @@ export default function Home() {
 
       <CompanyCarousel />
 
-      {/* Work Experience */}
+      {/* Projects Section */}
       <section className="container-edge mt-16 copy">
         <h2 className="text-3xl font-semibold mb-10 text-[rgb(var(--text))]">
-          {workExpTitle}
+          Projects
         </h2>
-        <div className="space-y-10">
-          {/* Experience Card */}
-          {experience.map((exp, idx) => (
-            <div
-              key={idx}
-              className="experience-card bg-white/[0.05] border border-white/10 backdrop-blur-md rounded-2xl p-6 shadow-[0_0_30px_rgba(0,0,0,0.4)] hover:shadow-[0_0_40px_rgba(0,0,0,0.6)] hover:scale-[1.02] transition-transform duration-300"
-            >
-              <div className="flex items-center gap-4">
-                <img src={exp.logo} alt={exp.name} className="w-15 h-10 object-contain" />
-                <div>
-                  <h3
-                    className="font-semibold text-xl"
-                    style={{
-                      color: exp.color,
-                      filter: 'brightness(var(--logo-brightness, 1))'
-                    }}
-                  >{exp.name}</h3>
-                  <p className="text-sm opacity-70">{exp.role}</p>
-                </div>
-              </div>
-              <ul className="mt-4 list-disc ml-6 text-[rgb(var(--text))]/80 leading-relaxed">
-                {exp.points.map((p, i) => (
-                  <li key={i}>
-                    <span className="font-semibold">{p.split(":")[0]}</span>: <span className="">{p.split(":")[1]}</span>
-                  </li>
+        <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {projects.map((p) => (
+            <div className="card p-5" key={p.name}>
+              <h3>{p.name}</h3>
+              <p className="mt-2 opacity-90">{p.description}</p>
+
+              <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                {p.tech.map((t: string) => (
+                  <span className="badge" key={t}>{t}</span>
                 ))}
-              </ul>
+              </div>
+
+              {p.demo.username && (
+                <div className="mt-3 text-xs opacity-80">
+                  Demo: <b>{p.demo?.username}</b> / <b>{p.demo?.password}</b>
+                </div>
+              )}
+
+              <div className="mt-4 flex gap-3 text-sm">
+                {p.github && (
+                  <a
+                    className="btn btn-sm btn-ghost hover:bg-blue-600 hover:text-white"
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    GitHub
+                  </a>
+                )}
+                {p.live && (
+                  <a
+                    className="btn"
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Live
+                  </a>
+                )}
+              </div>
             </div>
           ))}
         </div>
