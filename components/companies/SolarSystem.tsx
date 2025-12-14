@@ -97,6 +97,36 @@ function CompanyLogo({ company }: { company: any }) {
     ? company.logo
     : `/${company.logo.replace(/^\.?\/*/, "")}`;
 
+  // If a specific dark mode logo is provided, we render TWO images:
+  // 1. The default (light mode) image, hidden in dark mode.
+  // 2. The dark mode image, hidden in light mode.
+  if (company.darkLogo && company.darkLogo !== company.logo) {
+    const darkSrc = company.darkLogo.startsWith("/")
+      ? company.darkLogo
+      : `/${company.darkLogo.replace(/^\.?\/*/, "")}`;
+
+    return (
+      <>
+        {/* Light Mode Logo */}
+        <Image
+          src={src}
+          alt={company.name}
+          width={40}
+          height={40}
+          className="object-contain w-full h-full p-1 opacity-80 group-hover:opacity-100 transition-opacity dark:hidden"
+        />
+        {/* Dark Mode Logo */}
+        <Image
+          src={darkSrc}
+          alt={company.name + " Dark Mode"}
+          width={40}
+          height={40}
+          className="object-contain w-full h-full p-1 opacity-80 group-hover:opacity-100 transition-opacity hidden dark:block"
+        />
+      </>
+    );
+  }
+
   return (
     <Image
       src={src}

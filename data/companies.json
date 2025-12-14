@@ -6,19 +6,23 @@
   },
   {
     "name": "DBS Bank",
-    "logo": "/logos/dbs_logo.png",
-    "url": "https://www.ncs.co/en-in/",
+    "logo": "/logos/dbs_dark.svg",
+    "darkLogo": "/logos/dbs_light.svg",
+    "url": "https://www.dbs.com",
     "invertOnDark": false
   },
   {
     "name": "NCSI Technologies",
     "logo": "/logos/ncsi_logo.svg",
+    "darkLogo": "/logos/ncs_light_transparent.png",
     "url": "https://www.ncs.co/en-in/",
     "invertOnDark": false
   },
   {
     "name": "Infosys Ltd.",
     "logo": "/logos/infosys_logo.png",
-    "url": "https://www.infosys.com/"
+    "darkLogo": "/logos/infosys_light.svg",
+    "url": "https://www.infosys.com/",
+    "invertOnDark": false
   }
 ]
