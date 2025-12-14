@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/ProjectCard";
-import SolarSystem from "@/components/companies/SolarSystem";
+import SolarSystem from "@/components/SolarSystem";
 import MouseGradient from "@/components/MouseGradient";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import projects from "@/data/personal-projects.json";
