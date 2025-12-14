@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 
 export default function ThemeSwitcher() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
 
   // On first mount, sync with system or localStorage
   useEffect(() => {
