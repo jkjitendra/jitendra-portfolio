@@ -3,6 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
+import SmartDownloadButton from "./SmartDownloadButton";
 
 interface ProjectCardProps {
   project: {
@@ -18,9 +19,15 @@ interface ProjectCardProps {
     };
   };
   index: number;
+  // Optional pre-fetched URLs for downloads (passed from server components)
+  downloadUrls?: {
+    windows?: string;
+    mac?: string;
+    linux?: string;
+  };
 }
 
-export default function ProjectCard({ project, index }: ProjectCardProps) {
+export default function ProjectCard({ project, index, downloadUrls }: ProjectCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [imageError, setImageError] = useState(false);
 
@@ -51,6 +58,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
   const p = project;
   const hasImage = p.image && !imageError;
+  const isMazeSolver = p.name.includes("MazeSolver");
 
   return (
     <motion.div
@@ -156,7 +164,9 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
                 GitHub
               </a>
             )}
-            {p.live && (
+
+            {/* Standard Live Button */}
+            {p.live && !isMazeSolver && (
               <a
                 className="btn interactive-btn cursor-pointer"
                 href={p.live}
@@ -166,6 +176,19 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
               >
                 Live
               </a>
+            )}
+
+            {/* Smart Download Button for MazeSolver */}
+            {isMazeSolver && (
+              <SmartDownloadButton
+                // If caller passed specific URLs (like from server side), use them
+                windowsUrl={downloadUrls?.windows}
+                macUrl={downloadUrls?.mac}
+                linuxUrl={downloadUrls?.linux}
+                // Fallback to the 'live' link which is likely the releases page
+                fallbackUrl={p.live || ""}
+                className="btn interactive-btn cursor-pointer"
+              />
             )}
           </div>
         </div>

@@ -19,13 +19,23 @@ export default function SmartDownloadButton({
   className,
   children,
 }: SmartDownloadButtonProps): React.JSX.Element {
-  const [status, setStatus] = useState<string>("");
+  const [isHovered, setIsHovered] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading">("idle");
 
-  const handleDownload = async () => {
+  const handleDownload = async (e: React.MouseEvent) => {
+    // Prevent multiple clicks
+    if (status !== "idle") return;
+
     // 1. Detect OS
+    setStatus("loading");
+
+    // Small delay to show feedback if it happens too fast
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     console.log("User windowsUrl:", windowsUrl);
     console.log("User macUrl:", macUrl);
     console.log("User linuxUrl:", linuxUrl);
+
     const userAgent = window.navigator.userAgent.toLowerCase();
     let downloadUrl = "";
     let osType: "win" | "mac" | "linux" | null = null;
@@ -43,7 +53,6 @@ export default function SmartDownloadButton({
 
     // 2. If no direct URL, try fetching from GitHub releases API (client-side fallback)
     if (!downloadUrl && fallbackUrl.includes("github.com") && fallbackUrl.includes("releases")) {
-      setStatus("Fetching download link...");
       try {
         // Extract owner/repo from fallback URL
         const match = fallbackUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
@@ -69,23 +78,54 @@ export default function SmartDownloadButton({
 
     // 3. Redirect
     if (downloadUrl) {
-      setStatus("Download starting...");
-      window.location.href = downloadUrl;
+      // Give UI a moment to show "Downloading" before redirect takes over
+      setTimeout(() => {
+        window.location.href = downloadUrl;
 
-      // Reset status after a delay
-      setTimeout(() => setStatus(""), 3000);
+        // Reset state when user focuses window (e.g. after closing valid/cancel dialog)
+        const onFocus = () => {
+          setStatus("idle");
+          window.removeEventListener("focus", onFocus);
+        };
+        window.addEventListener("focus", onFocus);
+
+        // Fallback reset timer in case focus event doesn't fire or happens too fast
+        setTimeout(() => {
+          setStatus("idle");
+          window.removeEventListener("focus", onFocus);
+        }, 5000); // Increased slightly to prioritize focus event but ensure eventual reset
+      }, 600);
     } else {
       // Fallback to releases page
       window.location.href = fallbackUrl;
+      setStatus("idle");
     }
   };
 
+  const getButtonContent = () => {
+    if (status === "loading") {
+      return (
+        <span className="flex items-center gap-2">
+          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+          </svg>
+          Downloading App...
+        </span>
+      );
+    }
+    return children || "Download App";
+  };
+
   return (
-    <div className="flex flex-col items-start gap-1">
-      <button onClick={handleDownload} className={className}>
-        {children || "Download App"}
-      </button>
-      {status && <p className="text-xs text-gray-400" id="downloadStatus">{status}</p>}
-    </div>
+    <button
+      onClick={handleDownload}
+      className={className}
+      disabled={status !== "idle"}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {getButtonContent()}
+    </button>
   );
 }
