@@ -79,26 +79,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
 
         {/* Register the service worker for image caching */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                  navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('SW registered:', reg.scope))
-                    .catch(err => {
-                      const errString = err.toString() + (err.message || '') + (err.stack || '');
-                      if (errString.includes('wrsParams')) {
-                        console.warn('Service Worker registration blocked by Webroot/Security extension. This is local to your machine and safe to ignore.');
-                      } else {
-                        console.error('SW registration failed:', err);
-                      }
-                    });
-                });
-              }
-            `,
-          }}
-        />
+
       </head>
       <body className={`antialiased ${dancingScript.variable}`} suppressHydrationWarning>
         {children}

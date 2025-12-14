@@ -4,8 +4,6 @@
   "version": "1.0.1",
   "scripts": {
     "dev": "next dev",
-    "bump:sw": "node scripts/bump-sw-version.mjs",
-    "prebuild": "npm run bump:sw",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
