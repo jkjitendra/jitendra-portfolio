@@ -134,8 +134,6 @@ export default function Home() {
 
       {/* Companies Section - Solar System View */}
       <section className="py-8 overflow-hidden">
-        {/* <div className="container mx-auto px-6 mb-8 text-center">
-        </div> */}
         <SolarSystem />
       </section>
 
