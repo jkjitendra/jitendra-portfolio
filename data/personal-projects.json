@@ -55,7 +55,7 @@
       "Gradle"
     ],
     "github": "https://github.com/jkjitendra/MazeSolver",
-    "live": "",
+    "live": "https://github.com/jkjitendra/MazeSolver/releases/latest",
     "image": "/projects/mazesolver.png",
     "demo": {
       "username": null,

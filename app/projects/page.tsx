@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import projects from "@/data/personal-projects.json";
+import SmartDownloadButton from "@/components/SmartDownloadButton";
 
 import { Metadata } from "next";
 
@@ -9,7 +10,41 @@ export const metadata: Metadata = {
   description: "A showcase of my personal projects, case studies, and open source contributions.",
 };
 
-export default function ProjectsPage() {
+
+async function getMazeSolverRelease() {
+  try {
+    const res = await fetch(
+      "https://api.github.com/repos/jkjitendra/MazeSolver/releases/latest",
+      { next: { revalidate: 3600 } } // Cache for 1 hour
+    );
+
+    if (!res.ok) return null;
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch MazeSolver release:", error);
+    return null;
+  }
+}
+
+export default async function ProjectsPage() {
+  const releaseData = await getMazeSolverRelease();
+
+  let windowsUrl = "";
+  let macUrl = "";
+  let linuxUrl = "";
+
+  if (releaseData && releaseData.assets) {
+    const winAsset = releaseData.assets.find((a: any) => a.name.endsWith(".msi"));
+    const macAsset = releaseData.assets.find((a: any) => a.name.endsWith(".dmg"));
+    const linuxAsset = releaseData.assets.find((a: any) => a.name.endsWith(".deb"));
+
+    if (winAsset) windowsUrl = winAsset.browser_download_url;
+    if (macAsset) macUrl = macAsset.browser_download_url;
+    if (linuxAsset) linuxUrl = linuxAsset.browser_download_url;
+  }
+
   return (
     <main className="page-glow min-h-screen flex flex-col">
       <Header />
@@ -46,7 +81,7 @@ export default function ProjectsPage() {
                     GitHub
                   </a>
                 )}
-                {p.live && (
+                {p.live && !p.name.includes("MazeSolver") && (
                   <a
                     className="btn"
                     href={p.live}
@@ -55,6 +90,17 @@ export default function ProjectsPage() {
                   >
                     Live
                   </a>
+                )}
+                {p.live.includes("MazeSolver") && (
+                  <>
+                    <SmartDownloadButton
+                      windowsUrl={windowsUrl}
+                      macUrl={macUrl}
+                      linuxUrl={linuxUrl}
+                      fallbackUrl={p.live}
+                      className="btn"
+                    />
+                  </>
                 )}
               </div>
             </div>

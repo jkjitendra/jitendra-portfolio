@@ -1,5 +1,6 @@
 // public/service-worker.js
-const VERSION = 'swr-4012fd3';                         // ← bump this when you want to bust SW cache
+// Version is auto-bumped on build by scripts/bump-sw-version.mjs
+const VERSION = 'swr-ee3b544';
 const CACHE_NAME = `imgs-${VERSION}`;
 const IMG_RE = /\.(?:png|webp|jpg|jpeg|svg|gif|avif)$/i;
 

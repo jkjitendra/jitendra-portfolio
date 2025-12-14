@@ -14,7 +14,7 @@ function resolveBuildId() {
       .toString()
       .trim();
     if (sha) return `swr-${sha}`;
-  } catch (_) {}
+  } catch (_) { }
 
   // 2) Common CI envs
   const ciSha =
@@ -47,14 +47,23 @@ function bumpInFile(filePath, newVersion) {
   if (!fs.existsSync(filePath)) return false;
 
   const src = fs.readFileSync(filePath, "utf8");
+  const versionRegex = /const\s+VERSION\s*=\s*(['"])[^'"]*\1\s*;/;
+
+  // First check if the pattern exists at all
+  if (!versionRegex.test(src)) {
+    console.warn(`⚠️  VERSION pattern not found in ${filePath}. No changes written.`);
+    return false;
+  }
+
   const replaced = src.replace(
-    /const\s+VERSION\s*=\s*(['"])[^'"]*\1\s*;/,
+    versionRegex,
     `const VERSION = '${newVersion}';`
   );
 
   if (replaced === src) {
-    console.warn(`⚠️  VERSION not found in ${filePath}. No changes written.`);
-    return false;
+    // Pattern found but already has the correct version
+    console.log(`✅ SW version in ${filePath} already up-to-date: ${newVersion}`);
+    return true;
   }
 
   fs.writeFileSync(filePath, replaced);
