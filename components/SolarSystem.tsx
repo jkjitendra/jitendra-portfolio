@@ -3,20 +3,36 @@
 import Image from "next/image";
 import companies from "@/data/companies.json";
 
-// Order: Innermost -> Outermost
-const ORDER = ["Infosys Ltd.", "NCSI Technologies", "DBS Bank", "Cricbuzz"];
+type Company = {
+  name: string;
+  logo: string;
+  darkLogo?: string;
+  url: string;
+  invertOnDark?: boolean;
+};
+
+// 0 = innermost orbit, 3 = outermost orbit
+const PLACEMENT: Record<string, { orbitIndex: number; angle: number }> = {
+  "Infosys Ltd.": { orbitIndex: 0, angle: 180 },         // South
+  "NCSI Technologies": { orbitIndex: 1, angle: 90 },      // East
+  "DBS Bank": { orbitIndex: 2, angle: 270 },              // West
+  "Cricbuzz": { orbitIndex: 3, angle: 0 },                // North
+};
 
 export default function SolarSystem() {
-  // Sort companies based on the ORDER array
-  const sortedCompanies = [...companies].sort((a, b) => {
-    return ORDER.indexOf(a.name) - ORDER.indexOf(b.name);
-  });
+  // Build 4 orbit buckets, fixed by orbitIndex
+  const orbitGroups: Array<Array<Company & { fixedAngle?: number }>> =
+    Array.from({ length: 4 }, () => []);
 
-  const orbitGroups = sortedCompanies.map(c => [c]);
+  for (const c of companies as Company[]) {
+    const p = PLACEMENT[c.name];
+    if (!p) continue;
+    orbitGroups[p.orbitIndex].push({ ...c, fixedAngle: p.angle });
+  }
 
   return (
     <div className="relative w-full h-[600px] overflow-visible flex items-center justify-center">
-      {/* Central "Sun" - The User / Portfolio Core */}
+      {/* Sun */}
       <div className="absolute z-10 w-24 h-24 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 blur-[20px] opacity-40 animate-pulse" />
       <div className="absolute z-10 w-16 h-16 rounded-full bg-slate-950 border border-slate-700 flex items-center justify-center shadow-2xl shadow-blue-500/20 z-20">
         <span className="text-2xl">⚡️</span>
@@ -26,34 +42,29 @@ export default function SolarSystem() {
       {orbitGroups.map((group, orbitIndex) => {
         const radius = 90 + orbitIndex * 55;
         const duration = 20 + orbitIndex * 10;
-        // 2nd (index 1) and 4th (index 3) -> Clockwise
-        // 1st (index 0) and 3rd (index 2) -> Counter-Clockwise
+
         const isClockwise = [1, 3].includes(orbitIndex);
-        const animationName = isClockwise ? 'orbit-cw' : 'orbit-ccw';
-        const counterDateAnimationName = isClockwise ? 'orbit-ccw' : 'orbit-cw';
+        const ringAnim = isClockwise ? "orbit-cw" : "orbit-ccw";
+        const counterAnim = isClockwise ? "orbit-ccw" : "orbit-cw";
 
         return (
           <div
             key={`orbit-${orbitIndex}`}
             className="absolute rounded-full border transition-colors duration-300 border-black/10 dark:border-white/10 pointer-events-none"
-            style={{
-              width: radius * 2,
-              height: radius * 2,
-            }}
+            style={{ width: radius * 2, height: radius * 2 }}
           >
-            {/* Rotating Ring Container */}
+            {/* Rotating Ring */}
             <div
               className="absolute inset-0 w-full h-full pointer-events-none"
               style={{
-                animation: `${animationName} ${duration}s linear infinite`,
-                willChange: 'transform' // Hint browser to optimize
+                animation: `${ringAnim} ${duration}s linear infinite`,
+                willChange: "transform",
               }}
             >
               {group.map((company, index) => {
-                const angle = (360 / group.length) * index;
-                // 2nd (idx 1) & 4th (idx 3) -> North (0 deg)
-                // 1st (idx 0) & 3rd (idx 2) -> South (180 deg)
-                const visualAngle = angle + ([1, 3].includes(orbitIndex) ? 0 : 180);
+                // If fixedAngle exists, it pins the starting position (N/E/S/W)
+                const computedAngle = (360 / group.length) * index;
+                const visualAngle = company.fixedAngle ?? computedAngle;
 
                 return (
                   <div
@@ -63,12 +74,12 @@ export default function SolarSystem() {
                       transform: `rotate(${visualAngle}deg) translateY(-${radius}px) rotate(-${visualAngle}deg)`,
                     }}
                   >
-                    {/* Counter-rotating Logo Container */}
+                    {/* Counter-rotating Logo */}
                     <div
                       className="w-full h-full"
                       style={{
-                        animation: `${counterDateAnimationName} ${duration}s linear infinite`,
-                        willChange: 'transform'
+                        animation: `${counterAnim} ${duration}s linear infinite`,
+                        willChange: "transform",
                       }}
                     >
                       <a
@@ -79,7 +90,6 @@ export default function SolarSystem() {
                       >
                         <CompanyLogo company={company} />
 
-                        {/* Tooltip */}
                         <div className="absolute top-full mt-2 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap bg-black/80 px-2 py-1 rounded text-xs text-white pointer-events-none z-50">
                           {company.name}
                         </div>
@@ -101,9 +111,6 @@ function CompanyLogo({ company }: { company: any }) {
     ? company.logo
     : `/${company.logo.replace(/^\.?\/*/, "")}`;
 
-  // If a specific dark mode logo is provided, we render TWO images:
-  // 1. The default (light mode) image, hidden in dark mode.
-  // 2. The dark mode image, hidden in light mode.
   if (company.darkLogo && company.darkLogo !== company.logo) {
     const darkSrc = company.darkLogo.startsWith("/")
       ? company.darkLogo
@@ -111,7 +118,6 @@ function CompanyLogo({ company }: { company: any }) {
 
     return (
       <>
-        {/* Light Mode Logo */}
         <Image
           src={src}
           alt={company.name}
@@ -119,7 +125,6 @@ function CompanyLogo({ company }: { company: any }) {
           height={40}
           className="object-contain w-full h-full p-1 opacity-80 group-hover:opacity-100 transition-opacity dark:hidden"
         />
-        {/* Dark Mode Logo */}
         <Image
           src={darkSrc}
           alt={company.name + " Dark Mode"}
@@ -139,5 +144,5 @@ function CompanyLogo({ company }: { company: any }) {
       height={40}
       className={`object-contain w-full h-full p-1 opacity-80 group-hover:opacity-100 transition-opacity dark:invert-0 ${company.invertOnDark === false ? "" : "dark:invert"}`}
     />
-  )
+  );
 }
