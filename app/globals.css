@@ -98,12 +98,18 @@ html[data-theme="light"] .bg-white\/20 {
   transition: background 0.5s ease;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   min-height: 100%;
   background: radial-gradient(1200px 800px at 30% -10%, rgba(255, 255, 255, .06), rgb(var(--bg)));
   color: rgb(var(--text));
   /* overflow-y: scroll; -- Removed per user request to fix whitespace */
+  /* Optimize scrolling performance */
+  -webkit-overflow-scrolling: touch;
 }
 
 .company-card {
@@ -180,6 +186,169 @@ body {
   background: var(--badge-bg);
   border-color: var(--badge-border);
   color: var(--badge-text);
+}
+
+/* ===== MICRO-INTERACTIONS ===== */
+
+/* Tech Badge Hover Glow */
+.tech-badge-hover {
+  position: relative;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.tech-badge-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(var(--accent), 0.3),
+    transparent
+  );
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.tech-badge-hover:hover {
+  border-color: rgb(var(--accent) / 0.5);
+  box-shadow: 0 0 15px rgba(var(--accent), 0.2);
+  transform: translateY(-2px);
+}
+
+.tech-badge-hover:hover::before {
+  transform: translateX(100%);
+}
+
+/* Interactive Button with Ripple */
+.interactive-btn {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.interactive-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0);
+  transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.interactive-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(var(--accent), 0.3);
+}
+
+.interactive-btn:active::after {
+  opacity: 1;
+  transform: scale(2);
+  transition: transform 0s, opacity 0s;
+}
+
+/* Button Ghost Variant Enhanced */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgb(var(--accent) / 0.3);
+  color: rgb(var(--text));
+}
+
+.btn-ghost:hover {
+  background: rgb(var(--accent));
+  color: white;
+  border-color: rgb(var(--accent));
+}
+
+/* Hero Gradient Animation */
+@keyframes heroGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.hero-gradient-text {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--text)) 0%,
+    rgb(var(--accent)) 25%,
+    rgb(var(--accentAlt)) 50%,
+    rgb(var(--accent)) 75%,
+    rgb(var(--text)) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: heroGradientShift 8s ease infinite;
+}
+
+/* Breathing Animation */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+}
+
+.breathing-text {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+/* Section Entrance Animation Helper */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Shimmer Effect for Loading/Empty States */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(var(--accent), 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
 }
 
 /* ------- Responsive typography ------- */
@@ -547,6 +716,8 @@ body {
   z-index: 0;
   overflow: visible !important;
   padding-top: 72px;
+  /* Hint browser to optimize this container */
+  contain: layout style;
 }
 
 .page-glow::before {
@@ -569,6 +740,9 @@ body {
   background-blend-mode: screen;
   /* Removed expensive box-shadow animation */
   transition: box-shadow 0.6s ease, border-color 0.6s ease;
+  /* Force GPU acceleration to prevent jank */
+  transform: translateZ(0);
+  will-change: opacity;
 }
 
 /* === Floating Particle Glow Layer === */
@@ -590,6 +764,9 @@ body {
   /* Simplified animation */
   animation: particleDrift 20s linear infinite;
   mix-blend-mode: screen;
+  /* Force GPU acceleration for smooth animation */
+  transform: translateZ(0);
+  will-change: background-position;
 }
 
 /* ✨ Animation: particles drift around slowly */
@@ -714,4 +891,15 @@ body {
 
 .profile-card-social .icon-font {
   display: inline-flex;
+}
+
+/* Solar System Orbit Animations */
+@keyframes orbit-cw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes orbit-ccw {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
 }

@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import caseStudyData from "@/data/case-studies.json";
-import projects from "@/data/personal-projects.json";
-import CompanyCarousel from "@/components/CompanyCarousel";
+import ProjectCard from "@/components/ProjectCard";
+import SolarSystem from "@/components/companies/SolarSystem";
+import MouseGradient from "@/components/MouseGradient";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import projects from "@/data/personal-projects.json";
 
 const skills = [
   "Full Stack", "Java", "Spring Boot", "React", "NextJs"
@@ -53,23 +54,57 @@ export default function Home() {
   }, []);
 
   return (
-
-    // linear-gradient(to right, #6944a0, #19043b)    
     <main className="page-glow min-h-screen">
+      {/* Mouse-following gradient background */}
+      <MouseGradient />
+
       <Header />
 
       {/* Mobile floating Theme FAB */}
       <div className="md:hidden fixed z-[9999] right-4 bottom-4">
         <ThemeSwitcher />
       </div>
-      {/* Hero Section */}
-      <section className="container-edge mt-10 text-center">
-        <h1>
-          Jitendra Kumar Tiwari
-        </h1>
-        <p
+
+      {/* Hero Section - Enhanced */}
+      <motion.section
+        className="container-edge mt-10 text-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        {/* Animated gradient background for hero */}
+        <div className="relative">
+          {/* Subtle glow behind title */}
+          <motion.div
+            className="absolute inset-0 -z-10 flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.2 }}
+          >
+            <div
+              className="w-[500px] h-[200px] rounded-full opacity-30 blur-3xl"
+              style={{
+                background: "radial-gradient(ellipse, rgb(var(--accent)) 0%, transparent 70%)",
+              }}
+            />
+          </motion.div>
+
+          <motion.h1
+            className="hero-gradient-text breathing-text relative z-10"
+            initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
+            Jitendra Kumar Tiwari
+          </motion.h1>
+        </div>
+
+        <motion.p
           className="mt-3"
           style={{ fontFamily: "monospace", minHeight: "1.6em", visibility: showSkills ? "visible" : "hidden" }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
         >
           {/* Render typed skills, separated */}
           {typedSkills.map((skill, idx) => (
@@ -86,7 +121,7 @@ export default function Home() {
               <span className="blinking-cursor">|</span>
             </span>
           )}
-        </p>
+        </motion.p>
         <style>
           {`
             .blinking-cursor {
@@ -95,89 +130,50 @@ export default function Home() {
             @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0;} }
           `}
         </style>
+      </motion.section>
+
+      {/* Companies Section - Solar System View */}
+      <section className="py-8 overflow-hidden">
+        {/* <div className="container mx-auto px-6 mb-8 text-center">
+        </div> */}
+        <SolarSystem />
       </section>
 
-      <CompanyCarousel />
-
-      {/* Projects Section */}
-      <section className="container-edge mt-16 copy">
-        <h2 className="text-3xl font-semibold mb-10 text-[rgb(var(--text))]">
+      {/* Projects Section - Enhanced with 3D Cards */}
+      <motion.section
+        className="container-edge mt-16 copy"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.6 }}
+      >
+        <motion.h2
+          className="text-3xl font-semibold mb-10 text-[rgb(var(--text))]"
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           Projects
-        </h2>
+        </motion.h2>
         <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {projects.map((p) => (
-            <div className="card p-5" key={p.name}>
-              <h3>{p.name}</h3>
-              <p className="mt-2 opacity-90">{p.description}</p>
-
-              <div className="mt-3 flex flex-wrap gap-2 text-xs">
-                {p.tech.map((t: string) => (
-                  <span className="badge" key={t}>{t}</span>
-                ))}
-              </div>
-
-              {p.demo.username && (
-                <div className="mt-3 text-xs opacity-80">
-                  Demo: <b>{p.demo?.username}</b> / <b>{p.demo?.password}</b>
-                </div>
-              )}
-
-              <div className="mt-4 flex gap-3 text-sm">
-                {p.github && (
-                  <a
-                    className="btn btn-sm btn-ghost hover:bg-blue-600 hover:text-white"
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub
-                  </a>
-                )}
-                {p.live && (
-                  <a
-                    className="btn"
-                    href={p.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live
-                  </a>
-                )}
-              </div>
-            </div>
+          {projects.map((p, index) => (
+            <ProjectCard key={p.name} project={p} index={index} />
           ))}
         </div>
-      </section>
-
-      {/* Case Studies */}
-      {/* <section className="container-edge mt-12 copy">
-        <h2>{caseStudyTitle}</h2>
-        <ol className="mt-6 space-y-6">
-          {caseStudies.map((c, j) => (
-            <li
-              key={c.title}
-              className="card p-5"
-            >
-              <h3>{c.title}</h3>
-              <p className="mt-2 opacity-90">
-                <b>Problem:</b> {c.problem}
-              </p>
-              <div className="mt-2">
-                <p className="opacity-90"><b>Approach:</b></p>
-                <ul className="mt-1 list-disc pl-5 opacity-90">
-                  {c.approach.map((a: string) => <li key={a}>{a}</li>)}
-                </ul>
-              </div>
-              <p className="mt-2 opacity-90">
-                <b>Impact:</b> {c.impact}
-              </p>
-            </li>
-          ))}
-        </ol>
-      </section> */}
+      </motion.section>
 
       <br />
-      <Footer />
+
+      {/* Footer with entrance animation */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <Footer />
+      </motion.div>
     </main>
   );
 }

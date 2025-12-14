@@ -47,7 +47,8 @@ export default function Header() {
   /** Scroll effect for header shadow */
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll);
+    // Using passive: true for better scroll performance
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
