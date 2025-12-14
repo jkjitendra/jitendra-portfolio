@@ -26,9 +26,11 @@ export default function SolarSystem() {
       {orbitGroups.map((group, orbitIndex) => {
         const radius = 90 + orbitIndex * 55;
         const duration = 20 + orbitIndex * 10;
-        const isCV = orbitIndex % 2 === 0; // Clockwise if even index
-        const animationName = isCV ? 'orbit-cw' : 'orbit-ccw';
-        const counterDateAnimationName = isCV ? 'orbit-ccw' : 'orbit-cw';
+        // 2nd (index 1) and 4th (index 3) -> Clockwise
+        // 1st (index 0) and 3rd (index 2) -> Counter-Clockwise
+        const isClockwise = [1, 3].includes(orbitIndex);
+        const animationName = isClockwise ? 'orbit-cw' : 'orbit-ccw';
+        const counterDateAnimationName = isClockwise ? 'orbit-ccw' : 'orbit-cw';
 
         return (
           <div
@@ -49,7 +51,9 @@ export default function SolarSystem() {
             >
               {group.map((company, index) => {
                 const angle = (360 / group.length) * index;
-                const visualAngle = angle + (orbitIndex * 45);
+                // 2nd (idx 1) & 4th (idx 3) -> North (0 deg)
+                // 1st (idx 0) & 3rd (idx 2) -> South (180 deg)
+                const visualAngle = angle + ([1, 3].includes(orbitIndex) ? 0 : 180);
 
                 return (
                   <div
