@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Dancing_Script } from "next/font/google";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "Jitendra · Portfolio",
@@ -82,6 +83,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
       </head>
       <body className={`antialiased ${dancingScript.variable}`} suppressHydrationWarning>
+        <Header />
         {children}
       </body>
     </html>

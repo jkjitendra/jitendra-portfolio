@@ -77,6 +77,9 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
+  // Don't render header on landing page
+  if (pathname === "/") return null;
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-[1000] border-b border-black/5 dark:border-white/10 shadow-sm backdrop-blur-md 
@@ -199,6 +202,11 @@ export default function Header() {
           </div>
         </div>
       </header>
+
+      {/* Mobile floating Theme FAB - moved here to share visibility logic (hidden on landing) */}
+      <div className="md:hidden fixed z-[9999] right-4 bottom-4">
+        <ThemeSwitcher />
+      </div>
     </>
   );
 }

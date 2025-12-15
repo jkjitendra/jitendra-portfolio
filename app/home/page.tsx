@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProjectCard from "@/components/ProjectCard";
 import SolarSystem from "@/components/SolarSystem";
 import MouseGradient from "@/components/MouseGradient";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import projects from "@/data/personal-projects.json";
 
 const skills = [
@@ -58,12 +56,7 @@ export default function Home() {
       {/* Mouse-following gradient background */}
       <MouseGradient />
 
-      <Header />
 
-      {/* Mobile floating Theme FAB */}
-      <div className="md:hidden fixed z-[9999] right-4 bottom-4">
-        <ThemeSwitcher />
-      </div>
 
       {/* Hero Section - Enhanced */}
       <motion.section

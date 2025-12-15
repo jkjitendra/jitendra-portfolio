@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Footer from '@/components/Footer';
-import Header from '@/components/Header';
 import ContactParchment from '@/components/ContactParchment';
 
 export default function ContactPage() {
@@ -63,7 +62,7 @@ export default function ContactPage() {
 
   return (
     <main className="page-glow min-h-screen flex flex-col">
-      <Header />
+
       <div className="flex-1 flex items-center justify-center p-4 pt-10 pb-4 relative overflow-hidden">
         {/* Background Elements */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
