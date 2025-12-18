@@ -1,3 +1,10 @@
+# Remove trailing slashes with 301 (must be before other redirects)
+[[redirects]]
+from = "/*/"
+to = "/:splat"
+status = 301
+force = true
+
 [[redirects]]
 from = "https://jkjitendra.in/*"
 to = "https://www.jkjitendra.in/:splat"
