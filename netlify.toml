@@ -10,9 +10,4 @@ to = "https://www.jkjitendra.in/:splat"
 status = 301
 force = true
 
-# IMPORTANT: regex so it matches ONLY /home/ (not /home)
-[[redirects]]
-from = "^/home/$"
-to = "/home"
-status = 301
-force = true
+

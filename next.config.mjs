@@ -7,6 +7,17 @@ import withBundleAnalyzer from '@next/bundle-analyzer';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  trailingSlash: false,
+  async redirects() {
+    return [
+      // Redirect trailing slashes to non-trailing with 301 instead of default 308
+      {
+        source: '/:path+/',
+        destination: '/:path+',
+        permanent: true, // 301 redirect
+      },
+    ];
+  },
   images: {
     // Tailored to your layout/sizes usage to reduce variants
     deviceSizes: [360, 400, 640, 768, 1024, 1280],
