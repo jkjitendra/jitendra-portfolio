@@ -1,8 +1,6 @@
-# Force non-www to www (HTTPS)
+# Force apex to www (preserve path)
 https://jkjitendra.in/*  https://www.jkjitendra.in/:splat  301!
-
-# Optional: also cover HTTP apex explicitly (keeps it clean)
 http://jkjitendra.in/*   https://www.jkjitendra.in/:splat  301!
 
-# Normalize trailing slash for /home (avoid Next.js 308 + refresh)
- /home/                 /home                           301!
+# Canonicalize home
+/home  /  301!
