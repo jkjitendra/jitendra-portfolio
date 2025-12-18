@@ -4,10 +4,10 @@ import type { NextRequest } from "next/server";
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // /home/ -> /home (clean 301, no 308+refresh)
-  if (pathname === "/home/") {
+  // Redirect any path with trailing slash (except root) to non-trailing with 301
+  if (pathname !== "/" && pathname.endsWith("/")) {
     const url = req.nextUrl.clone();
-    url.pathname = "/home";
+    url.pathname = pathname.slice(0, -1);
     return NextResponse.redirect(url, 301);
   }
 
@@ -15,5 +15,8 @@ export function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/home/"],
+  // Match all paths except static files, api routes, and _next
+  matcher: [
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
 };
