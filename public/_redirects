@@ -1,3 +1,0 @@
-# Force non-www to www (HTTPS)
-https://jkjitendra.in/*  https://www.jkjitendra.in/:splat  301!
-http://jkjitendra.in/*   https://www.jkjitendra.in/:splat  301!

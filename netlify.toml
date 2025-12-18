@@ -1,0 +1,18 @@
+[[redirects]]
+from = "https://jkjitendra.in/*"
+to = "https://www.jkjitendra.in/:splat"
+status = 301
+force = true
+
+[[redirects]]
+from = "http://jkjitendra.in/*"
+to = "https://www.jkjitendra.in/:splat"
+status = 301
+force = true
+
+# IMPORTANT: regex so it matches ONLY /home/ (not /home)
+[[redirects]]
+from = "^/home/$"
+to = "/home"
+status = 301
+force = true
