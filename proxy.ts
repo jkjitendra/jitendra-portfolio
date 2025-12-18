@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  // Normalize only this one route
+  // /home/ -> /home (clean 301, no 308+refresh)
   if (pathname === "/home/") {
     const url = req.nextUrl.clone();
     url.pathname = "/home";
