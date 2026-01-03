@@ -1,7 +1,7 @@
 # Jitendra Portfolio
 
 A modern, responsive developer portfolio built with Next.js 16, TypeScript, and TailwindCSS.
-It showcases projects, work experience, case studies, testimonials, blogs, and supports theme switching with a polished UI.
+It showcases projects, work experience, tech skills, blogs, and supports theme switching with a polished UI featuring stunning animations.
 
 <hr/>
 
@@ -9,13 +9,14 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 
 - **Responsive Design**: Mobile-first UI with adaptive layouts.
 - **Sections**:
-  - Hero with name, tagline, and company carousel.
-  - Work Experience & Personal Projects.
-  - Case Studies.
+  - Landing page with animated name card and enter transition.
+  - Home with hero section, skill typing animation, and company solar system orbit.
+  - Personal Projects with 3D hover cards.
   - Blogs with images, tags, and metadata.
+  - Tech Radar displaying skills across different technology categories.
+  - Contact page with elegant parchment-style form.
   - Resume (view inline on desktop, download on mobile).
-  - Testimonials & Performance improvements.
-- **Company Carousel**: Auto-scrolling slider with partner logos.
+- **Company Solar System**: Animated orbit display of companies worked with.
 - **Theme Switcher**:
   - Desktop inline dropdown.
   - Mobile floating action button (FAB).
@@ -27,14 +28,16 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
   - Next.js Metadata API used.
   - Optimized images with next/image.
 - **Modern Styling**: TailwindCSS with custom themes (light, dark).
+- **Smooth Animations**: Framer Motion powered transitions and micro-interactions.
 
 <hr/>
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 16
+- **Framework**: Next.js 16 (Turbopack)
 - **Language**: TypeScript
 - **Styling**: TailwindCSS
+- **Animations**: Framer Motion
 - **Icons/Images**: Next.js Image Optimization
 
 <hr/>
@@ -43,37 +46,48 @@ It showcases projects, work experience, case studies, testimonials, blogs, and s
 
 ```
 ├── app/
-│   ├── page.tsx           # Home page
+│   ├── page.tsx           # Landing page
+│   ├── home/              # Home page with hero, projects, solar system
+│   ├── blogs/             # Blogs page
+│   ├── tech-radar/        # Tech Radar page
+│   ├── contact/           # Contact page with parchment form
+│   ├── resume/            # Resume page (PDF view/download)
 │   ├── layout.tsx         # Root layout with theme init
 │   ├── globals.css        # Tailwind + global styles
-│   ├── projects/          # Projects page
-│   ├── blogs/             # Blogs page
-│   ├── resume/            # Resume page (PDF view/download)
-│   ├── tech-radar/        # Tech Radar page
-│   ├── testimonials/      # Testimonials page
-│   ├── performance/       # Performance page
 │
 ├── components/
 │   ├── Header.tsx         # Navbar + mobile hamburger
 │   ├── Footer.tsx         # Footer with socials
-│   ├── CompanyCarousel.tsx# Partner logos slider
+│   ├── LandingCard.tsx    # Animated landing card
+│   ├── SolarSystem.tsx    # Company orbit animation
+│   ├── CompanyOrbit.tsx   # Orbit component for companies
+│   ├── ProjectCard.tsx    # 3D project cards
 │   ├── ThemeSwitcher.tsx  # Theme dropdown + FAB
-│   ├── TestimonialMarquee.tsx
-│   ├── SimpleLine.tsx     # Line chart for performance
+│   ├── TechPill.tsx       # Tech radar pill display
+│   ├── VerticalPills.tsx  # Vertical skills display
+│   ├── ContactParchment.tsx # Contact form component
+│   ├── MouseGradient.tsx  # Mouse-following gradient effect
+│   ├── ResumeClient.tsx   # Resume viewer client component
+│   ├── SmartDownloadButton.tsx # Smart download for resume
 │
 ├── data/
 │   ├── companies.json     # Companies worked with
 │   ├── personal-projects.json
-│   ├── case-studies.json
 │   ├── blogs.json
-│   ├── performance.json
+│   ├── experience.json
+│   ├── tech-radar.json
+│   ├── skills-matrix.json
 │   ├── testimonials.json
 │
 ├── public/
 │   ├── logos/             # Company + personal logos
 │   ├── blogs/             # Blog cover images
-│   ├── authors/           # Author images
+│   ├── tech/              # Technology icons
+│   ├── screenshots/       # App screenshots
 │   └── jitendra_resume.pdf
+│
+├── hooks/
+│   └── ...                # Custom React hooks
 │
 ├── package.json
 └── README.md
@@ -120,11 +134,20 @@ The ThemeSwitcher component handles theme selection and persistence using localS
 
 ## 📸 Screenshots
 
+### Landing Page
+![Landing Page](public/screenshots/landing.png)
+
+### Home Page
 ![Home Page](public/screenshots/home.png)
-![Projects Page](public/screenshots/projects.png)
-![Blogs Page](public/screenshots/blogs.png)
+
+<!-- ### Blogs Page
+![Blogs Page](public/screenshots/blogs.png) -->
+
+### Tech Radar Page
 ![Tech Radar Page](public/screenshots/tech-radar.png)
-![Testimonials Page](public/screenshots/testimonials.png)
+
+### Contact Page
+![Contact Page](public/screenshots/contact.png)
 
 <hr/>
 
