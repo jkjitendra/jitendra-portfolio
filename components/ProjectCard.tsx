@@ -59,6 +59,7 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
   const p = project;
   const hasImage = p.image && !imageError;
   const isMazeSolver = p.name.includes("MazeSolver");
+  const isErrorSoundAlert = p.name.includes("Error Sound Alert");
 
   return (
     <motion.div
@@ -94,7 +95,12 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
               src={p.image!}
               alt={`${p.name} preview`}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className={`transition-transform duration-500 group-hover:scale-105 ${
+                isErrorSoundAlert
+                  ? "object-contain object-center p-3 sm:p-4"
+                  : "object-cover"
+              }`
+            }
               onError={() => setImageError(true)}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
