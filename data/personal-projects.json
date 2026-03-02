@@ -76,5 +76,21 @@
       "username": null,
       "password": null
     }
+  },
+  {
+    "name": "Error Sound Alert (JetBrains Plugin)",
+    "description": "JetBrains plugin that plays an alert sound when IDE errors are detected, now published on the JetBrains Marketplace.",
+    "tech": [
+      "Kotlin",
+      "IntelliJ Platform SDK",
+      "JetBrains Plugin"
+    ],
+    "github": "https://github.com/jkjitendra/error-sound",
+    "live": "https://plugins.jetbrains.com/plugin/30398-error-sound-alert",
+    "image": "",
+    "demo": {
+      "username": null,
+      "password": null
+    }
   }
 ]
