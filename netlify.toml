@@ -1,3 +1,6 @@
+[build.environment]
+NETLIFY_NEXT_SKEW_PROTECTION = "true"
+
 [[redirects]]
 from = "https://jkjitendra.in/*"
 to = "https://www.jkjitendra.in/:splat"
@@ -9,5 +12,4 @@ from = "http://jkjitendra.in/*"
 to = "https://www.jkjitendra.in/:splat"
 status = 301
 force = true
-
 
