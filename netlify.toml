@@ -1,41 +1,26 @@
 [build.environment]
 NETLIFY_NEXT_SKEW_PROTECTION = "true"
 
-# CodeBundle subdomain root
 [[redirects]]
-  from = "https://codebundle.jkjitendra.in/"
-  to = "/codebundle"
-  status = 200
-  force = true
+from = "https://codebundle.jkjitendra.in/*"
+to = "/codebundle/:splat"
+status = 200
+force = true
 
 [[redirects]]
-  from = "http://codebundle.jkjitendra.in/"
-  to = "/codebundle"
-  status = 200
-  force = true
-
-# CodeBundle subdomain nested paths
-[[redirects]]
-  from = "https://codebundle.jkjitendra.in/*"
-  to = "/codebundle"
-  status = 200
-  force = true
+from = "http://codebundle.jkjitendra.in/*"
+to = "/codebundle/:splat"
+status = 200
+force = true
 
 [[redirects]]
-  from = "http://codebundle.jkjitendra.in/*"
-  to = "/codebundle"
-  status = 200
-  force = true
-
-# Main domain canonical redirect
-[[redirects]]
-  from = "https://jkjitendra.in/*"
-  to = "https://www.jkjitendra.in/:splat"
-  status = 301
-  force = true
+from = "https://jkjitendra.in/*"
+to = "https://www.jkjitendra.in/:splat"
+status = 301
+force = true
 
 [[redirects]]
-  from = "http://jkjitendra.in/*"
-  to = "https://www.jkjitendra.in/:splat"
-  status = 301
-  force = true
+from = "http://jkjitendra.in/*"
+to = "https://www.jkjitendra.in/:splat"
+status = 301
+force = true
