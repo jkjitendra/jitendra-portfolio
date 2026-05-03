@@ -77,8 +77,8 @@ export default function Header() {
     return () => document.removeEventListener("mousedown", onDown);
   }, [open]);
 
-  // Don't render header on landing page
-  if (pathname === "/") return null;
+  // Don't render portfolio navigation on standalone landing pages.
+  if (pathname === "/" || pathname === "/codebundle") return null;
 
   return (
     <>

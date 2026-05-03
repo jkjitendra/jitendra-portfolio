@@ -2,6 +2,18 @@
 NETLIFY_NEXT_SKEW_PROTECTION = "true"
 
 [[redirects]]
+from = "https://codebundle.jkjitendra.in/"
+to = "/codebundle"
+status = 200
+force = true
+
+[[redirects]]
+from = "http://codebundle.jkjitendra.in/"
+to = "/codebundle"
+status = 200
+force = true
+
+[[redirects]]
 from = "https://jkjitendra.in/*"
 to = "https://www.jkjitendra.in/:splat"
 status = 301
@@ -12,4 +24,3 @@ from = "http://jkjitendra.in/*"
 to = "https://www.jkjitendra.in/:splat"
 status = 301
 force = true
-

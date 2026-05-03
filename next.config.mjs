@@ -21,7 +21,7 @@ const nextConfig = {
     return [
       // Cache all public site images (you’re serving from /public)
       {
-        source: '/(blogs|logos|tech|android-chrome-.*|apple-touch-icon\\.png|favicon-.*|.*\\.webp|.*\\.png)',
+        source: '/(blogs|codebundle|logos|tech|android-chrome-.*|apple-touch-icon\\.png|favicon-.*|.*\\.webp|.*\\.png)',
         headers: [
           { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ],
