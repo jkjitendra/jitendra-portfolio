@@ -58,8 +58,8 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
 
   const p = project;
   const hasImage = p.image && !imageError;
-  const isMazeSolver = p.name.includes("MazeSolver");
-  const isErrorSoundAlert = p.name.includes("Error Sound Alert");
+  const isCodeBundle = p.name.includes("CodeBundle");
+  const isErrorSoundAlert = p.name.includes("Error Sound Alert") || p.name.includes("CodeBundle");
 
   return (
     <motion.div
@@ -95,12 +95,11 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
               src={p.image!}
               alt={`${p.name} preview`}
               fill
-              className={`transition-transform duration-500 group-hover:scale-105 ${
-                isErrorSoundAlert
+              className={`transition-transform duration-500 group-hover:scale-105 ${isErrorSoundAlert
                   ? "object-contain object-center p-3 sm:p-4"
                   : "object-cover"
-              }`
-            }
+                }`
+              }
               onError={() => setImageError(true)}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
@@ -172,7 +171,7 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
             )}
 
             {/* Standard Live Button */}
-            {p.live && !isMazeSolver && (
+            {p.live && !isCodeBundle && (
               <a
                 className="btn interactive-btn cursor-pointer"
                 href={p.live}
@@ -184,17 +183,26 @@ export default function ProjectCard({ project, index, downloadUrls }: ProjectCar
               </a>
             )}
 
-            {/* Smart Download Button for MazeSolver */}
-            {isMazeSolver && (
-              <SmartDownloadButton
-                // If caller passed specific URLs (like from server side), use them
-                windowsUrl={downloadUrls?.windows}
-                macUrl={downloadUrls?.mac}
-                linuxUrl={downloadUrls?.linux}
-                // Fallback to the 'live' link which is likely the releases page
-                fallbackUrl={p.live || ""}
+            {/* CodeBundle links to its landing page */}
+            {isCodeBundle && (
+              <a
                 className="btn interactive-btn cursor-pointer"
-              />
+                href="https://codebundle.jkjitendra.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ pointerEvents: "auto" }}
+              >
+                Live
+              </a>
+            )}
+            {isCodeBundle && (
+              <a
+                className="btn btn-sm btn-ghost interactive-btn cursor-pointer"
+                href="/codebundle/versions"
+                style={{ pointerEvents: "auto" }}
+              >
+                All Versions
+              </a>
             )}
           </div>
         </div>
