@@ -47,16 +47,16 @@
     }
   },
   {
-    "name": "MazeSolver (Desktop)",
-    "description": "Java 17 + Swing desktop app for solving MathMaze puzzles; native installers via Gradle/jpackage.",
+    "name": "CodeBundle (Desktop)",
+    "description": "Local-first desktop app that bundles selected project files into one AI-ready Markdown or TXT export. No uploads required.",
     "tech": [
-      "Java",
-      "Swing",
-      "Gradle"
+      "Electron",
+      "TypeScript",
+      "Python"
     ],
-    "github": "https://github.com/jkjitendra/MazeSolver",
-    "live": "https://github.com/jkjitendra/MazeSolver/releases/latest",
-    "image": "/projects/mazesolver.png",
+    "github": "https://github.com/jkjitendra/codebundle",
+    "live": "https://github.com/jkjitendra/codebundle/releases/latest",
+    "image": "/codebundle/primary_logo.png",
     "demo": {
       "username": null,
       "password": null
