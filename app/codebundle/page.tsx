@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { Metadata } from "next";
+import CodeBundleDownloadButton from "@/components/CodeBundleDownloadButton";
 
 const releaseUrl = process.env.NEXT_PUBLIC_CODEBUNDLE_RELEASE_URL ?? "https://github.com/jkjitendra/codebundle/releases/latest";
 const repoUrl = process.env.NEXT_PUBLIC_CODEBUNDLE_REPO_URL ?? "https://github.com/jkjitendra/codebundle";
@@ -48,12 +49,15 @@ export default function CodeBundlePage() {
           </div>
 
           <div className="flex flex-wrap gap-3">
-            <a
+            {/* <a
               href={releaseUrl}
               className="inline-flex min-h-12 items-center rounded-md bg-[#0b5fff] px-5 py-3 font-semibold text-white transition hover:bg-[#084ed0] focus:outline-none focus:ring-2 focus:ring-[#0b5fff]/40"
             >
               Download latest release
-            </a>
+            </a> */}
+            <CodeBundleDownloadButton
+              className="inline-flex min-h-12 items-center rounded-md bg-[#0b5fff] px-5 py-3 font-semibold text-white transition hover:bg-[#084ed0] focus:outline-none focus:ring-2 focus:ring-[#0b5fff]/40 disabled:cursor-not-allowed disabled:opacity-70"
+            />
             <a
               href={repoUrl}
               className="inline-flex min-h-12 items-center rounded-md border border-[#c9d4e7] bg-white px-5 py-3 font-semibold text-[#10213f] transition hover:border-[#8ea5c8] focus:outline-none focus:ring-2 focus:ring-[#0b5fff]/30"
