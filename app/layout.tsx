@@ -67,7 +67,7 @@ const themeInit = `
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     // Provide a stable default and suppress hydration warnings for this element.
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         {/* This sets data-theme from localStorage BEFORE React hydrates */}
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
