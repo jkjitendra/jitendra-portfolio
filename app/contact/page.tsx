@@ -10,6 +10,7 @@ export default function ContactPage() {
     name: '',
     email: '',
     mobile: '',
+    subject: '',
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -45,7 +46,7 @@ export default function ContactPage() {
       // Success
       console.log('Form Submitted via API:', formData);
       setStatus('success');
-      setFormData({ name: '', email: '', mobile: '', message: '' });
+      setFormData({ name: '', email: '', mobile: '', subject: '', message: '' });
 
       // Status stays 'success' until user types again, triggering 'idle' via handleChange
 
