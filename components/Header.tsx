@@ -78,7 +78,7 @@ export default function Header() {
   }, [open]);
 
   // Don't render portfolio navigation on standalone landing pages.
-  if (pathname === "/" || pathname === "/codebundle") return null;
+  if (pathname === "/" || pathname === "/home" || pathname === "/codebundle") return null;
 
   return (
     <>

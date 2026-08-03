@@ -1,4 +1,4 @@
-import HomeClient from "@/components/HomeClient";
+import PortfolioExperience from "@/components/portfolio/PortfolioExperience";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <HomeClient />;
+  return <PortfolioExperience />;
 }
