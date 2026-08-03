@@ -10,6 +10,7 @@ type ContactParchmentProps = {
     email: string;
     mobile: string;
     message: string;
+    subject: string;
   };
   status: 'idle' | 'submitting' | 'success' | 'error';
 };
@@ -20,6 +21,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
   const displayMessage = formData.message || "Write your message...";
   const displayName = formData.name || "(Your Name)";
   const displayMobile = formData.mobile ? formData.mobile : "";
+  const displaySubject = formData.subject || "(Your Subject)";
 
   // Animation Stages: 'hidden' -> 'idle' -> 'mailbox' -> 'success'
   const [animationStage, setAnimationStage] = React.useState<'hidden' | 'idle' | 'mailbox' | 'success'>('hidden');
@@ -45,7 +47,12 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
     else if (status === 'error') {
       setAnimationStage('idle');
     }
-  }, [status]);
+    // Restore the live parchment after the "send another" action clears a
+    // successful state in the parent contact form.
+    else if (status === 'idle' && animationStage === 'success') {
+      setAnimationStage('idle');
+    }
+  }, [animationStage, status]);
 
   // Variants
   const containerVariants = {
@@ -97,7 +104,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
               initial="idle"
               animate={'idle'}
               variants={contentVariants}
-              className="absolute inset-0 pt-[4.5rem] pb-[3rem] pl-[3rem] pr-[2rem] font-handwriting text-ink-900 flex flex-col text-slate-900"
+              className="absolute inset-0 pt-[5.6rem] pb-[3rem] pl-[3rem] pr-[2rem] font-handwriting text-ink-900 flex flex-col text-slate-900"
               style={{ fontFamily: 'var(--font-handwriting)' }}
             >
               <div className="flex flex-col gap-1 text-base md:text-lg border-b border-black/5 pb-2 mb-2">
@@ -107,7 +114,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
                 </div>
                 <div className="flex items-baseline gap-2">
                   <span className="font-bold opacity-70 text-md md:text-base">Subject:</span>
-                  <span className="font-bold opacity-90">Portfolio Inquiry</span>
+                  <span className="font-bold opacity-90">{displaySubject}</span>
                 </div>
               </div>
 

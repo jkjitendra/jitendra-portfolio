@@ -5,7 +5,7 @@ import nodemailer from 'nodemailer';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, mobile, message } = body;
+    const { name, email, mobile, subject, message } = body;
 
     // Basic validation
     if (!name || !email || !message) {
@@ -53,11 +53,12 @@ export async function POST(req: Request) {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER, // Setup to send to yourself
       replyTo: email,
-      subject: `Portfolio Contact: ${name}`,
+      subject: `Portfolio Contact: ${subject || name}`,
       text: `
         Name: ${name}
         Email: ${email}
         Mobile: ${mobile || 'Not provided'}
+        Subject: ${subject || 'Not provided'}
         
         Message:
         ${message}
@@ -68,6 +69,7 @@ export async function POST(req: Request) {
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> ${email}</p>
           <p><strong>Mobile:</strong> ${mobile || 'Not provided'}</p>
+          <p><strong>Subject:</strong> ${subject || 'Not provided'}</p>
           <hr />
           <h3>Message:</h3>
           <p style="white-space: pre-wrap; background: #f4f4f4; padding: 15px; border-radius: 5px;">${message}</p>
