@@ -12,6 +12,7 @@ type NavItem = { href: `/${string}` | "/"; label: string };
 const NAV_LINKS = [
   { href: "/home", label: "Home" },
   { href: "/tech-radar", label: "Tech Radar" },
+  { href: "/resume", label: "Resume" },
   { href: "/contact", label: "Contact" },
   // { href: "/testimonials", label: "Testimonials" },
   // { href: "/blogs", label: "Blogs" },

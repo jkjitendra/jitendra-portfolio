@@ -68,6 +68,7 @@ git diff --check
 | `/contact` | Legacy standalone contact page with parchment preview |
 | `/blogs` | Blog listing |
 | `/tech-radar` | Technology radar |
+| `/resume` | Resume view/download |
 | `/codebundle` | CodeBundle product page |
 
 ## Data and content
@@ -88,7 +89,7 @@ app/
   page.tsx                     Original landing page
   home/page.tsx                Immersive portfolio entry
   api/contact/route.ts         Contact email endpoint
-  contact/, blogs/, tech-radar/, codebundle/
+  contact/, blogs/, resume/, tech-radar/, codebundle/
 
 components/
   portfolio/                   Reusable /home sections and interactions
