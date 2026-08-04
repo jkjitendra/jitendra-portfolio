@@ -3,12 +3,11 @@
 import { motion } from "framer-motion";
 import experienceData from "@/data/experience.json";
 import ScrambleText from "./ScrambleText";
-import ScrollCue from "./ScrollCue";
+import SectionDivider from "./SectionDivider";
 
 export default function ExperienceTimeline() {
   return (
     <section id="experience" className="section-shell portfolio-section experience-section" aria-labelledby="experience-title">
-      <div className="section-number" aria-hidden="true">02</div>
       <div className="section-label"><span /> <ScrambleText text="MISSION.LOG" /></div>
       <div className="section-heading-row">
         <div>
@@ -35,7 +34,7 @@ export default function ExperienceTimeline() {
           </motion.li>
         ))}
       </ol>
-      <ScrollCue side="left" />
+      <SectionDivider side="left" />
     </section>
   );
 }
