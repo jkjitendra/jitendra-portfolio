@@ -94,6 +94,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
                 src="/assets/concept/parchment_paper.webp"
                 alt="Parchment Paper"
                 fill
+                sizes="(max-width: 760px) calc(100vw - 2.5rem), 28rem"
                 className="object-cover"
                 priority
               />

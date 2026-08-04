@@ -3,12 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import ScrambleText from "./ScrambleText";
-import ScrollCue from "./ScrollCue";
+import SectionDivider from "./SectionDivider";
 
 export default function AboutSection() {
   return (
     <section id="about" className="section-shell portfolio-section about-section" aria-labelledby="about-title">
-      <div className="section-number" aria-hidden="true">01</div>
       <div className="section-label"><span /> PROFILE.DOSSIER</div>
       <div className="about-layout">
         <motion.div
@@ -47,7 +46,7 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
-      <ScrollCue side="right" />
+      <SectionDivider side="right" />
     </section>
   );
 }

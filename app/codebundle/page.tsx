@@ -33,7 +33,7 @@ export default function CodeBundlePage() {
       <section className="mx-auto grid min-h-screen w-full max-w-6xl items-center gap-10 px-5 pb-16 pt-24 sm:px-8 lg:grid-cols-[1fr_420px] lg:gap-16">
         <div className="space-y-8">
           <Image
-            src="/codebundle/horizontal_logo.png"
+            src="/codebundle/primary_logo.png"
             alt="CodeBundle"
             width={540}
             height={180}

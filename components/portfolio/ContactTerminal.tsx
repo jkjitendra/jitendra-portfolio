@@ -27,7 +27,6 @@ export default function ContactTerminal() {
 
   return (
     <section id="contact" className="section-shell portfolio-section contact-section" aria-labelledby="contact-title">
-      <div className="section-number" aria-hidden="true">05</div>
       <div className="section-label"><span /> <ScrambleText text="CONTACT.TERMINAL" /></div>
       <div className="contact-heading"><p className="eyebrow"><ScrambleText text="// NEW_MESSAGE" /></p><h2 id="contact-title"><ScrambleText text="Let’s make the next" duration={2050} /><br /><em><ScrambleText text="system count." duration={1900} delay={180} /></em></h2><p>Have a product challenge, a performance problem, or an opportunity in mind? Send the signal.</p></div>
       <div className="contact-layout">

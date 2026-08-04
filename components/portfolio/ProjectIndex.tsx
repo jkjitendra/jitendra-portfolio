@@ -5,12 +5,16 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import projects from "@/data/personal-projects.json";
 import ScrambleText from "./ScrambleText";
-import ScrollCue from "./ScrollCue";
+import SectionDivider from "./SectionDivider";
 
 type Project = (typeof projects)[number];
 type Category = "All" | "Full Stack" | "Backend & APIs" | "Frontend" | "Open Source";
 
 const categories: Category[] = ["All", "Full Stack", "Backend & APIs", "Frontend", "Open Source"];
+const containedPreviewProjects = new Set([
+  "Blog App",
+  "Error Sound Alert (JetBrains Plugin)"
+]);
 const categoryFor = (project: Project): Exclude<Category, "All">[] => {
   const tech = project.tech.join(" ").toLowerCase();
   const output: Exclude<Category, "All">[] = ["Open Source"];
@@ -34,7 +38,6 @@ export default function ProjectIndex() {
 
   return (
     <section id="work" className="section-shell portfolio-section work-section" aria-labelledby="work-title">
-      <div className="section-number" aria-hidden="true">03</div>
       <div className="section-label"><span /> <ScrambleText text="SELECTED.WORK" /></div>
       <div className="work-heading">
         <div><p className="eyebrow"><ScrambleText text="PROJECT INDEX / 2020—NOW" /></p><h2 id="work-title"><ScrambleText text="Built to solve." duration={1900} /><br /><em><ScrambleText text="Designed to last." duration={2000} delay={160} /></em></h2></div>
@@ -68,11 +71,17 @@ export default function ProjectIndex() {
               <button className="dialog-close" onClick={() => setSelected(null)} type="button" aria-label="Close project details">[ × ]</button>
               <div className={`dialog-image${selected.name === "CodeBundle (Desktop)" ? " is-light-media" : ""}`}>
                 <Image
-                  src={selected.name === "CodeBundle (Desktop)" ? "/codebundle/horizontal_logo.png" : selected.image}
+                  src={selected.name === "CodeBundle (Desktop)" ? "/codebundle/primary_logo.png" : selected.image}
                   alt=""
                   fill
                   sizes="(max-width: 760px) 90vw, 480px"
-                  className={selected.name === "CodeBundle (Desktop)" ? "object-contain p-8" : "object-cover"}
+                  className={
+                    selected.name === "CodeBundle (Desktop)"
+                      ? "object-contain p-8"
+                      : containedPreviewProjects.has(selected.name)
+                        ? "object-contain p-4"
+                        : "object-cover"
+                  }
                 />
               </div>
               <div className="dialog-copy"><p className="eyebrow">PROJECT.DETAIL</p><h3 id="project-dialog-title">{selected.name}</h3><p>{selected.description}</p><div className="project-tech">{selected.tech.map((item) => <span key={item}>{item}</span>)}</div><div className="dialog-links"><a href={selected.github} target="_blank" rel="noreferrer">GitHub ↗</a>{selected.live && <a href={selected.live} target="_blank" rel="noreferrer">Live project ↗</a>}</div></div>
@@ -80,7 +89,7 @@ export default function ProjectIndex() {
           </motion.div>
         )}
       </AnimatePresence>
-      <ScrollCue side="right" />
+      <SectionDivider side="right" />
     </section>
   );
 }
