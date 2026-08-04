@@ -68,7 +68,6 @@ git diff --check
 | `/contact` | Legacy standalone contact page with parchment preview |
 | `/blogs` | Blog listing |
 | `/tech-radar` | Technology radar |
-| `/resume` | Resume view/download |
 | `/codebundle` | CodeBundle product page |
 
 ## Data and content
