@@ -15,7 +15,7 @@ There are two intentionally separate homepage experiences:
 | `/` | Original teal profile-card landing page | Existing visual, social links, and entry behaviour |
 | `/home` | New immersive cyber-editorial portfolio | Section narrative, data reuse, accessibility, and motion behaviour |
 
-The original site routes are not removed. `/contact`, `/blogs`, `/tech-radar`, `/resume`, and `/codebundle` remain meaningful routes. The new `/home` is the primary in-depth portfolio experience, not a replacement that discards the older content.
+The original site routes are not removed. `/contact`, `/blogs`, `/tech-radar`, and `/codebundle` remain meaningful routes. The new `/home` is the primary in-depth portfolio experience, not a replacement that discards the older content.
 
 ## `/home` information architecture
 
@@ -28,7 +28,7 @@ The original site routes are not removed. `/contact`, `/blogs`, `/tech-radar`, `
 5. **Engineering Systems** — skills and technology clusters from `data/skills-matrix.json` and `data/tech-radar.json`.
 6. **Contact** — terminal form paired with a live parchment preview and footer links.
 
-The fixed `SectionNav` links to these anchors, updates its active state through `IntersectionObserver`, includes a Resume link, and becomes a compact mobile menu below the mobile breakpoint.
+The fixed `SectionNav` links to these anchors, updates its active state through `IntersectionObserver`, includes a direct resume-PDF link, and becomes a compact mobile menu below the mobile breakpoint.
 
 ## Component reference
 
@@ -44,7 +44,7 @@ The fixed `SectionNav` links to these anchors, updates its active state through 
 | `ContactTerminal.tsx` | `/home` contact form, success/error state, footer links | Do not move footer social links without an explicit request |
 | `ContactParchment.tsx` | Reusable paper preview and submit/success animation | Used by both `/home` and legacy `/contact` |
 | `ScrambleText.tsx` | Reusable heading decode effect | Must preserve fixed text dimensions and reduced-motion support |
-| `ScrollCue.tsx` | Decorative SVG scroll handoff cue | Present on all `/home` sections except Contact |
+| `SectionDivider.tsx` | Decorative SVG section handoff | Alternates sides on all `/home` sections except Contact |
 
 ## Design system and visual direction
 
@@ -85,9 +85,9 @@ Oversized Georgia-based display typography is paired with Courier-like technical
 
 When adding a new decoded heading, split it into deliberate phrase-sized `ScrambleText` calls and use explicit `<br />` elements when visual line breaks are required. Do not rely on temporary glyph wrapping for layout.
 
-### Scroll cues
+### Section dividers
 
-`ScrollCue` is decorative (`aria-hidden`) and alternates position by section:
+`SectionDivider` is decorative (`aria-hidden`) and alternates position by section:
 
 | Section | Position |
 | --- | --- |
