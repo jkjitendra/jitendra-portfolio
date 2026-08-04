@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const sections = [
@@ -35,7 +36,7 @@ export default function SectionNav() {
   return (
     <header className="portfolio-nav">
       <a className="portfolio-wordmark" href="#intro" aria-label="Back to intro">
-        <span className="portfolio-wordmark-dot" /> JITENDRA<span className="portfolio-wordmark-muted">.DEV</span>
+        <Image className="portfolio-wordmark-logo" src="/logos/jk_favicon.png" width={192} height={192} alt="Jitendra Logo" priority />
       </a>
 
       <button
@@ -56,7 +57,7 @@ export default function SectionNav() {
             aria-current={active === id ? "location" : undefined}
             onClick={() => setOpen(false)}
           >
-            <span>0{index + 1}</span>{label}
+            {label}
           </a>
         ))}
         <a className="portfolio-resume-link" href="/jitendra_resume.pdf" target="_blank" rel="noreferrer">
