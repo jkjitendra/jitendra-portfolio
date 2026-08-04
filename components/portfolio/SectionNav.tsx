@@ -35,7 +35,7 @@ export default function SectionNav() {
 
   return (
     <header className="portfolio-nav">
-      <a className="portfolio-wordmark" href="#intro" aria-label="Back to intro">
+      <a className="portfolio-wordmark" href="/" aria-label="Go to Jitendra's homepage">
         <Image className="portfolio-wordmark-logo" src="/logos/jk_favicon.png" width={192} height={192} alt="Jitendra Logo" priority />
       </a>
 
