@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import radar from "@/data/tech-radar.json";
 import skills from "@/data/skills-matrix.json";
 import ScrambleText from "./ScrambleText";
-import ScrollCue from "./ScrollCue";
+import SectionDivider from "./SectionDivider";
 
 const clusters = [
   { label: "LANGUAGES", values: ["Java", "TypeScript", "JavaScript", "Scala", "Python", "Go"] },
@@ -16,7 +16,6 @@ const clusters = [
 export default function StackSection() {
   return (
     <section id="stack" className="section-shell portfolio-section stack-section" aria-labelledby="stack-title">
-      <div className="section-number" aria-hidden="true">04</div>
       <div className="section-label"><span /> <ScrambleText text="ENGINEERING.SYSTEMS" /></div>
       <div className="stack-heading">
         <div><p className="eyebrow"><ScrambleText text="TOOLKIT / CONTINUOUSLY EVOLVING" /></p><h2 id="stack-title"><ScrambleText text="The stack is not" duration={1900} /><br /><em><ScrambleText text="the strategy." duration={1850} delay={160} /></em></h2></div>
@@ -34,7 +33,7 @@ export default function StackSection() {
         <div><span className="eyebrow">CORE PROFICIENCY</span>{skills.map((skill) => <p key={skill.skill}><span>{skill.skill}</span><b>{skill.level}</b></p>)}</div>
         <p className="radar-note">SYSTEM INVENTORY <strong>{Object.values(radar).flat().length}+</strong> technologies across delivery, data, platform, and product engineering.</p>
       </div>
-      <ScrollCue side="left" />
+      <SectionDivider side="left" />
     </section>
   );
 }
