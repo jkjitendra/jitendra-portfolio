@@ -2,11 +2,7 @@
   {
     "name": "XPense",
     "description": "Smart expense manager for personal and group expenses tracking with AI-based categorization, file uploads, analytics and integrated UPI payments.",
-    "tech": [
-      "Spring Boot",
-      "ReactJs",
-      "PostgreSQL"
-    ],
+    "tech": ["Spring Boot", "ReactJs", "PostgreSQL"],
     "github": "https://github.com/ExpensePro",
     "live": "",
     "image": "/projects/xpense.png",
@@ -18,11 +14,7 @@
   {
     "name": "EduKitBox",
     "description": "Offline-first educational kit order collection for field teams; tablet-optimized PWA with local storage, customer management, and CSV export.",
-    "tech": [
-      "TypeScript",
-      "React",
-      "PWA"
-    ],
+    "tech": ["TypeScript", "React", "PWA"],
     "github": "https://github.com/jkjitendra/EduKitBox",
     "live": "https://edukitbox.netlify.app/",
     "image": "/projects/edukitbox.png",
@@ -34,10 +26,7 @@
   {
     "name": "Blog App",
     "description": "Full-stack blog with RBAC, comments, reactions, social login/SSO and payments.",
-    "tech": [
-      "Java",
-      "Spring Boot"
-    ],
+    "tech": ["Java", "Spring Boot"],
     "github": "https://github.com/jkjitendra/Blog_App",
     "live": "",
     "image": "/projects/blog_app.png",
@@ -49,11 +38,7 @@
   {
     "name": "CodeBundle (Desktop)",
     "description": "Local-first desktop app that bundles selected project files into one AI-ready Markdown or TXT export. No uploads required.",
-    "tech": [
-      "Electron",
-      "TypeScript",
-      "Python"
-    ],
+    "tech": ["Electron", "TypeScript", "Python"],
     "github": "https://github.com/jkjitendra/codebundle",
     "live": "https://github.com/jkjitendra/codebundle/releases/latest",
     "image": "/codebundle/primary_logo.png",
@@ -65,13 +50,10 @@
   {
     "name": "price_lookup (Chrome Extension)",
     "description": "Extension that tracks and notifies lowest product prices.",
-    "tech": [
-      "JavaScript",
-      "Chrome Extension"
-    ],
+    "tech": ["JavaScript", "Chrome Extension"],
     "github": "https://github.com/jkjitendra/price_lookup",
     "live": "https://chromewebstore.google.com/detail/hpkjionlijpkmbjdpbpefdbgdejjpjje?utm_source=item-share-cb",
-    "image": "/projects/price_peek.png",
+    "image": "/projects/price_peek.jpg",
     "demo": {
       "username": null,
       "password": null
@@ -80,11 +62,7 @@
   {
     "name": "Error Sound Alert (JetBrains Plugin)",
     "description": "JetBrains plugin that plays an alert sound when IDE errors are detected, now published on the JetBrains Marketplace.",
-    "tech": [
-      "Kotlin",
-      "IntelliJ Platform SDK",
-      "JetBrains Plugin"
-    ],
+    "tech": ["Kotlin", "IntelliJ Platform SDK", "JetBrains Plugin"],
     "github": "https://github.com/jkjitendra/error-sound",
     "live": "https://plugins.jetbrains.com/plugin/30398-error-sound-alert",
     "image": "/projects/error_sound_alert.svg",
