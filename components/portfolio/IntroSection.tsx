@@ -109,7 +109,11 @@ export default function IntroSection() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           transition={{ duration: 0.85, delay: 0.2 }}
         >
-          <ScrambleText text="Jitendra" duration={1200} /> <em><ScrambleText text="Kumar" duration={1200} delay={1150} /></em> <ScrambleText text="Tiwari" duration={1200} delay={2300} />
+          <ScrambleText
+            text="Jitendra Kumar Tiwari"
+            duration={2600}
+            emphasisRanges={[{ start: 9, end: 14 }]}
+          />
         </motion.h1>
         <motion.p
           className="hero-role"

@@ -10,13 +10,14 @@ type ScrambleTextProps = {
   className?: string;
   duration?: number;
   delay?: number;
+  emphasisRanges?: Array<{ start: number; end: number }>;
 };
 
 /**
  * A short, one-time character decode used for prominent interface copy.
  * The real text is preserved for assistive technology and reduced-motion users.
  */
-export default function ScrambleText({ text, className, duration, delay = 0 }: ScrambleTextProps) {
+export default function ScrambleText({ text, className, duration, delay = 0, emphasisRanges = [] }: ScrambleTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { amount: 0.7 });
   const reduceMotion = useReducedMotion();
@@ -27,6 +28,10 @@ export default function ScrambleText({ text, className, duration, delay = 0 }: S
   const scrollDirection = useRef<"initial" | "up" | "down">("initial");
   const previousScrollY = useRef(0);
   const resolvedDuration = duration ?? Math.max(1300, Math.min(2500, text.length * 78));
+  const renderText = (value: string) => Array.from(value, (character, index) => {
+    const isEmphasized = emphasisRanges.some(({ start, end }) => index >= start && index < end);
+    return isEmphasized ? <em key={index}>{character}</em> : character;
+  });
 
   useEffect(() => {
     previousScrollY.current = window.scrollY;
@@ -100,8 +105,8 @@ export default function ScrambleText({ text, className, duration, delay = 0 }: S
   return (
     <>
       <span ref={ref} className={`decode-shell${className ? ` ${className}` : ""}`} aria-hidden="true">
-        <span className="decode-layout">{text}</span>
-        <span className="decode-text">{displayedText}</span>
+        <span className="decode-layout">{renderText(text)}</span>
+        <span className="decode-text">{renderText(displayedText)}</span>
       </span>
       <span className="sr-only">{text}</span>
     </>
