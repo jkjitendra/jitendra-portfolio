@@ -33,6 +33,13 @@ export default function SectionNav() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && setOpen(false);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [open]);
+
   return (
     <header className="portfolio-nav">
       <a className="portfolio-wordmark" href="/" aria-label="Go to Jitendra's homepage">
