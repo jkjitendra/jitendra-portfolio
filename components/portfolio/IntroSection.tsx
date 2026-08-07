@@ -101,7 +101,7 @@ export default function IntroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <ScrambleText text="[ ENGINEERING SYSTEMS / HUMAN-CENTRED PRODUCTS ]" />
+          <ScrambleText text="[ ENGINEERING SYSTEMS / HUMAN-CENTRED PRODUCTS ]" wrapByWords />
         </motion.p>
         <motion.h1
           id="intro-title"
@@ -113,6 +113,7 @@ export default function IntroSection() {
             text="Jitendra Kumar Tiwari"
             duration={2600}
             emphasisRanges={[{ start: 9, end: 14 }]}
+            wrapByWords
           />
         </motion.h1>
         <motion.p
@@ -121,7 +122,7 @@ export default function IntroSection() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.55, delay: 0.7 }}
         >
-          <ScrambleText text="FULL-STACK ENGINEER · JAVA · SPRING BOOT · REACT" duration={2500} delay={420} />
+          <ScrambleText text="FULL-STACK ENGINEER · JAVA · SPRING BOOT · REACT" duration={2500} delay={420} wrapByWords />
         </motion.p>
       </div>
 
