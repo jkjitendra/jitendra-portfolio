@@ -28,7 +28,7 @@ The original site routes are not removed. `/contact`, `/blogs`, `/tech-radar`, a
 5. **Engineering Systems** — skills and technology clusters from `data/skills-matrix.json` and `data/tech-radar.json`.
 6. **Contact** — terminal form paired with a live parchment preview and footer links.
 
-The fixed `SectionNav` links to these anchors, updates its active state through `IntersectionObserver`, links directly to the resume PDF, and becomes a compact mobile menu below the mobile breakpoint.
+The fixed `SectionNav` links to these anchors, updates its active state through `IntersectionObserver`, links directly to the resume PDF, and becomes a compact, keyboard-operable menu below the `1024px` laptop breakpoint. Escape and selecting a destination close the menu.
 
 ## Component reference
 
@@ -36,14 +36,14 @@ The fixed `SectionNav` links to these anchors, updates its active state through 
 | --- | --- | --- |
 | `PortfolioExperience.tsx` | `/home` shell, skip link, short preloader, section composition | Hide the preloader for reduced-motion users |
 | `SectionNav.tsx` | Fixed anchor navigation and active-section state | Uses the IDs `intro`, `about`, `experience`, `work`, `stack`, and `contact` |
-| `IntroSection.tsx` | Hero copy, visual circuit field, primary CTAs | Keep the explicit line break between name lines |
+| `IntroSection.tsx` | Hero copy, visual circuit field, primary CTAs | Name, technical kicker, and role use stable word-aware decoding where needed |
 | `AboutSection.tsx` | Dossier, portrait, profile narrative, metrics | Uses `/public/logos/image.jpg` |
 | `ExperienceTimeline.tsx` | Data-driven vertical experience timeline | Maps `experience.json`; retain readable impact points |
 | `ProjectIndex.tsx` | Filtered project rows and accessible modal details | Escape closes the dialog; use existing project images/data |
 | `StackSection.tsx` | Technology clusters and engineering narrative | Uses skills/radar data as source of truth |
-| `ContactTerminal.tsx` | `/home` contact form, success/error state, footer links | Do not move footer social links without an explicit request |
-| `ContactParchment.tsx` | Reusable paper preview and submit/success animation | Used by both `/home` and legacy `/contact` |
-| `ScrambleText.tsx` | Reusable heading decode effect | Must preserve fixed text dimensions and reduced-motion support |
+| `ContactTerminal.tsx` | `/home` contact form, success/error state, footer links, and floating back-to-top control | The accessible up-arrow scrolls to `#intro` and respects reduced motion |
+| `ContactParchment.tsx` | Reusable paper preview and submit/success animation | Used by both `/home` and legacy `/contact`; the `portfolio` variant is scoped to `/home` |
+| `ScrambleText.tsx` | Reusable heading decode effect | Preserves fixed text dimensions, supports opt-in word-aware wrapping, and respects reduced motion |
 | `SectionDivider.tsx` | Decorative SVG scroll handoff cue | Present on all `/home` sections except Contact |
 
 ## Design system and visual direction
@@ -78,12 +78,14 @@ Oversized Georgia-based display typography is paired with Courier-like technical
 
 - A hidden final-text layer reserves the final width and line height.
 - The animated text is absolutely positioned over that reserved layer.
-- Each supplied text phrase is `white-space: nowrap`; random glyphs therefore never cause a word or phrase to wrap to a new line.
+- Default output remains `white-space: nowrap`, so existing intentional phrase-level composition stays intact.
+- `wrapByWords` is an opt-in mode for phrases that must wrap on narrow screens. It renders complete final-word layout boxes and overlays the matching scrambled word in each box; spaces remain between boxes, so wrapping occurs only between complete words.
+- The final words alone determine width, line height, and browser-selected line breaks. Temporary glyphs never change layout, though they may paint slightly beyond their reserved word width.
 - Glyph overflow is visible so ascenders and descenders are not clipped.
 - The animation runs on first entry, then can replay when a section is exited and re-entered while scrolling down.
 - `prefers-reduced-motion` keeps the final text without the effect.
 
-When adding a new decoded heading, split it into deliberate phrase-sized `ScrambleText` calls and use explicit `<br />` elements when visual line breaks are required. Do not rely on temporary glyph wrapping for layout.
+When adding a new decoded heading, first preserve deliberate phrase-sized `ScrambleText` calls and explicit `<br />` elements. Use `wrapByWords` only when the phrase must be responsive (the hero name, hero technical copy, and first Contact line are current examples). Do not rely on temporary glyph wrapping for layout.
 
 ### Section dividers
 
@@ -121,6 +123,8 @@ The `/home` contact form collects:
 
 `ContactParchment` mirrors these values on the parchment in real time. The paper animates in from the right while the form animates in from the left. The parchment has deliberate top padding so the sender line sits below the ornamental header.
 
+`/home` passes `variant="portfolio"` so its parchment can match the responsive form panel without changing the existing `/contact` dimensions, typography, or image sizing. The component default remains the legacy standalone-contact treatment.
+
 ### Submission states
 
 1. **Idle**: live parchment and form remain visible.
@@ -157,13 +161,27 @@ When adding an SEO-relevant route, include metadata and consider the sitemap/can
 
 ## Responsive and accessibility requirements
 
+`/home` uses a mobile-first responsive cascade scoped below `.portfolio-site`:
+
+| Tier | Viewport | Behaviour |
+| --- | --- | --- |
+| Compact mobile | `320–479px` | Single-column content, reduced hero decoration, wrapped project/filter controls, stacked Contact form and parchment |
+| Mobile | `480–767px` | Fluid type/spacing refinement while keeping touch-friendly single-column layouts |
+| Tablet | `768–1023px` | About and Stack retain readable two-column compositions; Contact stacks for legibility; compact navigation remains active |
+| Laptop | `1024–1439px` | Horizontal navigation, desktop timeline/project index, and Form \| Parchment Contact layout return |
+| Large desktop | `1440px+` | Preserves the established `85rem` content cap and desktop proportions |
+
+Use intrinsic Grid/Flex sizing, `minmax()`, `clamp()`, and dynamic viewport units rather than JavaScript viewport branching. Do not reintroduce the former `/home` `max-width: 760px` responsive system.
+
 - Keep semantic sections and meaningful `aria-labelledby` relationships.
 - Preserve the `/home` skip-to-content link.
-- All controls must remain keyboard-operable: nav links, filter buttons, dialog close, and contact controls.
-- Project details must be dismissible with Escape.
+- All controls must remain keyboard-operable: nav links/menu, filter buttons, dialog close, contact controls, and the floating back-to-top link.
+- The mobile navigation and project details must be dismissible with Escape. Dialog focus returns to its opening control after close.
 - Do not make any required information dependent on animation, hover, colour alone, or audio.
 - Use Next/Image for local raster media and supply suitable `sizes` values.
-- Test both desktop and mobile before delivery. Mobile changes may need a lower display type scale, but decoded phrases must not wrap during animation.
+- Keep menus and dialogs within dynamic viewport constraints (`dvh`) and safe-area insets. Their own content, not the page behind them, must scroll when needed.
+- Test compact phone, phone, tablet, laptop, large desktop, short-height, and breakpoint-edge viewports before delivery. Fix the offending element when overflow occurs; do not hide it globally.
+- Word-aware decoded phrases may wrap only at complete word boundaries, with stable line positions throughout the animation.
 
 ## Development workflow
 
@@ -184,10 +202,10 @@ The `next build` command is the required production-level verification. Build wa
 3. Keep `/` and `/home` distinct unless the user explicitly requests otherwise.
 4. For `/home`, make focused reusable components rather than adding a monolithic page file.
 5. Maintain the contact form API payload, including `subject`.
-6. Preserve footer direct-contact link placement unless asked to change it.
+6. Preserve footer direct-contact links and the fixed accessible up-arrow back-to-top control unless asked to change them.
 7. Respect reduced motion and validate with TypeScript, production build, and `git diff --check`.
 8. Treat existing uncommitted changes as user work unless they are clearly part of the assigned task.
 
 ## Historical redesign summary
 
-The current `/home` redesign translated the interaction language of an editorial cyber portfolio into Jitendra’s engineering identity without copying reference content, assets, or exact compositions. It introduced the one-page information architecture, fixed navigation, technical texture, decode typography, vertical experience log, project index/dialogs, system-oriented technology grouping, parchment-driven contact experience, and alternating scroll handoff cues while retaining legacy routes and existing content sources.
+The current `/home` redesign translated the interaction language of an editorial cyber portfolio into Jitendra’s engineering identity without copying reference content, assets, or exact compositions. It introduced the one-page information architecture, fixed navigation, technical texture, decode typography, vertical experience log, project index/dialogs, system-oriented technology grouping, parchment-driven contact experience, floating up-arrow return control, and alternating scroll handoff cues while retaining legacy routes and existing content sources.
