@@ -13,15 +13,19 @@ type ContactParchmentProps = {
     subject: string;
   };
   status: 'idle' | 'submitting' | 'success' | 'error';
+  variant?: 'default' | 'portfolio';
 };
 
-export default function ContactParchment({ formData, status }: ContactParchmentProps) {
+export default function ContactParchment({ formData, status, variant = 'default' }: ContactParchmentProps) {
   // Logic to show clean empty states or user input
   const displayEmail = formData.email || "(Your Email)";
   const displayMessage = formData.message || "Write your message...";
   const displayName = formData.name || "(Your Name)";
   const displayMobile = formData.mobile ? formData.mobile : "";
   const displaySubject = formData.subject || "(Your Subject)";
+  const parchmentSizes = variant === 'portfolio'
+    ? '(max-width: 479px) calc(100vw - 2rem), (max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) 28rem, (max-width: 1439px) 38vw, 28rem'
+    : '(max-width: 760px) calc(100vw - 2.5rem), 28rem';
 
   // Animation Stages: 'hidden' -> 'idle' -> 'mailbox' -> 'success'
   const [animationStage, setAnimationStage] = React.useState<'hidden' | 'idle' | 'mailbox' | 'success'>('hidden');
@@ -69,7 +73,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
   };
 
   return (
-    <div className="relative w-full min-h-[500px] py-12 md:py-0 md:h-[600px] md:min-h-0 flex items-center justify-center perspective-1000">
+    <div className={`contact-parchment relative w-full min-h-[500px] py-12 md:py-0 md:h-[600px] md:min-h-0 flex items-center justify-center perspective-1000${variant === 'portfolio' ? ' contact-parchment--portfolio' : ''}`}>
       <AnimatePresence mode="wait">
         {animationStage !== 'success' && animationStage !== 'mailbox' && (
           <motion.div
@@ -94,7 +98,7 @@ export default function ContactParchment({ formData, status }: ContactParchmentP
                 src="/assets/concept/parchment_paper.webp"
                 alt="Parchment Paper"
                 fill
-                sizes="(max-width: 760px) calc(100vw - 2.5rem), 28rem"
+                sizes={parchmentSizes}
                 className="object-cover"
                 priority
               />
