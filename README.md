@@ -14,9 +14,11 @@ For an architectural guide and the reasoning behind the redesign, see [Project_O
 - Single-page portfolio journey at `/home`: Intro, About, Experience, Selected Work, Engineering Systems, and Contact.
 - Dark cyber-editorial visual language: technical grid/scanline texture, cyan and amber accents, oversized serif display type, and data-like labels.
 - Direction-aware text decoding: headings scramble into their final copy on entry and replay when re-entered while scrolling down. It respects `prefers-reduced-motion`.
-- Accessible fixed section navigation with active-section tracking, a mobile menu, skip link, and resume download.
+- Stable word-aware decoding for responsive hero/contact copy: final word boxes reserve layout, while temporary scramble glyphs are overlaid without shifting lines.
+- Accessible fixed section navigation with active-section tracking, a touch-friendly menu below `1024px`, skip link, and resume download.
 - Project Index with category filtering, animated transitions, keyboard-dismissible project-detail dialogs, and GitHub/live links.
-- Parchment-backed contact preview that mirrors form fields in real time, animates on submission, and supports a “send another message” action.
+- Parchment-backed contact preview that mirrors form fields in real time, animates on submission, and supports a “send another message” action. The `/home` parchment variant is isolated from legacy `/contact` styling.
+- Mobile-first `/home` layouts across compact phones, phones, tablets, laptops, and large desktops, plus a fixed accessible bouncing up-arrow return control.
 - Existing portfolio pages, resume, tech radar, blogs, and CodeBundle routes remain available.
 
 ## Technology
@@ -39,6 +41,20 @@ Then visit:
 
 - [http://localhost:3000](http://localhost:3000) for the original landing page.
 - [http://localhost:3000/home](http://localhost:3000/home) for the redesigned portfolio.
+
+## `/home` responsive behaviour
+
+The redesigned portfolio is scoped under `.portfolio-site` and uses mobile-first tiers:
+
+| Viewport | Layout behaviour |
+| --- | --- |
+| `320–479px` | Single-column sections, word-aware hero wrapping, compact navigation, and stacked Contact form/parchment |
+| `480–767px` | Fluid spacing and type refinement while retaining mobile interaction patterns |
+| `768–1023px` | Readable two-column About/Stack layouts where appropriate; Contact remains stacked; compact navigation remains active |
+| `1024–1439px` | Horizontal navigation, desktop project/timeline layout, and side-by-side Contact form/parchment |
+| `1440px+` | Original large-desktop composition and content cap are retained |
+
+The bottom-right up-arrow is the `/home` return-to-top control. It is safe-area aware, keyboard accessible, and its bounce is reduced automatically for users who prefer reduced motion.
 
 ## Environment variables
 
