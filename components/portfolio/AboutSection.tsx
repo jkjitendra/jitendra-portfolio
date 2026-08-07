@@ -18,7 +18,7 @@ export default function AboutSection() {
           transition={{ duration: 0.65 }}
         >
           <div className="profile-image-wrap">
-            <Image src="/logos/image.jpg" alt="Jitendra Kumar Tiwari" fill sizes="(max-width: 800px) 80vw, 360px" className="profile-image" />
+            <Image src="/logos/image.jpg" alt="Jitendra Kumar Tiwari" fill sizes="(max-width: 479px) calc(100vw - 2rem), (max-width: 767px) 23rem, (max-width: 1023px) 38vw, 360px" className="profile-image" />
             <span className="profile-badge">Jitendra/01</span>
           </div>
           <div className="profile-meta">
@@ -30,7 +30,7 @@ export default function AboutSection() {
         <div className="about-copy">
           <motion.p className="eyebrow" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}><ScrambleText text="ABOUT / THE OPERATOR" /></motion.p>
           <motion.h2 id="about-title" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            <ScrambleText text="Systems that stay calm" duration={2100} /> <em><ScrambleText text="under pressure." duration={1900} delay={180} /></em>
+            <ScrambleText text="Systems that stay calm" duration={2100} wrapByWords /> <em><ScrambleText text="under pressure." duration={1900} delay={180} /></em>
           </motion.h2>
           <motion.div className="about-prose" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }}>
             <p>I&apos;m a full-stack engineer focused on building dependable software where performance, clarity, and maintainability work together.</p>

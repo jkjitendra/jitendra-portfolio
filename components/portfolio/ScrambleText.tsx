@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 
 const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=?<>[]/\\";
@@ -11,13 +11,14 @@ type ScrambleTextProps = {
   duration?: number;
   delay?: number;
   emphasisRanges?: Array<{ start: number; end: number }>;
+  wrapByWords?: boolean;
 };
 
 /**
  * A short, one-time character decode used for prominent interface copy.
  * The real text is preserved for assistive technology and reduced-motion users.
  */
-export default function ScrambleText({ text, className, duration, delay = 0, emphasisRanges = [] }: ScrambleTextProps) {
+export default function ScrambleText({ text, className, duration, delay = 0, emphasisRanges = [], wrapByWords = false }: ScrambleTextProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { amount: 0.7 });
   const reduceMotion = useReducedMotion();
@@ -28,10 +29,31 @@ export default function ScrambleText({ text, className, duration, delay = 0, emp
   const scrollDirection = useRef<"initial" | "up" | "down">("initial");
   const previousScrollY = useRef(0);
   const resolvedDuration = duration ?? Math.max(1300, Math.min(2500, text.length * 78));
-  const renderText = (value: string) => Array.from(value, (character, index) => {
-    const isEmphasized = emphasisRanges.some(({ start, end }) => index >= start && index < end);
+  const renderText = (value: string, startIndex = 0) => Array.from(value, (character, index) => {
+    const isEmphasized = emphasisRanges.some(({ start, end }) => startIndex + index >= start && startIndex + index < end);
     return isEmphasized ? <em key={index}>{character}</em> : character;
   });
+
+  const renderWrappedWords = () => {
+    const finalWords = text.split(" ");
+    const displayedWords = displayedText.split(" ");
+    let startIndex = 0;
+
+    return finalWords.map((word, index) => {
+      const wordStartIndex = startIndex;
+      startIndex += word.length + 1;
+
+      return (
+        <Fragment key={`${word}-${wordStartIndex}`}>
+          <span className="decode-word">
+            <span className="decode-word-layout">{renderText(word, wordStartIndex)}</span>
+            <span className="decode-word-text">{renderText(displayedWords[index] ?? word, wordStartIndex)}</span>
+          </span>
+          {index < finalWords.length - 1 ? " " : null}
+        </Fragment>
+      );
+    });
+  };
 
   useEffect(() => {
     previousScrollY.current = window.scrollY;
@@ -104,10 +126,16 @@ export default function ScrambleText({ text, className, duration, delay = 0, emp
 
   return (
     <>
-      <span ref={ref} className={`decode-shell${className ? ` ${className}` : ""}`} aria-hidden="true">
-        <span className="decode-layout">{renderText(text)}</span>
-        <span className="decode-text">{renderText(displayedText)}</span>
-      </span>
+      {wrapByWords ? (
+        <span ref={ref} className={`decode-shell decode-shell--words${className ? ` ${className}` : ""}`} aria-hidden="true">
+          {renderWrappedWords()}
+        </span>
+      ) : (
+        <span ref={ref} className={`decode-shell${className ? ` ${className}` : ""}`} aria-hidden="true">
+          <span className="decode-layout">{renderText(text)}</span>
+          <span className="decode-text">{renderText(displayedText)}</span>
+        </span>
+      )}
       <span className="sr-only">{text}</span>
     </>
   );

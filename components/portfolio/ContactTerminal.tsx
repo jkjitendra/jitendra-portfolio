@@ -28,7 +28,7 @@ export default function ContactTerminal() {
   return (
     <section id="contact" className="section-shell portfolio-section contact-section" aria-labelledby="contact-title">
       <div className="section-label"><span /> <ScrambleText text="CONTACT.TERMINAL" /></div>
-      <div className="contact-heading"><p className="eyebrow"><ScrambleText text="// NEW_MESSAGE" /></p><h2 id="contact-title"><ScrambleText text="Let’s make the next" duration={2050} /><br /><em><ScrambleText text="system count." duration={1900} delay={180} /></em></h2><p>Have a product challenge, a performance problem, or an opportunity in mind? Send the signal.</p></div>
+      <div className="contact-heading"><p className="eyebrow"><ScrambleText text="// NEW_MESSAGE" /></p><h2 id="contact-title"><ScrambleText text="Let’s make the next" duration={2050} wrapByWords /><br /><em><ScrambleText text="system count." duration={1900} delay={180} /></em></h2><p>Have a product challenge, a performance problem, or an opportunity in mind? Send the signal.</p></div>
       <div className="contact-layout">
         <motion.form className="terminal-form" onSubmit={submit} initial={{ opacity: 0, x: -64 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, ease: "easeOut" }}>
           <label htmlFor="portfolio-name">[&gt;&gt;&gt;] NAME*<input id="portfolio-name" name="name" required value={form.name} onChange={(event) => { setForm({ ...form, name: event.target.value }); setStatus("idle"); }} placeholder="YOUR NAME" /></label>
@@ -40,7 +40,7 @@ export default function ContactTerminal() {
           {/* {status !== "success" && <p className={`form-status ${status}`} aria-live="polite">{status === "error" ? "> TRANSMISSION FAILED. PLEASE TRY AGAIN OR EMAIL DIRECTLY." : ""}</p>} */}
         </motion.form>
         <motion.aside className="contact-parchment-panel" aria-label="Live message preview and direct contact details" initial={{ opacity: 0, x: 64 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.25 }} transition={{ duration: 0.7, delay: 0.12, ease: "easeOut" }}>
-          <ContactParchment formData={form} status={status} />
+          <ContactParchment formData={form} status={status} variant="portfolio" />
           {status === "success" && (
             <div className="contact-success-actions" aria-live="polite">
               <p className="form-status success">&gt; TRANSMISSION RECEIVED. I’LL GET BACK TO YOU SOON.</p>
@@ -51,13 +51,19 @@ export default function ContactTerminal() {
         </motion.aside>
       </div>
       <footer className="portfolio-footer">
-        <span>© {new Date().getFullYear()} JITENDRA KUMAR TIWARI</span><a href="#intro">BACK TO TOP ↑</a>
+        <span>© {new Date().getFullYear()} JITENDRA KUMAR TIWARI</span>
          <div className="parchment-direct-links">
             <a href="mailto:jitendrakumartiwari849@gmail.com">Email <span>↗</span></a>
             <a href="https://github.com/jkjitendra" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
             <a href="https://www.linkedin.com/in/jkjitendra" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
           </div>
       </footer>
+      <a className="back-to-top" href="#intro" aria-label="Back to top">
+        <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+          <path d="M16 25V8M8.5 15.5 16 8l7.5 7.5" />
+        </svg>
+        <span className="sr-only">Back to top</span>
+      </a>
     </section>
   );
 }

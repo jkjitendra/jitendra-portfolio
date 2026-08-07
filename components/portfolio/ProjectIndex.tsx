@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import projects from "@/data/personal-projects.json";
 import ScrambleText from "./ScrambleText";
 import SectionDivider from "./SectionDivider";
@@ -27,13 +27,31 @@ const categoryFor = (project: Project): Exclude<Category, "All">[] => {
 export default function ProjectIndex() {
   const [active, setActive] = useState<Category>("All");
   const [selected, setSelected] = useState<Project | null>(null);
+  const openerRef = useRef<HTMLButtonElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const filtered = active === "All" ? projects : projects.filter((project) => categoryFor(project).includes(active));
 
   useEffect(() => {
-    if (!selected) return;
+    if (!selected) {
+      openerRef.current?.focus();
+      return;
+    }
+
+    const { overflow, paddingRight } = document.body.style;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const focusFrame = window.requestAnimationFrame(() => closeButtonRef.current?.focus());
     const closeOnEscape = (event: KeyboardEvent) => event.key === "Escape" && setSelected(null);
+
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) document.body.style.paddingRight = `${scrollbarWidth}px`;
     document.addEventListener("keydown", closeOnEscape);
-    return () => document.removeEventListener("keydown", closeOnEscape);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.body.style.overflow = overflow;
+      document.body.style.paddingRight = paddingRight;
+      document.removeEventListener("keydown", closeOnEscape);
+    };
   }, [selected]);
 
   return (
@@ -58,7 +76,7 @@ export default function ProjectIndex() {
               <div className="project-number">0{index + 1}</div>
               <div className="project-summary"><h3>{project.name}</h3><p>{project.description}</p></div>
               <div className="project-tech">{project.tech.map((item) => <span key={item}>{item}</span>)}</div>
-              <button className="project-open" type="button" onClick={() => setSelected(project)} aria-label={`View ${project.name} project details`}>↗</button>
+              <button className="project-open" type="button" onClick={(event) => { openerRef.current = event.currentTarget; setSelected(project); }} aria-label={`View ${project.name} project details`}>↗</button>
             </motion.article>
           ))}
         </AnimatePresence>
@@ -68,13 +86,13 @@ export default function ProjectIndex() {
         {selected && (
           <motion.div className="project-dialog-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onMouseDown={() => setSelected(null)}>
             <motion.section role="dialog" aria-modal="true" aria-labelledby="project-dialog-title" className="project-dialog" initial={{ opacity: 0, y: 25, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 25, scale: 0.98 }} onMouseDown={(event) => event.stopPropagation()}>
-              <button className="dialog-close" onClick={() => setSelected(null)} type="button" aria-label="Close project details">[ × ]</button>
+              <button ref={closeButtonRef} className="dialog-close" onClick={() => setSelected(null)} type="button" aria-label="Close project details">[ × ]</button>
               <div className={`dialog-image${selected.name === "CodeBundle (Desktop)" ? " is-light-media" : ""}`}>
                 <Image
                   src={selected.name === "CodeBundle (Desktop)" ? "/codebundle/primary_logo.png" : selected.image}
                   alt=""
                   fill
-                  sizes="(max-width: 760px) 90vw, 480px"
+                  sizes="(max-width: 479px) calc(100vw - 2rem), (max-width: 767px) calc(100vw - 2.5rem), (max-width: 1023px) 42vw, 480px"
                   className={
                     selected.name === "CodeBundle (Desktop)"
                       ? "object-contain p-8"
