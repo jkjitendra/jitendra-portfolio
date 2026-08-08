@@ -1,4 +1,4 @@
-import PortfolioExperience from "@/components/portfolio/PortfolioExperience";
+import VersionArchive from "@/components/portfolio/VersionArchive";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <PortfolioExperience />;
+  return <VersionArchive />;
 }
